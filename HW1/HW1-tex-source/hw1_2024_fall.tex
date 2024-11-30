@@ -1,0 +1,493 @@
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Template for homework of Introduction to Machine Learning.
+%
+%  Fill in your name, lecture number, lecture date and body
+%  of homework as indicated below.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,letter,notitlepage]{article}
+%Mise en page
+\usepackage[left=2cm, right=2cm, lines=45, top=0.8in, bottom=0.7in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{fancybox}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{enumitem}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{comment}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1.5pt}
+\newcommand\Loadedframemethod{TikZ}
+\usepackage[framemethod=\Loadedframemethod]{mdframed}
+\usepackage{amssymb,amsmath}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\setlength{\topmargin}{0pt}
+\setlength{\textheight}{9in}
+\setlength{\headheight}{0pt}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6in}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Define math operator %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator*{\argmin}{\bf argmin}
+\DeclareMathOperator*{\relint}{\bf relint\,}
+\DeclareMathOperator*{\dom}{\bf dom\,}
+\DeclareMathOperator*{\intp}{\bf int\,}
+%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\topmargin}{0pt}
+\setlength{\textheight}{9in}
+\setlength{\headheight}{0pt}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6in}
+\pagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\mdtheorem[
+topline=false,
+rightline=false,
+leftline=false,
+bottomline=false,
+leftmargin=-10,
+rightmargin=-10
+]{exercise}{\textbf{Exercise}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Problem environment %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\mdtheorem[
+topline=false,
+rightline=false,
+leftline=false,
+bottomline=false,
+leftmargin=-10,
+rightmargin=-10
+]{problem}{\textbf{Problem}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Solution Environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+\declaretheoremstyle
+[
+spaceabove=0pt,
+spacebelow=0pt,
+headfont=\normalfont\bfseries,
+notefont=\mdseries,
+notebraces={(}{)},
+headpunct={:\quad},
+headindent={},
+postheadspace={ },
+postheadspace=4pt,
+bodyfont=\normalfont,
+qed=$\blacksquare$,
+preheadhook={\begin{mdframed}[style=myframedstyle]},
+postfoothook=\end{mdframed},
+]{mystyle}
+\declaretheorem[style=mystyle,title=Solution,numbered=no]{solution}
+\mdfdefinestyle{myframedstyle}{%
+	topline=false,
+	rightline=false,
+	leftline=false,
+	bottomline=false,
+	skipabove=-6ex,
+	leftmargin=-10,
+	rightmargin=-10}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Solution environment
+
+\renewcommand{\eqref}[1]{Eq.~(\ref{#1})}
+\newcommand{\figref}[1]{Fig.~\ref{#1}}
+
+
+\newcommand{\proj}[2]{\textbf{P}_{#2} (#1)}
+\newcommand{\lspan}[1]{\textbf{span}  (#1)  }
+\newcommand{\rank}[1]{ \textbf{rank}  (#1)  }
+\newcommand{\tr}{ \operatorname{tr}  }
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\mb}[1]{\mathbf{#1}}
+
+\DeclareMathOperator*{\cl}{\bf cl\,}
+\DeclareMathOperator*{\bd}{\bf bd\,}
+\DeclareMathOperator*{\conv}{\bf conv\,}
+\DeclareMathOperator*{\epi}{\bf epi\,}
+
+
+% Definition environment	
+\theoremstyle{definition}	
+\newtheorem{definition}{Definition}	
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%           Homework info.             %%
+\newcommand{\posted}{\text{Sep. 19, 2024}}       			%%% FILL IN POST DATE HERE
+\newcommand{\due}{\text{Oct. 8, 2024}} 			%%% FILL IN Due DATE HERE
+\newcommand{\hwno}{\text{1}} 		           			%%% FILL IN LECTURE NUMBER HERE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%    Put your information here   %%
+\newcommand{\name}{\text{San Zhang}}  	          			%%% FILL IN YOUR NAME HERE
+\newcommand{\id}{\text{PBXXXXXXXX}}		       			%%% FILL IN YOUR ID HERE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \lhead{
+% 	\textbf{\name}
+% }
+% \rhead{
+% 	\textbf{\id}
+% }
+\chead{\textbf{
+		Homework \hwno
+}}
+
+
+\begin{document}
+	\vspace*{-4\baselineskip}
+	\thispagestyle{empty}
+	
+	
+	\begin{center}
+		{\bf\large Introduction to Machine Learning}\\
+		{Fall 2024}\\
+		University of Science and Technology of China
+	\end{center}
+	
+	\noindent
+	Lecturer: Jie Wang  			 %%% FILL IN LECTURER HERE
+	\hfill
+	Homework \hwno             			
+	\\
+	Posted: \posted
+	\hfill
+	Due: \due
+%	Name: \name             			
+%	\hfill
+%	ID: \id						
+%	\hfill
+	
+	\noindent
+	\rule{\textwidth}{2pt}
+	
+	\medskip
+	
+	
+	
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%% BODY OF HOMEWORK GOES HERE
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\textbf{Notice, }to get the full credits, please present your solutions step by step.
+
+ \begin{exercise}[Bolzano-Weierstrass Theorem]
+    \textbf{The Least Upper Bound Axiom}
+
+
+    \emph{Any nonempty set of real numbers with an upper bound has a least upper bound. That is, $\sup  C$ always exists for a nonempty bounded above set $C \subset \mathbb{R}$.}
+
+    Please show the following statements from \textbf{the least upper bound axiom}.
+    \begin{enumerate}
+        \item Let $C$ be a nonempty subset of $\mathbb{R}$ that is bounded above. Prove that $u = \sup C$ if and only if $u$ is an upper bound of $C$ and
+        \begin{align*}
+            \forall\,\epsilon>0,\exists\,a \in C\,\text{ such that }\,a>u-\epsilon.
+        \end{align*}
+       \item  Suppose $(x_n)$ be a sequence of real numbers such that $x_n \in[a, b], \forall n$, please show that there exists $c\in [a,b]$ and a subsequence $(x_{n_k})$ of $(x_n)$ such that $x_{n_k} \rightarrow c$ as $k \rightarrow \infty$.
+    \end{enumerate}
+\end{exercise}
+
+\newpage
+	    \begin{exercise}[Limit and Limit Points]
+\begin{enumerate}
+    \item Show that $\{\mathbf{x}_n\}$ in $\mathbb{R}^n$ converges to $\mathbf{x}\in \mathbb{R}^n$ if and only if $\{\mathbf{x}_n\}$ is bounded and has a unique limit point $\mathbf{x}$.
+    % added by haotonghuang
+    \item (\textbf{Limit Points of a Set}). Let $C$ be a subset of $\mathbb{R}^n$. A point $\mathbf{x}\in \mathbb{R}^n$ is called a limit point of $C$ if there is a sequence $\{\mathbf{x}_n\}$ in $C$ such that $\mathbf{x}_n\to \mathbf{x}$ and $\mathbf{x}_n \not=\mathbf{x}$ for all positive integers $n$. If $\mathbf{x}\in C$ and $\mathbf{x}$ is not a limit point of $C$, then $\mathbf{x}$ is called an isolated point of $C$. Let $C^\prime$ be the set of limit points of the set $C$. Please show the following statements.
+    \begin{enumerate}
+        \item If $C = (0,1)\cup\{2\}\subset \mathbb{R}$, then $C^\prime =[0,1]$ and $x=2$ is an isolated point of $C$.
+        \item  The set $C^\prime$ is closed.
+    \end{enumerate}
+\end{enumerate}
+\end{exercise}
+
+\newpage
+
+
+\begin{exercise}[Norms]
+    In this exercise, we will give some examples of norms and a useful theorem related to norms in \textbf{finite} dimensional vector space.
+    \begin{enumerate}
+        \item \textbf{$l_p$ norm:} The $l_p$ norm is defined by
+        \begin{align*}
+			\|\mathbf{x}\|_p = \left(\sum_{i=1}^n |x_i|^p\right)^{1/p}
+		\end{align*}
+		where $\mathbf{x}=(x_1,\dots,x_n)\in \mathbb{R}^n$ and $p\ge 1$. 
+		\begin{enumerate}
+			\item Please show that the $l_p$ norm is a norm.
+			\item Please show that the following equality.
+			\begin{align*}
+				\lim_{p\rightarrow \infty}\|\mathbf{x}\|_p = \|\mathbf{x}\|_{\infty} = \max_{1\le i\le n}|x_i|.
+			\end{align*}
+			The $l_{\infty}$ norm is defined as above.
+		\end{enumerate}
+		\item \textbf{Operator norms:} Suppose that $\mathbf{A}\in \mathbb{R}^{m\times n}$, which can be viewed as a linear transformation from $\mathbb{R}^n$ to $\mathbb{R}^m$. Please show the following operator norms' equality.
+		\begin{enumerate}
+			\item Let $\|\mathbf{A}\|_1 = \sup_{\mathbf{x}\in \mathbb{R}^n, \mathbf{x}\not=\mathbf{0}}\frac{\|\mathbf{Ax}\|_1}{\|\mathbf{x}\|_1}$. Please show that
+			\begin{align*}
+				\|\mathbf{A}\|_1 = \max_{1\le j\le n}\sum_{i=1}^m|a_{ij}|.
+			\end{align*}
+			\item Let $\|\mathbf{A}\|_{\infty} = \sup_{\mathbf{x}\in \mathbb{R}^n, \mathbf{x}\not=\mathbf{0}}\frac{\|\mathbf{Ax}\|_{\infty}}{\|\mathbf{x}\|_{\infty}}$. Please show that
+			\begin{align*}
+				\|\mathbf{A}\|_{\infty} = \max_{1\le i\le m}\sum_{j=1}^n|a_{ij}|.
+			\end{align*}
+		\end{enumerate}
+		\item \textbf{(Optional) Dual norm:} Let $\|\cdot\|$ be a norm on $\mathbb{R}^n$. The dual norm of $\|\cdot\|$ is defined by
+		\begin{align*}
+			\|\mathbf{x}\|_* = \sup_{\mathbf{y}\in \mathbb{R}^n, \|\mathbf{y}\|\le 1}\mathbf{y}^{\top}\mathbf{x}.
+		\end{align*}
+		\begin{enumerate}
+			\item Please show that the dual of the Euclidean norm is the Euclidean norm itself. i.e., 
+			\begin{align*}
+				\sup_{\mathbf{y}\in \mathbb{R}^n, \|\mathbf{y}\|_2\le 1}\mathbf{y}^{\top}\mathbf{x} = \|\mathbf{x}\|_2.
+			\end{align*}
+			\item Please show that the dual of the $l_1$ norm is the $l_{\infty}$ norm. i.e.,
+			\begin{align*}
+				\sup_{\mathbf{y}\in \mathbb{R}^n, \|\mathbf{y}\|_1\le 1}\mathbf{y}^{\top}\mathbf{x} = \|\mathbf{x}\|_{\infty}.
+			\end{align*}
+		\end{enumerate}
+		\item \textbf{(Optional) Equivalence of norms:} 
+            \begin{enumerate}
+    \item Let $\|\cdot\|_a$ and $\|\cdot\|_b$ be two norms on $\mathbb{R}^n$. We say that $\|\cdot\|_a$ and $\|\cdot\|_b$ are equivalent if there exist two positive constants $c_1$ and $c_2$ such that
+    \begin{align*}
+        c_1\|\mathbf{x}\|_a \leq \|\mathbf{x}\|_b \leq c_2\|\mathbf{x}\|_a,\quad \forall \mathbf{x}\in \mathbb{R}^n.
+    \end{align*}
+    Please show that all norms on $\mathbb{R}^n$ are equivalent.
+    
+    \item Suppose $\mathbf{X_1}=(\mathbb{R}^n, \|\cdot\|_a)$ and $\mathbf{X_2}=(\mathbb{R}^n, \|\cdot\|_b)$ are two normed vector spaces. Please show that if $(\mathbf{x_n})$ converges to $\mathbf{x}$ in $\mathbf{X_1}$, then $(\mathbf{x_n})$ also converges to $\mathbf{x}$ in $\mathbf{X_2}$, and vice versa.
+    
+    \item The unit ball in $\mathbf{X_1}$ and $\mathbf{X_2}$ may be different. However, the open set in normed vector space $\mathbf{X_1}$ is also open in normed vector space $\mathbf{X_2}$, and vice versa. Please show that by the theorem of equivalence of norms.
+    
+    \item Now we can prove that if $f$ is continuous in normed vector space $\mathbf{X_1}$, then $f$ is also continuous in normed vector space $\mathbf{X_2}$, and vice versa. Please show that by the conclusion in (c).
+\end{enumerate}
+
+		% \begin{enumerate}
+		% 	\item Let \|\cdot\|_a and \|\cdot\|_b\|\cdot\|_b be two norms on \mathbb{R}^n\mathbb{R}^n. We say that \|\cdot\|_a\|\cdot\|_a and \|\cdot\|_b\|\cdot\|_b are equivalent if there exist two positive constants c_1c_1 and c_2c_2 such that
+		% 	\begin{align*}
+		% 		c_1\|\mathbf{x}\|_a \le \|\mathbf{x}\|_b \le c_2\|\mathbf{x}\|_a,\quad \forall \mathbf{x}\in \mathbb{R}^n.
+		% 	\end{align*}
+		% 	Please show that all norms on \mathbb{R}^n\mathbb{R}^n are equivalent.
+		% 	\item Suppose \mathbf{X_1}=(\mathbb{R}^n, \|\cdot\|_a)\mathbf{X_1}=(\mathbb{R}^n, \|\cdot\|_a) and \mathbf{X_2}=(\mathbb{R}^n, \|\cdot\|_b)\mathbf{X_2}=(\mathbb{R}^n, \|\cdot\|_b) are two normed vector spaces. Please show that if (\mathbf{x_n})(\mathbf{x_n}) converges to \mathbf{x}\mathbf{x} in \mathbf{X_1}\mathbf{X_1}, then (\mathbf{x_n})(\mathbf{x_n}) also converges to \mathbf{x}\mathbf{x} in \mathbf{X_2}\mathbf{X_2}, and vice versa.
+		% 	\item The unit ball in $\mathbf{X_1}$ and $\mathbf{X_2}$ may be different. However, the open set in normed vector space $\mathbf{X_1}$ is also open in normed vector space $\mathbf{X_2}$, and vice versa. Please show that by theorem of equivalence of norms.
+		% 	\item Now we can prove that if $f$ is continuous in normed vector space $\mathbf{X_1}$, then $f$ is also continuous in normed vector space $\mathbf{X_2}$, and vice versa. Please show that by conclusion in (c).
+		% \end{enumerate}
+    \end{enumerate}
+\end{exercise}
+
+
+\newpage
+
+\begin{exercise}[Open and Closed Sets]
+    The norm ball $\{\mathbf{y} \in \mathbb{R}^n:\|\mathbf{y}-\mathbf{x}\|_2<r, \mathbf{x}\in \mathbb{R}^n\}$ is denoted by $B_r(\mathbf{x})$.
+    \begin{enumerate}
+        \item Given a set $C \subset \mathbb{R}^n$, please show the following are equivalent.
+        \begin{enumerate}
+            \item The set $C$ is closed; that is $\cl C=C$.
+            \item The complement of $C$ is open.
+            \item If $B_{\epsilon}(\mathbf{x})\cap C \not=\emptyset$ for every $\epsilon>0$, then $\mathbf{x}\in C$.
+        \end{enumerate}
+        \item Given $A\subset\mathbb{R}^n$, a set $C\subset A$ is called open in $A$ if $$C=\{\mathbf{x}\in C: B_{\epsilon}(\mathbf{x})\cap A \subset C\,\text{for some}\, \epsilon>0\}.$$
+        A set $C$ is said to be closed in $A$ if $A\setminus C$ is open in $A$.
+        \begin{enumerate}
+            \item Let $B= [0,1] \cup \{2\}$.  Please show that $[0,1]$ is not an open set in $\mathbb{R}$, while it is both open and closed in $B$.
+            \item Please show that a set $C \subset A$ is open in $A$ if and only if $C=A\cap U$, where $U$ is open in $\mathbb{R}^n$.
+        \end{enumerate}
+
+    \end{enumerate}
+\end{exercise}
+
+
+
+
+\newpage
+
+
+
+\begin{exercise}[Extreme Value Theorem and Fixed Point]
+    \begin{enumerate}
+        \item Show that any continuous mapping from the closed interval [0,1] to itself has a fixed point, i.e. $\forall f:[0,1]\to [0,1]$, $\exists \  x\in [0,1]$, such that $f(x) = x$.
+        \item Show that a continuous mapping from the open interval $(0,1)$ to itself may have no fixed point, i.e. $\exists \ f:(0,1)\to (0,1)$, such that for all $x\in (0,1)$, $f(x)\neq x$.
+        \item If a continuous mapping $f:[0,1]\to [0,1]$ satisfies $f(0)=0$, $f(1)=1$, and for some $n\in \mathbb{N}$, 
+        \begin{align*}
+            f^{(n)}(x) := (f\circ f\circ ...\circ f)(x) \equiv x
+        \end{align*}
+        for all $x\in [0,1]$, show that for all $x\in [0,1]$,
+        \begin{align*}
+            f(x) \equiv x.
+        \end{align*}
+        (\textbf{Hint:} consider the monotonicity of $f$.)
+        \item Show that if a non-decreasing function $f:[0,1]\to \mathbb{R}_{\mathbf {+}}$ is continuous, then there exists a constant $\lambda >0$, such that for any point $x\in[0,1]$, at least one of the following two cases of the function $\lambda f$ can be realized:
+        \begin{enumerate}
+            \item x is a fixed point of $\lambda f$.
+            \item $(\lambda f)^{(n)}(x)$ tends to a fixed point of $\lambda f$, i.e. $\underset{n\to \infty}{\lim}(\lambda f)((\lambda f)^{(n)}(x)) = \underset{n\to \infty}{\lim}(\lambda f)^{(n)}(x)$,
+        \end{enumerate}
+        where $(\lambda f)(x) = \lambda *(f(x))$.
+        
+        (\textbf{Hint:} first consider using the extreme value theorem.)
+    \end{enumerate}
+\end{exercise}
+
+
+\newpage
+\begin{exercise}[Linear Space]
+\begin{enumerate}
+    \item Let $P_n[x]$ be the set of all polynomials on $\mathbb{R}$ with degree at most $n$. Show that $P_n[x]$ is a linear space.
+    \item Let $V$ be a linear space, $\lambda\in \mathbb{F}$ be an arbitrary number, $\ v\in V$ be an arbitrary vector. Show that:
+    \begin{enumerate}
+        \item The zero vectors of $V$ is unique.
+        \item The additive inverse of $v$ is unique, i.e. $\forall\ v\in V$, there exists only one $v'\in V$, such that $v+v'=\mathbf{0}$. Moreover, $v' = (-1)\cdot v \triangleq -v$.
+        \item $\lambda\cdot \mathbf{0}=0\cdot v=\mathbf{0}$, $\forall\ \lambda\in \mathbb{F},\ v\in V$.
+        \item If $\lambda\cdot v=\mathbf{0}$, then $\lambda=0$ or $v=\mathbf{0}$.
+    \end{enumerate}
+    \item How many vectors can a linear space have? How many subspaces does a linear space have at least?
+\end{enumerate}
+    
+\end{exercise}
+
+
+\newpage
+	\begin{exercise}[Basis and Coordinates]
+		Suppose that $\{\mathbf{a}_1, \mathbf{a}_2,\dots,\mathbf{a}_n\}$ is a basis of an $n$-dimensional vector space $V$.
+		\begin{enumerate}
+			\item Show that $\{\lambda_1 \mathbf{a}_1, \lambda_2 \mathbf{a}_2, \dots, \lambda_n\mathbf{a}_n\}$ is also a basis of $V$ for nonzero scalars $\lambda_1,\lambda_2, \dots, \lambda_n$.
+			\item Let $V =\mathbb{R}^n$, $\mathbf{A}=(\mathbf{a}_1,\mathbf{a}_2, \dots, \mathbf{a}_n)\in\mathbb{R}^{n\times n}$ and $\mathbf{B}=(\mathbf{b}_1,\mathbf{b}_2,\dots, \mathbf{b}_n)\in\mathbb{R}^{n\times n}$. $(\mathbf{b}_1,\mathbf{b}_2,\dots, \mathbf{b}_n) = (\mathbf{a}_1,\mathbf{a}_2, \dots, \mathbf{a}_n)\mathbf{P}$, where $\mathbf{P}\in \mathbb{R}^{n\times n}$ and $\mathbf{b}_i\in \mathbb{R}^n$, for any $i\in\{1,\dots,n\}$. Show that $\{ \mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n\}$ is also a basis of $V$ for any invertible  matrix $\mathbf{P}$.
+			\item Suppose that the coordinate of a vector $\mathbf{v}$ under the basis $\{\mathbf{a}_1,  \mathbf{a}_2,\dots,\mathbf{a}_n\}$ is $\mathbf{x}=(x_1,x_2,\dots x_n)$.
+			\begin{enumerate}
+				\item What is the coordinate of $\mathbf{v}$ under $\{\lambda_1 \mathbf{a}_1, \lambda_2 \mathbf{a}_2, \dots, \lambda_n\mathbf{a}_n\}$?
+				
+				\item What are the coordinates of $\mathbf{w} = \mathbf{a}_1+\dots + \mathbf{a}_n$ under $\{\mathbf{a}_1, \mathbf{a}_2,\dots,\mathbf{a}_n\}$ and $\{\lambda_1 \mathbf{a}_1, \lambda_2 \mathbf{a}_2, \dots, \lambda_n\mathbf{a}_n\}$? Note that  $\lambda_i \neq 0$ for any $i\in \{1,\dots,n\}$.
+			\end{enumerate}
+%\added by yqbai
+                \item Suppose $\mathbf{a}=(1,0)$, $\mathbf{b}=(0,1)$ and $\mathbf{c}=(-1,0)$ are three unit vectors in two-dimensional space. $\mathbf{v}=(x,y)$ is a vector in two-dimensional space.
+                \begin{enumerate}
+                    \item Please find the coordinate of $\mathbf{v}$ under basis $\{\mathbf{c}, \mathbf{b}\}$? Is the coordinate unique?
+                    \item Please find all the possible combination coefficients of $\mathbf{v}$ under vectors $\mathbf{a}$, $\mathbf{b}$ and $\mathbf{c}$, i.e., $\mathbf{v} = x'\mathbf{a}+y'\mathbf{b}+z'\mathbf{c}$. 
+                    \item (\textbf{Bonus}) Each set of combination coefficients $(x',y',z')$ in (b) forms a vector in $\mathbb{R}^3$. Please find the combination coefficients with minimum $\ell_1$-norm.
+                \end{enumerate}
+%\added by yqbai
+		\end{enumerate}
+	\end{exercise}
+
+
+	
+	\newpage
+	
+	\begin{exercise}[Derivatives with matrices]
+	
+	\begin{definition}[Differentiability]\cite{Tao}\label{def:diff}
+	    Let $f:\mathbb{R}^n\rightarrow\mathbb{R}^m$ be a function, $\mathbf{x}_0\in\mathbb{R}^n$ be a point, and let $L:\mathbb{R}^n\rightarrow\mathbb{R}^m$ be a linear transformation. We say that $f$ is \emph{differentiable at $\mathbf{x}_0$ with derivative $L$} if we have
+	    \begin{align*}
+	        \lim_{\mathbf{x}\rightarrow\mathbf{x}_0;\mathbf{x}\neq\mathbf{x}_0}\frac{\|f(\mathbf{x})-f(\mathbf{x}_0)-L(\mathbf{x}-\mathbf{x}_0)\|_2}{\|\mathbf{x}-\mathbf{x}_0\|_2}=0.
+	    \end{align*}
+	    We denote this derivative by $f'(\mathbf{x}_0)$.
+	\end{definition}
+		\begin{enumerate}
+			\item 	Let $\mathbf{x},\mathbf{a}\in \mathbb{R}^n$ and $\mathbf{y}\in \mathbb{R}^m$. Consider the functions as follows. Please show that they are differentiable and find $f'(\mathbf{x})$.
+			\begin{enumerate}
+				\item[(a)] $f(\mathbf{x}) = \mathbf{a}^{\top}\mathbf{x}$.
+				\item[(b)] $f(\mathbf{x}) = \mathbf{x}^{\top}\mathbf{x}$.
+				\item[(c)] $f(\mathbf{x})=\| \mathbf{y} - \mathbf{A}\mathbf{x} \|_2^2$, where $\mathbf{A}\in\mathbb{R}^{m\times n}$.
+			\end{enumerate}
+			\item Please follow Definition \ref{def:diff} and give the definition of the differentiability of the functions $f:\mathbb{R}^{n\times n}\rightarrow\mathbb{R}$.
+			\item Let $f(\mathbf{X})=\tr(\mathbf{A}^{\top}\mathbf{X})$, where $\mathbf{A},\mathbf{X}\in\mathbb{R}^{n\times m}$, and $\tr(\cdot)$ denotes the trace of a matrix. Please discuss the differentiability of $f$ and find $f'$ if it is differentiable.
+			\item (Optional)Let $f(\mathbf{X}) = \det(\mathbf{X})$, where $\det(\mathbf{X})$ is the determinant of $\mathbf{X} \in \mathbb{R}^{n \times n}$. Please discuss the differentiability of $f$ rigorously according to your definition in the last part. If $f$ is differentiable, please find $f'(\mathbf{X})$.
+			\item (Optional)Let $\mathbf{S}_{++}^n$ be the space of all positive definite $n\times n$ matrices. Prove the function $f: \mathbf{S}_{++}^{n} \rightarrow \mathbb{R}$ defined by $f(\mathbf{X})=\tr{\mathbf{X}^{-1}}$ is differentiable on $ \mathbf{S}_{++}^{n} $. (Hint: Expand the expression $(\mathbf{X}+t\mathbf{Y})^{-1}$ as a power series.)
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	\newpage
+	\begin{exercise}[Rank of Matrices ]
+		Let $\mathbf{A} \in \mathbb{R}^{m\times n}$ and $\mathbf{B}\in \mathbb{R}^{n\times p}$.
+		\begin{enumerate}
+			\item Please show that
+			\begin{enumerate}
+				\item $\rank{\mathbf{A}} = \rank{\mathbf{A}^{\top}} = \rank{\mathbf{A}^{\top}\mathbf{A}}= \rank{\mathbf{A}\mathbf{A}^{\top}}$;
+				\item $\rank{\mathbf{A}\mathbf{B}} \leq \rank{\mathbf{A}}$; (please give an example when the equality holds)
+			\end{enumerate}
+			\item The \emph{column space} of $\mathbf{A}$ is defined by
+			\begin{align*}
+				\mathcal{C}(\mathbf{A} ) = \{ \mathbf{y}\in \mathbb{R}^m : \mathbf{y} = \mathbf{Ax},\,\mathbf{x}\in\mathbb{R}^n\}.
+			\end{align*}
+			The \emph{null space} of $\mathbf{A}$ is defined by
+			\begin{align*}
+				\mathcal{N}(\mathbf{A})  = \{ \mathbf{x}\in \mathbb{R}^n : \mathbf{Ax}=0\}.
+			\end{align*}
+			Notice that, the rank of $\mathbf{A}$ is the dimension of the column space of $\mathbf{A}$.
+			
+			Please show that
+			\begin{enumerate}
+				\item $\rank{\mathbf{A}} = \dim(\mathcal{C}(\mathbf{A})$;
+				\item $\rank{\mathbf{A}} + \dim ( \mathcal{N}( \mathbf{A} ) ) = n$.
+			\end{enumerate}
+			\item Given that
+			\begin{align}\label{eqn:rankaba}
+				\rank{\mathbf{AB}}=\rank{\mathbf{B}}-\dim(\mathcal{C}(\mathbf{B})\cap \mathcal{N}(\mathbf{A})).
+			\end{align}
+			Please show the results in 1.(b) by \eqref{eqn:rankaba}.
+		\end{enumerate}
+	\end{exercise}
+
+
+	
+	
+\newpage
+    \begin{exercise}[Properties of Eigenvalues and Singular Values]
+    \begin{enumerate}
+        \item Suppose the maximum eigenvalue, minimum eigenvalue and maximum singular value of a given symmetric matrix $\mathbf{A}\in S^n$ are denoted by $\lambda_{\max}(\mathbf{A})$ and $ \lambda_{\min}(\mathbf{A})$, respectively. Please show that
+        \begin{align*}
+            \lambda_{\max}(\mathbf{A})=\sup_{\mathbf{x}\in\mathbb{R}^n, \mathbf{x}\not=\mathbf{0}} \frac{\mathbf{x}^\top\mathbf{A}\mathbf{x}}{\mathbf{x}^\top\mathbf{x}},\,\,\,\,\,
+            \lambda_{\min}(\mathbf{A})=\inf_{\mathbf{x}\in\mathbb{R}^n, \mathbf{x}\not=\mathbf{0}} \frac{\mathbf{x}^\top\mathbf{A}\mathbf{x}}{\mathbf{x}^\top\mathbf{x}}.
+        \end{align*}
+        (\textbf{Hint:} considering the orthogonal decomposition of $\mathbf{A}$.)
+
+        \item (Optional) Suppose $\mathbf{B}=(b_{ij})\in \mathbb{R}^{m\times n}$ with maximum singular value $\sigma_{\max}(\mathbf{B})$.
+        \begin{enumerate}
+            \item Let $\|\mathbf{B}\|_2:=\sup_{\mathbf{x}\in\mathbb{R}^n, \mathbf{x}\not=\mathbf{0}}\frac{\|\mathbf{Bx}\|_2}{\|\mathbf{x}\|_2}$. Please show that
+             \begin{align*}
+            \sigma_{\max}(\mathbf{B})=\|\mathbf{B}\|_2.
+            \end{align*}
+
+            \item Please show that
+        \begin{align*}
+            \sigma_{\max}(\mathbf{B})=\sup_{\mathbf{x}\in\mathbb{R}^m, \mathbf{y}\in\mathbb{R}^n, \mathbf{x},\mathbf{y}\not=0}\frac{\mathbf{x}^\top \mathbf{B}\mathbf{y}}{\|\mathbf{x}\|_2\|\mathbf{y}\|_2}.
+        \end{align*}
+%added by yqbai
+            %\item Let ‖B‖1:=sup\|\mathbf{B}\|_1:=\sup_{\mathbf{x}\in\mathbb{R}^n, \mathbf{x}\not=\mathbf{0}}\frac{\|\mathbf{Bx}\|_1}{\|\mathbf{x}\|_1}. Please show that
+                %\begin{align*}
+                 % \|\mathbf{B}\|_1=\max_{1\le j\le n}\sum_{i=1}^m|b_{ij}|.
+                %\end{align*}
+
+            %\item Let ‖\|\mathbf{B}\|_\infty:=\sup_{\mathbf{x}\in\mathbb{R}^n, \mathbf{x}\not=\mathbf{0}}\frac{\|\mathbf{Bx}\|_\infty}{\|\mathbf{x}\|_\infty}. Please show that
+                %\begin{align*}
+                 % \|\mathbf{B}\|_\infty=\max_{1\le i\le m}\sum_{j=1}^n|b_{ij}|.
+                %\end{align*}
+%added by yqbai
+        \end{enumerate}
+    \end{enumerate}
+    \end{exercise}
+	
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\newpage
+	\newpage
+    \bibliography{refs}
+    \bibliographystyle{abbrv}
+	
+\end{document}

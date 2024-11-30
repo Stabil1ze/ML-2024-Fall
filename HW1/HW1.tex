@@ -1,0 +1,140 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{Homework}}
+\author{PB22010344 黄境}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{exercise}{\stepcounter{problemname}\par\noindent\textsc{Exercise \arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textsc{Solution. }}{\\\par}
+\newenvironment{note}{\par\noindent\textsc{Note of Problem \arabic{problemname}. }}{\\\par}
+
+\begin{document}
+
+\maketitle
+
+\begin{exercise}
+	\bf Bolzano-Weierstrass Theorem 
+\end{exercise}
+
+\begin{solution}\newline
+    1. Proof by contradiction. \newline
+    ($\Rightarrow$)Suppose that $\exists \epsilon_{0}$, s.t. $\forall a \in C, a + \epsilon_{0} < u$,
+    thus $u - \epsilon_{0}$ is also an upper bound of $C$, which has $u - \epsilon_{0} < u$, contradicting to the assumption that $u$ is the least upper bound of $C$. \newline
+    ($\Leftarrow$)Suppose that $u' < u$ is an upper bound of $C$, let $\epsilon_{0} = u' - u$, thus $\forall a \in C, a + \epsilon_{0} = a + u' - u = u' - (u - a) \leq u'$, contradicting to the assumption that $\forall \epsilon > 0, \exists a \in C$, s.t. $a > u - \epsilon$. \newline
+    2. If the term $a_{n} > a_{m}, \forall m > n$, we call it a head. If $\{a_{n}\}$ contains infinite heads, then the sequence of heads is a decreasing subsequence of $\{a_{n}\}$, or if $\{a_{n}\}$ only have finite heads, let $a_{i_{1}}$ be the next term of the last head, then there must exist $a_{i_{2}}$ s.t. $i_{2} > i_{1}$ and $a_{i_{1}} \leq a_{i_{2}}$. Since $a_{i_{2}}$ is also not a head, we can find $a_{i_{3}}$ s.t. $i_{2} > i_{3}$ and $a_{i_{2}} \leq a_{i_{3}}$. Follow the step and we have a increasing subsquence $\{a_{i_{n}}\}$. So we have proved that every squence has a monotune subsequence. \newline
+    Now for bounded sequence $\{a_{n}\}$, without loss of generality, we assume that it has an increasing subsequence $\{a_{i_{n}}\}$, then $\{a_{i_{n}}\}$ is also bounded. By the least upper bound axiom, let $c = sup\{a_{i_{n}}\}$, then $c \in [a,b]$, and we have $\forall \epsilon > 0, \exists a_{i_{N}}$, s.t. $c - \epsilon < a_{i_{N}}$, which implies $c - \epsilon < a_{i_{M}}, \forall M > N$, for the sequence is increasing. That is $0\leq c - a_{i_{M}} < \epsilon, \forall M > N$, which implies $\lim\limits_{n\to\infty} a_{i_{n}} = c$.
+\end{solution}
+
+\begin{exercise}
+	\bf Limit and Limit Points
+\end{exercise}
+
+\begin{solution}\newline
+	1.($\Rightarrow$) Since $\lim\limits_{n\to\infty} x_{n} = x$, let $\epsilon = 1$, $\exists N$, s.t. $\forall n > N, \|x_{n} - x\| \leq 1$. Let $r = 1 + max\{\|x_{1} - x\|, \|x_{2} - x\|, ... , \|x_{N} - x\|, 1\}$, then $\{x_{n}\} \in B_{r}(x)$, thus $\{x_{n}\}$ is bounded. Obviously $x$ is a limit point of $\{x_{n}\}$, and if $x'$ is another limit point of $\{x_{n}\}$, then $\lim\limits_{n\to\infty} x_{n} = x' = x$. Thus $x$ is unique. \newline
+	($\Leftarrow$) Suppose that $\exists \{y_{n}\}$ is a subsequence of $\{x_{n}\}$, s.t. $\lim\limits_{n\to\infty} y_{n}$ does not converge to $x$. Since $x$ is the unique limit point, $y_{n}$ must be divergent. By Bolzano-Weierstrass theorem, $\exists A$ and a subsequence $\{y_{k_{n}}\}$ of $y_{n}$, s.t. $\lim\limits_{n\to\infty} y_{k_{n}} = A$. By the definition of limit, $\exists \epsilon$, s.t. $B_{\epsilon}^{c}(A)$ has infinite terms of $y_{n}$. These terms are also a bounded sequence, thus by the Bolzano-Weierstrass theorem, $\exists \{y_{s_{n}}\}$, s.t. $\lim\limits_{n\to\infty} y_{s_{n}} = B \neq A$, contradicting to the assumption that x is the unique limit point of $\{x_{n}\}$. Thus we have $\lim\limits_{n\to\infty} x_{n} = x$. \newline
+	2.(a) Since $\{2^{-n}\}_{n = 1}^{\infty} \in C$, $\{1-2^{-n}\}_{n = 1}^{\infty} \in C$, $\lim\limits_{n\to\infty} 2^{-n} = 0$, $\lim\limits_{n\to\infty} 1 - 2^{-n} = 1$, and $\forall n$, $0 \neq 2^{-n}$, $1 \neq 1-2^{-n}$, thus $0$ and $1$ are limit points of $C$. $\forall x \in (0,1)$, let $d = min\{x, 1-x\}$, then $\{x + 2^{-n}d\}_{n = 1}^{\infty} \in C$, s.t. $x + 2^{-n}d \to x$ and $x + 2^{-n}d \neq x$, thus $x$ is also a limit point of $C$. By definition, x is a limit point of C $\Leftrightarrow$ $\forall \epsilon > 0, B_{\epsilon}(x) \bigcap C\setminus\{x\} \neq \emptyset$. Thus $\forall x \notin (0,1)$, let $d = min\{\|x\|, \|1-x\|\}$, then $B_{\frac{d}{2}}(x) \bigcap C\setminus\{x\} = \emptyset$. That is, $C' = [0,1]$, and $\{2\} = C\setminus C'$ is an isolated point of $C$. \newline
+	(b) $C'$ is closed $\Leftrightarrow$ $(C')^{c}$ is open. $\forall a \in (C')^{c}$, Since $a$ is not a limit point of $C$, $\exists B_{r}(a)$, s.t. $B_{r}(a) \bigcap C = \emptyset$. Thus $\forall b$ in $B_{r}(a)$, $b \notin C'$, which implies $B_{r}(a) \subset (C')^{c}$, thus $(C')^{c}$ is open, thus $C'$ is closed.
+\end{solution}
+
+\begin{exercise}
+	\bf Norms
+\end{exercise}
+
+\begin{solution}
+	1.(a) Obviously $l_{p}$ is nonnegative and definite. Since $\|\alpha \mathbf{x}\| = (\sum^{n}_{i=1} (|\alpha x_{i}|)^{p})^{\frac{1}{p}} = \alpha (\sum^{n}_{i=1} |x_{i}|^{p})^{\frac{1}{p}} = \alpha \|\mathbf{x}\|$, $l_{p}$ is homogeneous. By the Minkowski inequality, $l_{p}$ satisfies the triangle inequality. \newline
+	(b) On the one hand, $\|\mathbf{x}\|_{p} \leq (\sum^{n}_{i=1} \max\limits_{i} |x_{i}|^{p})^{\frac{1}{p}} = n^{\frac{1}{p}}\max\limits_{i}|x_i|$, thus $\lim\limits_{p\to\infty} \|\mathbf{x}\|_{p} \leq \lim\limits_{p\to\infty} n^{\frac{1}{p}}\max\limits_{i}|x_i| = \max\limits_{i}|x_i|$. On the other hand, $\|\mathbf{x}\|_{p} \geq (\max\limits_{i} |x_{i}|^{p})^{\frac{1}{p}} = \max\limits_{i}|x_i|$, thus $\lim\limits_{p\to\infty} \|\mathbf{x}\|_{p} \geq \lim\limits_{p\to\infty} \max\limits_{i}|x_i| = \max\limits_{i}|x_i|$. Thus $\lim\limits_{p\to\infty} \|\mathbf{x}\|_{p} = \max\limits_{i}|x_i|$ \newline
+	2.(a) Let $\mathbf{x} = \sum_{i=1}^{n} \lambda_{i} e_{i}$, the $i$th element of $e_{i}$ is $1$, the others are $0$. Thus $\|\mathbf{Ax}\|_{1} = \sum_{i=1}^{m} |a_{i} (\sum_{j=1}^{n} \lambda_{j} e_{j})| = \sum_{i=1}^{m} |\sum_{j=1}^{n} a_{ij} \lambda_{j}| $, $a_i$ is the $i$th row of $\mathbf{A}$. Since $|\sum_{j=1}^{n} a_{ij} \lambda_{j}| = \sum_{j=1}^{n} |a_{ij} \lambda_{j}|$ if $a_{ij} \lambda_{j}$ are all positive or all negative $\forall i,j$, and $\|\mathbf{x}\| = \sum_{i=1}^{n}|\lambda_{i}|$, we can simply assume that $a_{ij} \lambda_{j}$ are all positive. Thus $\|\mathbf{Ax}\|_{1} = \sum_{i=1}^{m} \sum_{j=1}^{n} |a_{ij} \lambda_{j}| = \sum_{i=1}^{n} |\lambda_{i}| (\sum_{j=1}^{m}|a_{ji}|)$, $\|\mathbf{A}\|_{1} = \sup\limits_{\lambda_{i}} \frac{ \sum_{i=1}^{n} (|\lambda_{i}| (\sum_{j=1}^{m}|a_{ji}|))}{\sum_{i=1}^{n}|\lambda_{i}|}$. On the one hand, $\|\mathbf{A}\|_{1} \leq \sup\limits_{\lambda_{i}} \frac{ \sum_{i=1}^{n} (|\lambda_{i}| (\max\limits_{i}\sum_{j=1}^{m}|a_{ji}|))}{\sum_{i=1}^{n}|\lambda_{i}|} = \sup\limits_{\lambda_{i}} \frac{(\sum_{i=1}^{n} |\lambda_{i}|)}{\sum_{i=1}^{n}|\lambda_{i}|}(\max\limits_{i}\sum_{j=1}^{m}|a_{ji}|) = \max\limits_{i}\sum_{j=1}^{m}|a_{ji}|$, on the other hand, let \newline $\max\limits_{i}\sum_{j=1}^{m}|a_{ji}| = \sum_{j=1}^{m}|a_{ji_{0}}|$, then $\|\mathbf{A}\|_{1} \geq \sup\limits_{\lambda_{i}} \frac{\lambda_{i_{0}}\sum_{j=1}^{m}|a_{ji_{0}}|}{\sum_{i=1}^{n}|\lambda_{i}|}$. Let $\lambda_{j} = 0, \forall j \neq i$, then $\sup\limits_{\lambda_{i}} \frac{\lambda_{i_{0}}\sum_{j=1}^{m}|a_{ji_{0}}|}{\sum_{i=1}^{n}|\lambda_{i}|} \geq \frac{\lambda_{i_{0}}}{\lambda_{i_{0}}}\sum_{j=1}^{m}|a_{ji_{0}}| = \sum_{j=1}^{m}|a_{ji_{0}}|$. That is $\|\mathbf{A}\|_{1} = \max\limits_{i}\sum_{j=1}^{m}|a_{ji}|$. \newline
+	(b) From (a), we have $\|\mathbf{Ax}\|_{\infty} = \max\limits_{i}|\sum_{j=1}^{n}\lambda_{j}a_{ij}|$, $\|\mathbf{x}\|_{\infty} = \max\limits_{j}|\lambda_{j}|$, so we can also assume that $|\sum_{j=1}^{n}\lambda_{j}a_{ij}| = \sum_{j=1}^{n}|\lambda_{j}a_{ij}|$. On the one hand, $\max\limits_{i}\sum_{j=1}^{n}|\lambda_{j}a_{ij}| \leq
+	(\max\limits_{j}|\lambda_{j}|)(\max\limits_{i}\sum_{j=1}^{n}|a_{ij}|)$, which implies $\|\mathbf{A}\|_{\infty} \leq$ \newline $\frac{(\max\limits_{j}|\lambda_{j}|)}{\max\limits_{j}|\lambda_{j}|}(\max\limits_{i}\sum_{j=1}^{n}|a_{ij}|) = \max\limits_{i}\sum_{j=1}^{n}|a_{ij}|$. On the other hand, let \newline $\max\limits_{i}\sum_{j=1}^{n}|a_{ij}| = \sum_{j=1}^{n}|a_{i_{0}j}|$, thus $\|\mathbf{A}\|_{\infty} \geq \sup\limits_{\lambda_{i}} \frac{\sum_{j=1}^{n} |\lambda_{j}a_{i_{0}j}|}{\max\limits_{j}|\lambda_{j}|}$. Let $\lambda_{i} = \lambda \neq 0, \forall i$, thus $\|\mathbf{A}\|_{\infty} \geq \frac{|\lambda|\sum_{j=1}^{n} |a_{i_{0}j}|}{|\lambda|} = \max\limits_{i}\sum_{j=1}^{n}|a_{ij}|$. Thus, $\|\mathbf{A}\|_{\infty} = \max\limits_{i}\sum_{j=1}^{n}|a_{ij}|$.
+\end{solution}
+
+\begin{exercise}
+	\bf Open and Closed Sets
+\end{exercise}
+
+\begin{solution}
+	1.(a)$\Rightarrow$(b) Since $\forall x \in C'$, $x \in C$, $\forall y \in C^{c}$, $y \notin C'$, thus $\exists \epsilon$, s.t. $B_{\epsilon}(y) \bigcap C = \emptyset$, which implies $B_{\epsilon}(y) \subset C^{c}$, then $\forall y \in C^{c}$, $y$ is an inner point of $C^{c}$. Thus the complement of C is open. \newline
+	(b)$\Rightarrow$(c) For $B_{\epsilon}(x) \bigcap C \neq \emptyset$, $\forall \epsilon$, if $x \in C$ then the proof is obvious, thus we only need to show that points in $C^{c}$ do not have the property. Since $C^{c}$ is open, $\forall x \in C^{c}$, $\exists \epsilon_{0}$, s.t. $B_{\epsilon_{0}}(x) \subset C^{c}$, that is $B_{\epsilon_{0}}(x) \bigcap C = \emptyset$. \newline
+	(c)$\Rightarrow$(a) There are two situations. Firstly, if $\{x\} \bigcap C \neq \emptyset$, then obviously $x \in C$. Secondly, since $(B_{\epsilon}(x) \setminus \{x\}) \bigcap C \neq \emptyset$, $\forall \epsilon$ implies $x \in C'$, then (c) imples $C' \subset C$. That is $\mathbf{cl}$ $C = C$. \newline
+	2.(a) $\forall \epsilon > 0$, $1 + \epsilon \notin [0,1]$, which implies $1$ is not a inner point of $[0,1]$, thus $[0,1]$ is not an open set in $\mathbb{R}$. Let $\epsilon = \frac{1}{2}$, then $\forall x \in [0,1]$, $B_{\epsilon}(x) \bigcap B \subset [0,1]$, thus $[0,1]$ is open in $B$. On the other hand, for $\{2\} = B \setminus [0,1]$, $B_{\epsilon}(2) \bigcap B = \{2\} \subset B$, thus $[0,1]$ is closed in $B$. \newline
+	(b)($\Leftarrow$) Since $C = A \bigcap U$, $\forall x \in C$, $\exists \epsilon$, s.t. $B_{\epsilon}(x) \subset U$. Thus $B_{\epsilon}(x) \bigcap A = B_{\epsilon}(x) \bigcap (A \bigcap U) = B_{\epsilon}(x) \bigcap C \subset C \subset A$. Thus $C$ is open in $A$. \newline
+	($\Rightarrow$) Since $\forall x \in C$, $\exists \epsilon = \epsilon(x)$, s.t. $B_{\epsilon(x)}(x) \bigcap A \subset C$, consider $\bigcup\limits_{x}B_{\epsilon(x)}(x)$ is open in $\mathbb{R}^{n}$. On the one hand, $A \bigcap (\bigcup\limits_{x}B_{\epsilon(x)}(x)) = \bigcup\limits_{x} (A \bigcap B_{\epsilon(x)}(x))$. Since $B_{\epsilon(x)}(x) \bigcap A \subset C$, $\bigcup\limits_{x} (A \bigcap B_{\epsilon(x)}(x)) \subset C$. On the other hand, $\forall x \in C$, $x \in B_{\epsilon(x)}(x) \bigcap A$. Thus $C \subset \bigcup\limits_{x} (A \bigcap B_{\epsilon(x)}(x)) = A \bigcap (\bigcup\limits_{x}B_{\epsilon(x)}(x))$. Thus $C = A \bigcap U$, $U =  (\bigcup\limits_{x}B_{\epsilon(x)}(x))$ is open in $\mathbb{R}^{n}$.
+\end{solution}
+
+\begin{exercise}
+	\bf Extreme Value Theorem and Fixed Point
+\end{exercise}
+
+\begin{solution}
+	1. If $f(0) = 0$ or $f(1) = 1$ then it's obvious, thus we suppose $f(0) > 0$ and $f(1) < 1$. Let $g(x) = x - f(x)$, then $g(0) < 0$, $g(1) > 0$, $g \in C[0,1]$. By the zero theorem,  $\exists x_{0} \in [0,1]$, s.t. $g(x_{0}) = 0$, which implies $f(x_{0}) = x_{0}$. \newline
+	2. Let $f(x) = x^{2}$, then $f: (0,1)\to (0,1)$, $f \in C(0,1)$. Since $f(x) = x \Leftrightarrow x^{2} - x = 0 \Leftrightarrow x = 0$ or $x = 1$, $f$ has no fixed point in $(0,1)$. \newline
+	3. Suppose that $\exists x_{1}, x_{2}$, s.t. $x_{1} \neq x_{2}$, $f(x_{1}) = f(x_{2})$, then $x_{1} = f^{(n)}(x_{1}) = f^{(n)}(x_{2}) = x_{2}$. Therefore $f$ must be a bijection, thus a monotune function in $[0,1]$. Since $f(0) < f(1)$, $f$ is increasing in $[0,1]$. Suppose that $\exists x_{0} \in [0,1]$, s.t. $f(x) \neq x$. If $f(x)> x$, since $f$ is increasing we have $f^{(2)}(x) = f(f(x)) > f(x)$, $f^{(3)}(x) = f(f^{(2)}(x)) > f^{(2)}(x)$, $\dots$, lead to $x = f^{(n)}(x) > f^{(n-1)}(x) > \dots > f(x) > x$. If $f(x) < x$, similarly we have $x = f^{(n)}(x) < f^{(n-1)}(x) < \dots < f(x) < x$, both lead to contradiction. Thus $f(x) = x$, $\forall x \in [0,1]$. \newline 
+	4. Suppose $Im f = [a,b]$, then let $\lambda = \frac{1}{b}$, $\lambda f = g: [0,1] \to [\frac{a}{b}, 1]$. Suppose $x$ is not a fixed point of $g$, let $a = \sup\limits_{y:g(y) = y, y \leq x}\{y\}$, $b = \sup\limits_{y:g(y) = y, y \geq x}\{y\}$, thus $\forall x \in (a, b)$, $g(x) - x$ does not change its signal. Without loss of generality, suppose that $g(x) > x$ in $(a, b)$. $\forall x_{0} \in (a, b)$, denote $g(x_{i})$ by $x_{i + 1}$, that is, $g(x_{0}) = x_{1}, g(x_{1}) = x_{2}, \dots$. Thus $g(x_{n}) = x_{n + 1} = x_{n} + (g(x_{n}) - x_{n}) = x_{n - 1} + (g(x_{n - 1}) - x_{n - 1}) + (g(x_{n}) - x_{n}) = \dots = x_{0} + \sum_{i = 1}^{n}(g(x_{i}) - x_{i})$. Since $g(x_{i}) > x_{i}$, $x_{0} > 0$, along with the continuity of $g$, we have $|g(x_{n})| = g(x_{n}) < \infty$, $\forall n$. Thus $\sum_{i = 1}^{\infty}g(x_{i}) - x_{i} < \infty \Rightarrow \lim\limits_{n \to \infty} g(x_{n}) - x_{n} = 0 \Rightarrow \lim\limits_{n \to \infty} g(x_{n}) = \lim\limits_{n \to \infty} x_{n}$. Since $g(x_{n}) = g^{n}(x_{0})$, $x_{n} = g^{n - 1}(x_{0})$, which implies $x_{0}$ satisfies the second case, $\forall x_{0} \in (a, b)$. Obviously $x \in (a, b)$, Thus we have proved that if $x$ is not a limit point, $x$ satisfies the second case.
+\end{solution}
+
+\begin{exercise}
+	\bf Linear Space
+\end{exercise}
+
+\begin{solution}
+	1. In fact we only need to check that $P_n[x]$ is closed to the addition. $\forall f$, $g \in P_n[x]$, $deg f + g \leq deg f \leq n$, thus $f + g \in P_n[x]$. Thus $P_n[x]$ is a linear space. \newline
+	2.(a) Suppose that $u$ and $v$ are two zero vectors of $V$, then $u = u + v = v$. \newline
+	(b) Suppose that $a$ and $b$ are two additive inverses of $c$, then $a + c = 0 = b + c \Rightarrow a + (c + a) = a + (c + b) \Rightarrow (a + c) + a = (a + c) + b \Rightarrow 0 + a = 0 + b \Rightarrow a = b$. $\forall a$, $a + (-1)a = 1a + (-1)a = (1 + (-1))a = 0$, thus $(-1)a = -a$, $\forall a \in V$ \newline
+	(c) $0v + 0v = (0 + 0)v = 0v \Rightarrow 0v + 0v + (-0v) = 0v + (-0)v = 0 \Rightarrow 0v = 0$, $\forall v \in V$. $\lambda \mathbf{0} + \lambda \mathbf{0} = \lambda (\mathbf{0} + \mathbf{0}) = \lambda \mathbf{0} \Rightarrow \lambda \mathbf{0} + \lambda \mathbf{0} + (-\lambda \mathbf{0}) = \lambda \mathbf{0} + (-\lambda \mathbf{0}) = 0 \Rightarrow \lambda \mathbf{0} = 0$, $\forall \lambda \in \mathbb{F}$. \newline
+	(d) Suppose $\lambda \mathbf{a} = \mathbf{0}$, if $\lambda \neq 0$, then $\lambda^{-1} (\lambda \mathbf{a}) = \mathbf{0} \Rightarrow (\lambda^{-1} \lambda) \mathbf{a} = \mathbf{0} \Rightarrow 1\mathbf{a} = \mathbf{0} \Rightarrow \mathbf{a} = \mathbf{0}$. \newline
+	3. A linear space can have infinite vectors and have at least one subspace $\emptyset$, since $\emptyset$ is also a linear space, and only hace one subspace.
+\end{solution}
+
+\begin{exercise}
+	\bf Basis and Coordinates
+\end{exercise}
+	
+\begin{solution}
+	1. Since $\{\mathbf{a}_1, \mathbf{a}_2,\dots,\mathbf{a}_n\}$ is a basis of $V$, $\forall v \in V$, $v$ can be uniquely decomposed to the linear combination of $\{\mathbf{a}_{i}\}$, denote by $v = \sum_{i = 1}^{n} \beta_{i} \mathbf{a}_{i}$. Since $\lambda_{i} \neq 0$, $v = \sum_{i = 1}^{n} \frac{\beta_{i}}{\lambda_{i}} \lambda_{i} \mathbf{a}_{i}$, $\frac{\beta_{i}}{\lambda_{i}}$ are also unique, which implies $\{\lambda_1 \mathbf{a}_1, \lambda_2 \mathbf{a}_2, \dots, \lambda_n\mathbf{a}_n\}$ is also a basis of $V$. \newline
+	2. $\forall v \in V$, $v = \sum_{i = 1}^{n} \beta_{i} \mathbf{a}_{i} = (\mathbf{a}_{1}, \mathbf{a}_{2}, \dots, \mathbf{a}_{n}) (\beta_{1}, \beta_{2}, \dots, \beta_{n})^{T}$. Since $(\mathbf{b}_1,\mathbf{b}_2,\dots, \mathbf{b}_n) = (\mathbf{a}_1,\mathbf{a}_2, \dots, \mathbf{a}_n)\mathbf{P}$ and $\mathbf{P}$ is invertible, $v = (\mathbf{b}_1,\mathbf{b}_2,\dots, \mathbf{b}_n)\mathbf{P}^{T} (\beta_{1}, \beta_{2}, \dots, \beta_{n})^{T} = (\mathbf{b}_1,\mathbf{b}_2,\dots, \mathbf{b}_n)(\gamma_{1}, \gamma_{2}, \dots, \gamma_{n})^{T}$. Since $\beta_{i}$ are unique, $\gamma_{i}$ are also unique. Thus $\{ \mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n\}$ is also a basis of $V$ for an invertible matrix $\mathbf{P}$. \newline
+	3.(a) From 1, it is $(\frac{x_{1}}{\lambda_{1}}, \frac{x_{2}}{\lambda_{2}}, \dots, \frac{x_{n}}{\lambda_{n}})$. \newline
+	(b) Obviously, it is $(1, 1, \dots, 1)$ under $\{\mathbf{a}_1, \mathbf{a}_2,\dots,\mathbf{a}_n\}$, $(\frac{1}{\lambda_{1}}, \frac{1}{\lambda_{2}}, \dots, \frac{1}{\lambda_{n}})$ under $\{\lambda_1 \mathbf{a}_1, \lambda_2 \mathbf{a}_2, \dots, \lambda_n\mathbf{a}_n\}$. \newline
+	4.(a) It is $(-x, y)$. Since $\{\mathbf{c}, \mathbf{b}\}$ is a basis, it is unique. \newline
+	(b) In fact, we only need $x' + z' = x$ and $y' = y$. \newline
+	(c) $\|(x', y', z')\|_{1} = |x'| + |y'| + |z'| = |y| + |x'| + |x - x'| \geq |x| + |y|$. The equality holds if and only if $x'(x - x') < 0$.
+\end{solution}
+
+\begin{exercise}
+	\bf Derivatives with Matrices
+\end{exercise}
+
+\begin{solution}
+	1.(a) Denote $\mathbf{a}$ by $(a_{1}, a_{2}, \dots, a_{n})$. Let $f'(\mathbf{x}) = L(\mathbf{x}) = \sum_{i = 1}^{n}a_{i}x_{i}$, then $f(\mathbf{x})-f(\mathbf{x}_0) = L(\mathbf{x} - \mathbf{x}_0)$, thus $\lim_{\mathbf{x}\rightarrow\mathbf{x}_0;\mathbf{x}\neq\mathbf{x}_0}\frac{\|f(\mathbf{x})-f(\mathbf{x}_0)-L(\mathbf{x}-\mathbf{x}_0)\|_2}{\|\mathbf{x}-\mathbf{x}_0\|_2} = 0$. \newline
+	(b) Let $f'(\mathbf{x}) = L(\mathbf{x}) = \sum_{i = 1}^{n}2x_{i}$, thus by the L'Hospital's rule, \newline  $\lim_{\mathbf{x}\rightarrow\mathbf{x}_0;\mathbf{x}\neq\mathbf{x}_0}\frac{\|f(\mathbf{x})-f(\mathbf{x}_0)-L(\mathbf{x}-\mathbf{x}_0)\|_2}{\|\mathbf{x}-\mathbf{x}_0\|_2} = 0$. \newline
+	(c) $f(\mathbf{x}) = \| \mathbf{y} - \mathbf{A}\mathbf{x} \|_{2}^{T}\| \mathbf{y} - \mathbf{A}\mathbf{x} \|_{2}$. Let $f'(\mathbf{x}) = L(\mathbf{x}) = 2(1, 1, \dots, 1) (\mathbf{Ax} - \mathbf{y})^{T} \mathbf{A}$, thus $\lim_{\mathbf{x}\rightarrow\mathbf{x}_0;\mathbf{x}\neq\mathbf{x}_0}\frac{\|f(\mathbf{x})-f(\mathbf{x}_0)-L(\mathbf{x}-\mathbf{x}_0)\|_2}{\|\mathbf{x}-\mathbf{x}_0\|_2} = 0$. \newline
+	2. Let $f:\mathbb{R}^{n \times n}\rightarrow\mathbb{R}$ be a function, $\mathbf{x}_0\in\mathbb{R}^{n \times n}$ be a matrix, and let $L:\mathbb{R}^{n \times n}\rightarrow\mathbb{R}$ be a function. We say that $f$ is \emph{differentiable at $\mathbf{x}_0$ with derivative $L$} if we have
+		    \begin{align*}
+		        \lim_{\mathbf{x}\rightarrow\mathbf{x}_0;\mathbf{x}\neq\mathbf{x}_0}\frac{\|f(\mathbf{x})-f(\mathbf{x}_0)-L(\mathbf{x}-\mathbf{x}_0)\|_2}{\|\mathbf{x}-\mathbf{x}_0\|_2}=0.
+		    \end{align*}
+	3. $\text{d}tr(\mathbf{A}^{T}\mathbf{X}) = tr(\text{d}\mathbf{A}^{T}\mathbf{X}) = tr(\mathbf{A}^{T}\text{d}\mathbf{X} + \mathbf{X}\text{d}\mathbf{A}^{T}) = tr(\mathbf{A}^{T}\text{d}\mathbf{X})) = \sum_{i = 1}^{m}\sum_{j = 1}^{n}a_{ij}\text{d}x_{ji}$, thus $f' = \sum_{i = 1}^{m}\sum_{j = 1}^{n}a_{ij}x_{ji}$.
+\end{solution}
+
+\begin{exercise}
+	\bf Rank of Matrices
+\end{exercise}
+
+\begin{solution}
+	1. We will prove the theorem with the conclusion in (2), and lately we will prove (2) without using the conclusion in (1). \newline
+	(a) By the conclusion in (2), $rank(\mathbf{A})$ is the dimension of the vector space spanned by its rows (row rank) or its columns (column rank). Since row space of $\mathbf{A}$ is the same as the column space of $\mathbf{A}^{T}$, we have $dim(Row(\mathbf{A})) = dim(Col(\mathbf{\mathbf{A}}^{T}))$, which implies $rank{\mathbf{A}} = rank{\mathbf{A}^{T}}$. Since the columns of $\mathbf{A}^{T} \mathbf{A}$ are linear combinations of the columns of $\mathbf{A}$, we have $rank{\mathbf{A}} = rank{\mathbf{A}^{T}\mathbf{A}}$. Similarly $rank{\mathbf{A}} = rank{\mathbf{A}\mathbf{A}^{T}}$.\newline
+	(b) By the conclusion in (2), $rank(\mathbf{AB})$ is the dimension of the image of the transformation defined by $\mathbf{AB}$. Since $Im(\mathbf{AB}) \subset Im(\mathbf{A})$, $rank(\mathbf{AB}) \leq rank(\mathbf{A})$. Example: $\mathbf{A} = \mathbf{B} = \mathbf{I}_n$.\newline
+	2.(a) In fact, the dimension of $\mathcal{C}(\mathbf{A})$ is equal to the number of vectors in a basis for $\mathcal{C}(\mathbf{A})$. Denote $\mathbf{A}$ by $(\mathbf{a}_{1}, \mathbf{a}_{2}, \dots, \mathbf{a}_{n})$. Without loss of generality, let $\{\mathbf{a}_{1}, \mathbf{a}_{2}, \dots, \mathbf{a}_{r}\}$ be a maximal linearly independent system of $\mathbf{A}$, then $\forall j \in \{r+1, \dots, n\}$, let $\mathbf{a}_{j} = \sum_{i = 1}^{r}\lambda_{ji}\mathbf{a}_{i}$. Since $\mathbf{x} = \sum_{i = 1}^{n}x_{i}\mathbf{e}_{i}$, $\mathbf{y} = \sum_{i = 1}^{n} x_{i}\mathbf{a_{i}} = \sum_{i = 1}^{r} (x_{i} + \sum_{j = r + 1}^{n}x_{j}\lambda_{ji})\mathbf{a}_{i}$, $\forall \mathbf{y} \in \mathcal{C}(\mathbf{A})$, which implies $\{\mathbf{a}_{1}, \mathbf{a}_{2}, \dots, \mathbf{a}_{r}\}$ is a basis of $\mathcal{C}(\mathbf{A})$. Thus $dim(\mathcal{C}(\mathbf{A})) = r = rank(\mathbf{A})$. \newline
+	(b) Denote $n - dim(\mathcal{N}(\mathbf{A}))$ by $k$, Suppose that $\{\mathbf{x}_{k + 1}, \mathbf{x}_{k + 2}, \dots, \mathbf{x}_{n}\}$ is a basis of $\mathcal{N}$, we can find a basis of $\mathbb{R}^n$, which is $\{\mathbf{x}_{1}, \mathbf{x}_{2}, \dots, \mathbf{x}_{k}, \mathbf{x}_{k + 1}, \mathbf{x}_{k + 2}, \dots, \mathbf{x}_{n}\}$. Thus we can get $\{\mathbf{y}_{i}\}_{i = 1}^{k}$, $y_{i} = \mathbf{Ax}_{i}$. $\forall \mathbf{y} \in \mathcal{C}(\mathbf{A})$, $\exists \mathbf{x} \in \mathbb{R}^{n}$, s.t. $\mathbf{y} = \mathbf{A}\mathbf{x}$. Since $\{\mathbf{x}_{1}, \mathbf{x}_{2}, \dots, \mathbf{x}_{n}\}$ is a basis of $\mathbb{R}^n$, $\mathbf{x} = \sum_{i = 1}^{n}\lambda_{i}\mathbf{x}_{i}$, $\lambda_{i}$ are unique. Thus $\mathbf{y} = \mathbf{A}\sum_{i = 1}^{n}\lambda_{i}\mathbf{x}_{i} = \sum_{i = 1}^{n}\lambda_{i}(\mathbf{A}\mathbf{x}_{i}) = \sum_{i = 1}^{k}\lambda_{i}\mathbf{y}_{i} + \sum_{i = k + 1}^{n}\mathbf{0} = \sum_{i = 1}^{k}\lambda_{i}\mathbf{y}_{i}$, $\forall \mathbf{y} \in \mathcal{C}$, $\lambda_{i}$ are unique. Obviously $\mathbf{y}_{i}$ are linear independent, thus $\{\mathbf{y}_{i}\}_{i = 1}^{k}$ is a basis of $\mathcal{C}$, which implies $rank(\mathbf{A}) = dim(\mathcal{C}(\mathbf{A})) = k = n - dim(\mathcal{N}(\mathbf{A}))$. That is $rank(\mathbf{A}) + dim(\mathcal{N}(\mathbf{A})) = n$. \newline
+	3. Since $\mathbf{A} \in \mathbb{R}^{m\times n}$ and $\mathbf{B}\in \mathbb{R}^{n\times p}$, $\mathcal{C}(\mathbf{B})$ and $\mathcal{N}(\mathbf{A})$ are subspaces of $\mathbb{R}^{n}$. Therefore we have $n = dim(\mathbb{R}^{n}) \geq dim(\mathcal{C}(\mathbf{B}) + \mathcal{N}(\mathbf{A})) = dim(\mathcal{C}(\mathbf{B})) + dim(\mathcal{N}(\mathbf{A})) - dim(\mathcal{C}(\mathbf{B}) \bigcap \mathcal{N}(\mathbf{A})) = rank(\mathbf{B}) + n - rank(\mathbf{A}) - dim(\mathcal{C}(\mathbf{B}) \bigcap \mathcal{N}(\mathbf{A})) $, thus $rank(\mathbf{A}) \geq rank(\mathbf{B}) - dim(\mathcal{C}(\mathbf{B}) \bigcap \mathcal{N}(\mathbf{A})) = rank(\mathbf{AB})$.
+\end{solution}
+
+\begin{exercise}
+	\bf Properties of Eigenvalues and Singular Values
+\end{exercise}
+
+\begin{solution}
+	1. $\forall \mathbf{x} \in \mathbb{R}^{n}$, replace $\mathbf{x}$ with $\frac{\mathbf{x}}{\sqrt{\|\mathbf{x}\|}}$, then $\frac{\frac{\mathbf{x}^{T}}{\sqrt{\|\mathbf{x}\|}}\mathbf{A}\frac{\mathbf{x}}{\sqrt{\|\mathbf{x}\|}}}{\frac{\mathbf{x}^{T}}{\sqrt{\|\mathbf{x}\|}}\frac{\mathbf{x}}{\sqrt{\|\mathbf{x}\|}}} = \frac{\mathbf{x}^{T}\mathbf{A}\mathbf{x}}{\mathbf{x}^{T}\mathbf{x}}$. Thus without loss of generality, we can suppose that $\|\mathbf{x}\| = 1$. Therefore $\frac{\mathbf{x}^{T}\mathbf{A}\mathbf{x}}{\mathbf{x}^{T}\mathbf{x}} = \mathbf{x}^{T}\mathbf{A}\mathbf{x}$. Since $\mathbf{A}\in S^n$, let $\{\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}\}$ be the eigenvalues of $\mathbf{A}$, which satisfies $\lambda_{i} \leq \lambda_{j}$, $\forall i \leq j$. We can decompose $\mathbf{A}$ by $\mathbf{P}^{T}\mathbf{S}\mathbf{P}$, $\mathbf{P}$ is an orthogonal matrix, $\mathbf{P} = (\mathbf{p}_{1}, \mathbf{p}_{2}, \dots, \mathbf{p}_{n})^{T}, \mathbf{S} = diag(\lambda_{1}, \lambda_{2}, \dots, \lambda_{n})$. Thus $\mathbf{x}^{T}\mathbf{A}\mathbf{x} = (\mathbf{Px})^{T}\mathbf{S}\mathbf{Px}$. Since $\mathbf{P}$ is an orthogonal matrix and $\|\mathbf{x}\| = 1$, $(\mathbf{Px})^{T}\mathbf{Px} = \mathbf{x}^{T}\mathbf{P}^{T}\mathbf{P}\mathbf{x} = \mathbf{x}^{T}\mathbf{x} = 1$, which implies $\mathbf{Px} \in \{\mathbf{x}: \mathbf{x}\in\mathbb{R}^n, \|\mathbf{x}\| = 1\}$. Since $\mathbf{P}$ is invertible, $\sup\limits_{\mathbf{x}\in\mathbb{R}^n, \mathbf{x}\not=\mathbf{0}}\mathbf{x}^{T}\mathbf{A}\mathbf{x} = \sup\limits_{\mathbf{x}\in\mathbb{R}^n, \mathbf{x}\not=\mathbf{0}}(\mathbf{Px})^{T}\mathbf{S}\mathbf{Px} = \sup\limits_{\mathbf{x}\in\mathbb{R}^n, \mathbf{x}\not=\mathbf{0}}\mathbf{x}^{T}\mathbf{S}\mathbf{x}$, Let $\mathbf{x} = \{y_{1}, y_{2}, \dots, y_{n}\}$, $\sum_{i = 1}^{n} y_{i}^{2} = 1$, then $\mathbf{x}^{T}\mathbf{S}\mathbf{x} = \sum_{i = 1}^{n} \lambda_{i}y_{i}^{2}$. Therefore $\sum_{i = 1}^{n} \lambda_{i} y_{i}^{2} \leq \sum_{i = 1}^{n} \lambda_{n} y_{i}^{2} = \lambda_{n} \sum_{i = 1}^{n} y_{i}^{2} = \lambda_{n} = \lambda_{\max}$, equality holds when $\mathbf{x} = \{0, 0, \dots, 0, 1\}$ and $\sum_{i = 1}^{n} \lambda_{i} y_{i}^{2} \geq \sum_{i = 1}^{n} \lambda_{1} y_{i}^{2} = \lambda_{1} \sum_{i = 1}^{n} y_{i}^{2} = \lambda_{1} = \lambda_{\min}$, equality holds when $\mathbf{x} = \{1, 0, 0, \dots, 0\}$. Therefore, $\lambda_{\max}(\mathbf{A})=\sup\limits_{\mathbf{x}\in\mathbb{R}^n, \mathbf{x}\not=\mathbf{0}} \frac{\mathbf{x}^{T}\mathbf{A}\mathbf{x}}{\mathbf{x}^{T}\mathbf{x}}$, $\lambda_{\min}(\mathbf{A})=\inf\limits_{\mathbf{x}\in\mathbb{R}^n, \mathbf{x}\not=\mathbf{0}} \frac{\mathbf{x}^{T}\mathbf{A}\mathbf{x}}{\mathbf{x}^{T}\mathbf{x}}$.
+\end{solution}
+
+\end{document}
