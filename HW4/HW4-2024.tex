@@ -1,0 +1,293 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{Homework}}
+\author{PB22010344 黄境}
+\date{\today}
+\linespread{1.5}
+\newcounter{exercisename}
+\newenvironment{exercise}{\stepcounter{exercisename}\par\noindent\textsc{Exercise \arabic{exercisename}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textsc{Solution. }}{\\\par}
+
+\DeclareMathOperator*{\dom}{\bf dom\,}
+\DeclareMathOperator*{\conv}{\bf conv\,}
+\DeclareMathOperator*{\argmax}{\bf argmax\,}
+\DeclareMathOperator*{\mspan}{\bf span\,}
+
+\begin{document}
+
+\maketitle
+
+\begin{exercise}
+    \bf Convex Functions 
+\end{exercise}
+
+\begin{solution}
+    1.(a) $\forall\, \mathbf{x} = (x_1, x_2, \dots, x_n)$, $\mathbf{y} = (y_1, y_2, \dots, y_n) \in \mathbb{R}^n$ and $\theta \in [0, 1]$, let $\mathbf{z}_\theta = \theta \mathbf{x} + (1 - \theta) \mathbf{y}$, we have
+    \[
+    f(z_\theta) = \sum_{i = 1}^{k} z_{[i]}.
+    \]
+    Denote $z_{[i]}$ by $z_{j_i}$. Since $z_i = \theta x_i + (1 - \theta) y_i$, we have 
+    \begin{align*}
+    	\sum_{i = 1}^{k} z_{[i]} = \sum_{i = 1}^{k} z_{j_i} & = \sum_{i = 1}^{k} \theta x_{j_i} + (1 - \theta) y_{j_i} \\
+    	& = \theta \sum_{i = 1}^{k} x_{j_i} + (1 - \theta) \sum_{i = 1}^{k} y_{j_i} \\
+    	& \leq \theta \sum_{i = 1}^{k} x_{[i]} + (1 - \theta) \sum_{i = 1}^{k} y_{[i]} \\
+    	& = \theta f(\mathbf{x}) + (1 - \theta) f(\mathbf{y})
+    \end{align*}
+    Therefore, f is convex.
+    \newline
+    (b) $\forall\, \mathbf{p}_1$, $\mathbf{p}_2 \in \dom f$ and $\theta \in [0, 1]$, let $\mathbf{p}_\theta = \theta \mathbf{p}_1 + (1 - \theta) \mathbf{p}_2$. Since
+    \[
+    \nabla^2 xlnx = \frac{d^2x \ln x}{dx^2} = \frac{1}{x} > 0,\, \forall\, x > 0,
+    \]
+    we have $f(x) = xlnx$ is convex. Therefore, 
+    \begin{align*}
+    	f(\mathbf{p}_\theta) & = \sum_{i = 1}^{n} (\theta p_{1i} + (1 - \theta) p_{2i}) \ln (\theta p_{1i} + (1 - \theta) p_{2i}) \\
+    	& \leq \sum_{i = 1}^{n} (\theta p_{1i} \ln p_{1i} + (1 - \theta) p_{2i} \ln p_{2i}) \\
+    	& = \theta \sum_{i = 1}^{n} p_{1i} \ln p_{1i} + (1 - \theta) \sum_{i = 1}^{n} p_{2i} \ln p_{1i}\\
+    	& = \theta f(\mathbf{p}_1) + (1 - \theta) f(\mathbf{p}_2)
+    \end{align*}
+    Therefore, f is convex.
+    \newline
+    (c) Since
+    \[
+    \|\mathbf{X}\|_p = \sup_{\substack{\mathbf{a} \in \mathbb{R}^{n \times 1} \\ \|\mathbf{a}\| = 1}}  \|\mathbf{Xa}\|_p,
+    \]
+    $\forall\, \mathbf{X}_1$, $\mathbf{X}_2 \in \dom f$ and $\theta \in [0, 1]$, we have
+    \begin{align*}
+        f(\theta \mathbf{X}_1 + (1 - \theta) \mathbf{X}_2) & = \sup_{\substack{\|\mathbf{a}\| = 1 \\ \mathbf{a} \in \mathbb{R}^{n \times 1}}} \|(\theta \mathbf{X}_1 + (1 - \theta) \mathbf{X}_2)\mathbf{a}\|_p \\
+        & \leq \sup_{\substack{\|\mathbf{a}\| = 1 \\ \mathbf{a} \in \mathbb{R}^{n \times 1}}} \|\theta \mathbf{X}_1 \mathbf{a}\|_p + \sup_{\substack{\|\mathbf{a}\| = 1 \\ \mathbf{a} \in \mathbb{R}^{n \times 1}}} \|(1 - \theta) \mathbf{X}_2 \mathbf{a}\|_p \\
+        & = \theta \sup_{\substack{\|\mathbf{a}\| = 1 \\ \mathbf{a} \in \mathbb{R}^{n \times 1}}} \|\mathbf{X}_1 \mathbf{a}\|_p + (1 - \theta) \sup_{\substack{\|\mathbf{a}\| = 1 \\ \mathbf{a} \in \mathbb{R}^{n \times 1}}} \|\mathbf{X}_2 \mathbf{a}\|_p \\
+        & = \theta f(\mathbf{X}_1) + (1 - \theta) f(\mathbf{X}_2)
+    \end{align*}
+    Therefore, f is convex.
+    \newline\newline
+    2. ($\Rightarrow$) From the definition of convex function, $\dom f$ is convex. Therefore, $\forall\, t_1$, $t_2 \in \dom g$ and $\theta \in [0, 1]$, we have
+    \begin{align*}
+    	g(\theta t_1 + (1 - \theta) t_2) & = f(\theta (\mathbf{x}_0 + t_1 \mathbf{v}) + (1 - \theta) (\mathbf{x}_0 + t_2 \mathbf{v})) \\
+    	& \leq \theta f(\mathbf{x}_0 + t_1 \mathbf{v}) + (1 - \theta) f(\mathbf{x}_0 + t_2 \mathbf{v}) \\
+    	& = \theta g(t_1) + (1 - \theta) g(t_2)
+    \end{align*}
+    which implies that $g$ is convex over its domain. \newline
+    ($\Leftarrow$) Prove by contradiction. Suppose that $f$ is not convex, i.e. $\exists\, \mathbf{x}_1$, $\mathbf{x}_2 \in \dom f$ and $\theta \in [0, 1]$, s.t.
+    \[
+    f(\theta \mathbf{x}_1 + (1 - \theta) \mathbf{x}_2) > \theta f(\mathbf{x}_1) + (1 - \theta) f(\mathbf{x}_2).
+    \]
+    Since $\dom f$ is convex, the line segment $\overline{\mathbf{x}_1\mathbf{x}_2} \subset \dom f$, which implies that
+    \[
+    g(t) = f(\mathbf{x}_1 + t (\mathbf{x}_2 - \mathbf{x}_1)),\, t \in [0, 1]
+    \]
+    is convex. Therefore, we have 
+    \begin{align*}
+    	\theta f(\mathbf{x}_1) + (1 - \theta) f(\mathbf{x}_2) & < f(\theta \mathbf{x}_1 + (1 - \theta) \mathbf{x}_2) \\
+    	& = g(1 - \theta) \\
+    	& = g(0 \cdot \theta + 1 \cdot (1 - \theta)) \\
+    	& \leq \theta g(0) + (1 - \theta) g(1) \\
+    	& = \theta f(\mathbf{x}_1) + (1 - \theta) f(\mathbf{x}_2)
+    \end{align*}
+    leading to a contradiction. Therefore, $f$ is convex.
+    \newline\newline
+    5. Let $g(t) = \nabla f(\mathbf{x} + t \mathbf{r})$, where $\mathbf{r} \in \mathbb{R}^n$ is an arbitrary non-zero vector. Similar to exercise 1.2, we have
+    \[
+    g'(t) = \nabla^2 f(\mathbf{x} + t \mathbf{r}) \mathbf{r}.
+    \]
+    Applying the fundamental theorem of calculus, we get
+    \[
+    \nabla f(\mathbf{x} + \alpha \mathbf{r}) - \nabla f(\mathbf{x}) = g(\alpha) - g(0) = \int_{0}^{\alpha} \nabla^2 f(\mathbf{x} + t \mathbf{r}) \mathbf{r} dt,
+    \]
+    where $\alpha \geq 0$. Since the $\nabla f$ is Lipschitz continuous with the constant $L$, we obtain
+    \[
+    \|\int_{0}^{\alpha} \nabla^2 f(\mathbf{x} + t \mathbf{r}) \mathbf{r} dt\|_2 = \|\nabla f(\mathbf{x} + \alpha \mathbf{r}) - \nabla f(\mathbf{x})\|_2 \leq \alpha L \|\mathbf{r}\|_2 
+    \]
+    by taking the 2-norm on both sides, which is equals to
+    \[
+    L \geq \frac{\|\int_{0}^{\alpha} \nabla^2 f(\mathbf{x} + t \mathbf{r}) \mathbf{r} dt\|_2}{\alpha \|\mathbf{r}\|_2}.
+    \]
+    Let $\alpha \to 0^+$, by the L'Hospital's rule, we have
+    \[
+    L \geq \frac{\|\nabla^2 f(\mathbf{x}) \mathbf{r}\|_2}{\|\mathbf{r}\|_2},\, \forall\, \mathbf{x},\, \mathbf{r} \in \mathbb{R}^n,\, \mathbf{r} \neq \mathbf{0}.
+    \]
+   Therefore, by the definition of 2-norm we have
+    \[
+    L \geq \sup\limits_{\mathbf{r} \neq \mathbf{0}} \frac{\|\nabla^2 f(\mathbf{x}) \mathbf{r}\|_2}{\|\mathbf{r}\|_2} = \|\nabla^2 f(\mathbf{x})\|_2,\, \forall\, \mathbf{x}.
+    \]
+    Suppose that $\lambda_i$ is an eigenvalue of $\nabla^2 f(\mathbf{x})$, and $\mathbf{b}_i$ is a corresponded non-zero eigenvector. Let $\mathbf{B}_i = (\mathbf{b}_i, \mathbf{b}_i, \dots, \mathbf{b}_i)^T \in \mathbb{R}^{n \times n}$, therefore
+    \[
+    \lambda_i \mathbf{B}_i = \mathbf{AB}_i,\, \|\mathbf{B}_i\|_2 > 0.
+    \]
+    Thus, we have
+    \[
+    \|\lambda_i \mathbf{B}_i\|_2 = |\lambda_i| \|\mathbf{B}_i\|_2 = \|\mathbf{AB}_i\|_2 \leq \|\mathbf{A}\|_2 \|\mathbf{B}_i\|_2 \Rightarrow |\lambda_i| \leq \|\mathbf{A}\|_2,\, \forall\, i.
+    \]
+    Therefore,
+    \[
+    L \geq \|\nabla^2 f(\mathbf{x})\|_2 \geq \max\limits_i \lambda_i = \lambda_{max} (\nabla^2 f(\mathbf{x})),\, \forall\, \mathbf{x} \in \mathbb{R}^n.
+    \]
+    \newline
+    6.(a) Suppose that $\{\mathbf{x}_n\}_{i = 1}^\infty \subset C_\alpha$, $\mathbf{x}_n \to \mathbf{x}$. Since $f$ is continuous, we have
+    \[
+    f(\mathbf{x}) = \lim\limits_{n \to \infty} f(\mathbf{x}_n) \leq \lim\limits_{n \to \infty} \alpha = \alpha,
+    \]
+    which implies that $\mathbf{x} \in C_\alpha$. Therefore $C_\alpha$ is closed.
+    \newline\newline
+    (b) Let $f(x) = e^x$, $x \in \mathbb{R}$. Since $\nabla^2 f = e^x > 0$, $f$ is strictly convex. Since $f$ is strictly decreasing when $x \to -\infty$, the problem is unsolvable.
+    \newline\newline
+    (c) Denote $\min_\mathbf{x} f(\mathbf{x})$ by $m$. \newline
+    Suppose that $\mathbf{y}_1$, $\mathbf{y}_2 \in \mathcal{C}$, $\lambda \in [0, 1]$. Since $f$ is convex, $\dom f$ is convex. Therefore, we have
+    \[
+    \lambda \mathbf{y}_1 + (1 - \lambda) \mathbf{y}_2 \in \dom f,\, \forall\, \mathbf{y}_1,\, \mathbf{y}_2 \in \dom f,\, \lambda \in [0, 1].
+    \]
+    Moreover, 
+    \[
+    m \leq f(\lambda \mathbf{y}_1 + (1 - \lambda) \mathbf{y}_2) \leq \lambda f(\mathbf{y}_1) + (1 - \lambda) f(\mathbf{y}_2) = \lambda m + (1 - \lambda) m = m
+    \]
+    \[
+    \Rightarrow \lambda \mathbf{y}_1 + (1 - \lambda) \mathbf{y}_2 \in \mathcal{C},\, \forall\, \mathbf{y}_1,\, \mathbf{y}_2 \in \mathcal{C},\, \lambda \in [0, 1].
+    \]
+    Therefore, $\mathcal{C}$ is convex. \newline
+    Suppose that $\{\mathbf{x}_n\}_{i = 1}^n \subset \mathcal{C}$, $\mathbf{x}_n \to \mathbf{x}$. Since $f$ is continuous, we have
+    \[
+    f(\mathbf{x}) = \lim\limits_{n \to \infty} f(\mathbf{x}_n) = m.
+    \]
+    Since $\dom f$ is closed, $\mathbf{x} \in \dom f$. Therefore $\mathbf{x} \in \mathcal{C}$, which implies that $\mathcal{C}$ is closed. \newline
+    If $\dom f$ is not closed, let $\dom f = B_\mathbf{0}(1)$, $f = 0$. Therefore, $f$ is convex and continuously differentiable, but $\mathcal{C} = B_\mathbf{0}(1)$ is not a closed set.
+    \newline\newline
+    (d) From exercise 1.3, we have
+    \[
+    f(\mathbf{y}) \geq f(\mathbf{x}) + \nabla f^T(\mathbf{x}) (\mathbf{y} - \mathbf{x}) + \frac{\mu}{2} \|\mathbf{y} -\mathbf{x}\|_2^2,\, \forall\, \mathbf{x}, \mathbf{y} \in \mathbb{R}^n.
+    \]
+    Suppose that Problem(3) has two different solutions $x_1$, $x_2$, which implies that $f(\mathbf{x}_1) = f(\mathbf{x}_2)$. Therefore, we have
+    \begin{align*}
+    	f(\mathbf{x}_2) & \geq f(\mathbf{x}_1) + \nabla f^T(\mathbf{x}_1) (\mathbf{x}_2 - \mathbf{x}_1) + \frac{\mu}{2} \|\mathbf{x}_2 -\mathbf{x}_1\|_2^2 \\
+    	& \Rightarrow \nabla f^T(\mathbf{x}_1) (\mathbf{x}_1 - \mathbf{x}_2) \geq \frac{\mu}{2} \|\mathbf{x}_1 - \mathbf{x}_2\|_2^2.
+    \end{align*}
+    Since $f$ is strongly convex, $f$ is convex. Thus, $\mathbf{x}_1$ is a minimum point of $f \Rightarrow \mathbf{x}_1 $ is a stationary point of $f \Rightarrow \nabla f(\mathbf{x}_1) = 0$,
+    which implies that
+    \[
+    0 = \nabla f^T(\mathbf{x}_1) (\mathbf{x}_1 - \mathbf{x}_2) \geq \frac{\mu}{2} \|\mathbf{x}_1 - \mathbf{x}_2\|_2^2 \geq 0 \Rightarrow \|\mathbf{x}_1 -\mathbf{x}_2\|_2^2 = 0 \Rightarrow \mathbf{x}_1 = \mathbf{x}_2,
+    \]
+    contradicting to the assumption that $\mathbf{x}_1 \neq \mathbf{x}_2$. Therefore, Problem (3) admits a unique solution.
+\end{solution}
+
+\begin{exercise}
+	\bf Operations that Preserve Convexity
+\end{exercise}
+
+\begin{solution}
+	1. For all $\mathbf{x}_1$, $\mathbf{x}_2 \in \mathbb{R}^n$ and $\lambda \in [0, 1]$, we have
+	\begin{align*}
+		F(\lambda \mathbf{x}_1 + (1 - \lambda) \mathbf{x}_2) & = f(\mathbf{A} (\lambda \mathbf{x}_1 + (1 - \lambda) \mathbf{x}_2) + \mathbf{b}) \\
+		& = f(\lambda (\mathbf{Ax}_1 + \mathbf{b}) + (1 - \lambda) (\mathbf{Ax}_2 + \mathbf{b})) \\
+		& \leq \lambda f(\mathbf{Ax}_1 + \mathbf{b}) + (1 - \lambda) f(\mathbf{Ax}_2 + \mathbf{b}) \\
+		& = \lambda F(\mathbf{x}_1) + (1 - \lambda) F(\mathbf{x}_2)
+	\end{align*}
+	Therefore, $F$ is convex.
+	\newline\newline
+	2. Similarly, we have
+	\begin{align*}
+		F(\lambda \mathbf{x}_1 + (1 - \lambda) \mathbf{x}_2) & = \sum_{i = 1}^{m} w_i f(\lambda \mathbf{x}_1 + (1 - \lambda) \mathbf{x}_2) \\
+		& \leq \sum_{i = 1}^{m} w_i (\lambda f(\mathbf{x}_1) + (1 - \lambda) f(\mathbf{x}_2)) \\
+		& = \lambda \sum_{i = 1}^{m} w_i f(\mathbf{x}_1) + (1 - \lambda) \sum_{i = 1}^{m} w_i f(\mathbf{x}_2) \\
+		& = \lambda F(\mathbf{x}_1) + (1 - \lambda) F(\mathbf{x}_2)
+	\end{align*}
+	Therefore, $F$ is convex.
+	\newline\newline
+	3. Since $f_i(\theta \mathbf{x}_1 + (1 - \theta) \mathbf{x}_2) \leq \theta f_i(\mathbf{x}_1) + (1 - \theta) f_i(\mathbf{x}_2)$, $\forall\, \mathbf{x}_1$, $\mathbf{x}_2 \in \mathbb{R}^n$, $\theta \in [0, 1]$, $i \in I$, we have
+	\begin{align*}
+		F(\theta \mathbf{x}_1 + (1 - \theta) \mathbf{x}_2) & = \sup_{i \in I} f_i(\theta \mathbf{x}_1 + (1 - \theta) \mathbf{x}_2) \\
+		& \leq \sup_{i \in I} \theta f_i(\mathbf{x}_1) + \sup_{i \in I} (1 - \theta) f_i(\mathbf{x}_2) \\
+		& = \theta \sup_{i \in I} f_i(\mathbf{x}_1) + (1 - \theta) \sup_{i \in I} f_i(\mathbf{x}_2) \\
+		& = \theta F(\mathbf{x}_1) + (1 - \theta) F(\mathbf{x}_2)
+	\end{align*}
+	Therefore, $F$ is convex.
+\end{solution}
+
+\begin{exercise}
+	\bf Subdifferentials
+\end{exercise}
+
+\begin{solution}
+	1. Let $\mathbf{x}_0 \in \mathbf{H}$, we have
+	\[
+	\tilde{I}_{\mathbf{H}}(\mathbf{y}) \geq \tilde{I}_{\mathbf{H}}(\mathbf{x}_0) + \left\langle \mathbf{g},\, \mathbf{y} - \mathbf{x}_0 \right\rangle = \mathbf{g}^T (\mathbf{y} - \mathbf{x}),\, \forall\, \mathbf{y} \in \mathbb{R}^n.
+	\]
+	Since $\tilde{I}_{\mathbf{H}}(\mathbf{y}) = + \infty$, $\forall\, \mathbf{y} \notin \mathbf{H}$, we can assume that $\mathbf{y} \in \mathbf{H}$. Therefore, we have
+	\[
+	0 \geq \mathbf{g}^T (\mathbf{y} - \mathbf{x}_0),\, \forall\, \mathbf{y} \in \mathbf{H}.
+	\]
+	which implies that
+	\[
+	\partial \tilde{I}_{\mathbf{H}}(\mathbf{x}) = \{\mathbf{g} \in \mathbb{R}^n | \mathbf{g}^T \mathbf{x} \geq \mathbf{g}^T \mathbf{y},\, \forall\, \mathbf{y} \in \mathbf{H}\}
+	\]
+	\newline
+	2. Without loss of generality, we can assume that $x_i = 0$, $i = k + 1, k + 2, \dots, n$. Since
+	\[
+	\partial e^{\|\mathbf{x}\|_1} = e^{\|\mathbf{x}\|_1} \partial \|\mathbf{x}\|_1,
+	\]
+	from Example 3 in Lec07, we have
+	\[
+	\partial f(\mathbf{x}) = \left\lbrace \mathbf{v} \in \mathbb{R}^n : v_i = \left\lbrace
+	\begin{aligned}
+		& sgn(x_i)e^{\|\mathbf{x}\|_1},\, \text{ if } x_i \neq 0, \\
+		& [-e^{\|\mathbf{x}\|_1}, e^{\|\mathbf{x}\|_1}],\, \text{ if } x_i = 0.
+	\end{aligned}
+	\right.
+	\right\rbrace
+	\]
+	\newline\newline
+	3. In fact, $f(\mathbf{x}) = \max_{i \in I} \left\langle \mathbf{p}_i,\, \mathbf{x} \right\rangle$, where 
+	\[
+	\{\mathbf{p}_i\}_{i \in I} = \{\sum_{j = 1}^{k}e_{i_j} | i_j \text{ are different elements in } \{1, 2, \dots, n\}\}.
+	\]
+	Let $f_i(\mathbf{x}) = \left\langle \mathbf{p}_i,\, \mathbf{x} \right\rangle$. Since $\nabla f_i(\mathbf{x}) = \mathbf{p}_i$, by Lemma 3 we have
+	\begin{align*}
+		\partial f(\mathbf{x}) & = \conv \{\mathbf{p}_i : i \in I, f_i(\mathbf{x}) = \left\langle \mathbf{p}_i,\, \mathbf{x} \right\rangle = f(\mathbf{x})\} \\
+		& = \{\mathbf{v} : \mathbf{v} \in \mathbb{R}_+^n,\, \|\mathbf{v}\|_1 = k,\, \left\langle \mathbf{v},\, \mathbf{x} \right\rangle\ = f(\mathbf{x})\}
+	\end{align*}
+	\newline
+	4. We have $f(\mathbf{x}) = \max_i |x_i| = \max_{1 \leq i \leq n} | \left\langle \mathbf{e}_i,\, \mathbf{x} \right\rangle |$. Let $f_i(\mathbf{x}) = | \left\langle \mathbf{e}_i,\, \mathbf{x} \right\rangle |$, then $\partial f_i(\mathbf{x}) = \mathbf{e}_i \partial |x_i|$. Therefore, we have 
+	\[
+	\partial f(\mathbf{x}) = \conv \{\mathbf{e}_i \partial |x_i| : |x_i| = \max_j |x_j|\}.
+	\]
+	Consider two cases: \newline
+	(i) $\|\mathbf{x}\|_\infty = 0$, which implies that $\mathbf{x} = \mathbf{0}$. Therefore, 
+	\[
+	\partial f(\mathbf{x}) = \conv \{\mathbf{e}_i [-1, 1] : 1 \leq i \leq n\} = \{\mathbf{v} \in \mathbb{R}^n : \sum_{i = 1}^{n} | v_i | \leq 1\}.
+	\]
+	(ii) $\|\mathbf{x}\|_\infty > 0$. We have
+	\begin{align*}
+		\partial f(\mathbf{x}) & = \conv \{\mathbf{e}_i sgn(x_i) : |x_i| = \max_j |x_j|\} \\ 
+		& = \left\lbrace \mathbf{v} \in \mathbb{R}^n : v_i = \left\lbrace
+			\begin{aligned}
+				& sgn(x_i) \theta_i,\, \text{ if } |x_i| = \max_j |x_j|, \\
+				& 0,\, \text{ others. }
+			\end{aligned}
+			\right. , \sum_{i = 1}^{n} \theta_i = 1
+			\right\rbrace
+	\end{align*}
+	\newline
+	5. From Example 7 in Lec06, we have
+	\[
+	f(\mathbf{X}) = \max\limits_{\|\mathbf{s}\| = 1} \left\langle \mathbf{s}, \mathbf{Xs} \right\rangle = \max\limits_{\|\mathbf{s}\| = 1} \left\langle \mathbf{ss}^T, \mathbf{X}\right\rangle.
+	\]
+	Let $f_\mathbf{s}(\mathbf{X}) = \left\langle \mathbf{ss}^T, \mathbf{X} \right\rangle$ and $\Delta = \{\mathbf{s} : \|\mathbf{s}\| = 1\}$, we have $\nabla f_\mathbf{s}(\mathbf{X}) = \mathbf{ss}^T$. Therefore, 
+	\[
+	\nabla f(\mathbf{X}) = \conv \{ \mathbf{ss}^T : \left\langle \mathbf{ss}^T, \mathbf{X} \right\rangle = f(\mathbf{X})\}. 	
+	\]
+	Assume that $\lambda_{max} = \lambda_1 = \dots = \lambda_r$, $r \leq n$, we have
+	\[
+	\mathbf{u}_i \in \argmax\limits_{\|\mathbf{s}\| = 1} \left\langle \mathbf{ss}^T, \mathbf{X} \right\rangle,\, i = 1, 2, \dots, r.
+	\]
+	Let $\mathbf{U} = (u_1, u_2, \dots, u_r)$, we have
+	\begin{align*}
+		\argmax\limits_{\|\mathbf{s}\| \in \Delta} \left\langle \mathbf{ss}^T, \mathbf{X} \right\rangle & = \{\mathbf{v} : \mathbf{v} \in \mspan \mathbf{U},\, \|\mathbf{v}\| = 1\} \\
+		& = \{\mathbf{v} : \mathbf{v} = \mathbf{Uq},\, \mathbf{q} \in \mathbf{R}^r,\, \|\mathbf{q}\| = 1\}
+	\end{align*}
+	By Lemma 4, we have
+	\begin{align*}
+		\nabla f(\mathbf{X}) & = \conv \{\mathbf{vv}^T : \mathbf{v} \in \mspan \mathbf{U},\, \|\mathbf{v}\| = 1\} \\
+		& = \conv \{\mathbf{Uqq}^T \mathbf{U}^T : \mathbf{q} \in \mathbf{R}^r,\, \|\mathbf{q}\| = 1\} \\
+		& = \{\mathbf{UGU}^T : \mathbf{G} \succeq 0,\, tr(\mathbf{G}) = 1\}
+	\end{align*}
+\end{solution}
+\end{document}

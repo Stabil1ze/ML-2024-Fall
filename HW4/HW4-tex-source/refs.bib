@@ -1,0 +1,870 @@
+@book{bertsekas2002introduction,
+  title={Introduction to probability},
+  author={Bertsekas, Dimitri P and Tsitsiklis, John N},
+  volume={1},
+  year={2002},
+  publisher={Athena Scientific Belmont, MA}
+}
+
+@article{beck2009fast,
+  title={A fast iterative shrinkage-thresholding algorithm for linear inverse problems},
+  author={Beck, Amir and Teboulle, Marc},
+  journal={SIAM journal on imaging sciences},
+  volume={2},
+  number={1},
+  pages={183--202},
+  year={2009},
+  publisher={SIAM}
+}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Template for homework of Introduction to Machine Learning.
+%
+%  Fill in your name, lecture number, lecture date and body
+%  of homework as indicated below.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[11pt,letter,notitlepage]{article}
+
+\usepackage[left=2cm, right=2cm, lines=45, top=0.8in, bottom=0.7in]{geometry}
+
+\usepackage{fancyhdr}
+\usepackage{fancybox}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{enumitem}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{epstopdf}
+\usepackage{subfigure}
+\usepackage{threeparttable}
+
+
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1.5pt}
+\newcommand\Loadedframemethod{TikZ}
+\usepackage[framemethod=\Loadedframemethod]{mdframed}
+
+\usepackage{amssymb,amsmath}
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\setlength{\topmargin}{0pt}
+\setlength{\textheight}{9in}
+\setlength{\headheight}{0pt}
+
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6in}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Define math operator %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator*{\argmin}{\bf argmin}
+\DeclareMathOperator*{\relint}{\bf relint\,}
+\DeclareMathOperator*{\dom}{\bf dom\,}
+\DeclareMathOperator*{\intp}{\bf int\,}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setlength{\topmargin}{0pt}
+\setlength{\textheight}{9in}
+\setlength{\headheight}{0pt}
+
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6in}
+\pagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\mdtheorem[
+topline=false,
+rightline=false,
+leftline=false,
+bottomline=false,
+leftmargin=-10,
+rightmargin=-10
+]{exercise}{\textbf{Exercise}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Problem environment %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\mdtheorem[
+topline=false,
+rightline=false,
+leftline=false,
+bottomline=false,
+leftmargin=-10,
+rightmargin=-10
+]{problem}{\textbf{Problem}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Solution Environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+\declaretheoremstyle
+[
+spaceabove=0pt,
+spacebelow=0pt,
+headfont=\normalfont\bfseries,
+notefont=\mdseries,
+notebraces={(}{)},
+headpunct={:\quad},
+headindent={},
+postheadspace={ },
+postheadspace=4pt,
+bodyfont=\normalfont,
+qed=$\blacksquare$,
+preheadhook={\begin{mdframed}[style=myframedstyle]\end{mdframed}},
+	postfoothook={},
+]{mystyle}
+
+\declaretheorem[style=mystyle,title=Solution,numbered=no]{solution}
+\mdfdefinestyle{myframedstyle}{%
+	topline=false,
+	rightline=false,
+	leftline=false,
+	bottomline=false,
+	skipabove=-6ex,
+	leftmargin=-10,
+	rightmargin=-10}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Solution environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Homework info.
+\newcommand{\posted}{\text{Nov. 22, 2021}}       			%%% FILL IN POST DATE HERE
+\newcommand{\due}{\text{Dec. 6, 2021}} 			%%% FILL IN Due DATE HERE
+\newcommand{\hwno}{\text{5}} 		           			%%% FILL IN LECTURE NUMBER HERE
+
+
+%%%%%%%%%%%%%%%%%%%%
+%% Put your information here %%
+%%%%%%%%%%%%%%%%%%%
+\newcommand{\name}{\text{San Zhang}}  	          			%%% FILL IN YOUR NAME HERE
+\newcommand{\id}{\text{PBXXXXXXXX}}		       			%%% FILL IN YOUR ID HERE
+%%%%%%%%%%%%%%%%%%%%
+%% End of the student's info %%
+%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\proj}[2]{\textbf{P}_{#2} (#1)}
+\newcommand{\lspan}[1]{\textbf{span}  (#1)  }
+\newcommand{\rank}[1]{ \textbf{rank}  (#1)  }
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\DeclareMathOperator*{\cl}{\bf cl\,}
+\DeclareMathOperator*{\bd}{\bf bd\,}
+\DeclareMathOperator*{\conv}{\bf conv\,}
+\DeclareMathOperator*{\epi}{\bf epi\,}
+
+
+% \lhead{
+% 	\textbf{\name}
+% }
+% \rhead{
+% 	\textbf{\id}
+% }
+\chead{\textbf{
+		Homework \hwno
+}}
+
+
+
+
+\begin{document}
+\vspace*{-4\baselineskip}
+\thispagestyle{empty}
+
+
+\begin{center}
+{\bf\large Introduction to Machine Learning}\\
+{Fall 2022}\\
+University of Science and Technology of China
+\end{center}
+
+\noindent
+Lecturer: Jie Wang  			 %%% FILL IN LECTURER HERE
+\hfill
+Homework \hwno             			
+\\
+Posted: \posted
+\hfill
+Due: \due
+% \\
+% Name: \name             			
+% \hfill
+% ID: \id						
+% \hfill
+
+\noindent
+\rule{\textwidth}{2pt}
+
+\medskip
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BODY OF HOMEWORK GOES HERE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Notice, }to get the full credits, please show your solutions step by step.
+
+
+\begin{exercise}[Proximal Operator]
+For a convex function $f:\mathbb{R}^n\to\mathbb{R}$, we define its proximal operator at $\mathbf{x}$ by
+\begin{align*}
+    \operatorname{prox}_{f}(\mathbf{x})=\underset{\mathbf{u} \in \operatorname{dom} f}{\arg \min }\left\{f(\mathbf{u})+\frac{1}{2}\|\mathbf{u}-\mathbf{x}\|^{2}\right\}.
+\end{align*}
+
+\begin{enumerate}
+    \item Recall the convex optimization problem in Lecture 08.
+    \begin{align*}
+      \min _{\mathbf{x} \in \mathbb{R}^{n}} F(\mathbf{x}).
+    \end{align*}
+    Please rewrite $p(\mathbf{x}_c)$ using proximal operator.
+  \item The proximal operator has the following properties.
+    \begin{enumerate}
+      \item If $f$ is proper and close (which means $\mathbf{epi} f$ is close), then for any $\mathbf{x}\in\mathbb{R}^n$, $\operatorname{prox}_{f}(\mathbf{x})$ exists and is unique. You can use the properties we have proved in Homework 4 directly.
+      \item If $f$ is proper and close, then $\mathbf{u}=\operatorname{prox}_{f}(\mathbf{x})$ if and only if $\mathbf{x}-\mathbf{u} \in \partial f(\mathbf{u})$.
+      \item Please show that if $\mathbf{u}=\operatorname{prox}_{f}(\mathbf{x}), \mathbf{v}=\operatorname{prox}_{f}(\mathbf{y})$, then
+          \begin{align*}
+            \langle \mathbf{u}-\mathbf{v},\mathbf{x}-\mathbf{y}\rangle \ge\|\mathbf{u}-\mathbf{v}\|_{2}^{2},
+          \end{align*}
+          which means $\operatorname{prox}_{f}$ is firmly nonexpansive. Then show that this implies nonexpansive
+          \begin{align*}
+            \left\|\operatorname{prox}_{f}(\mathbf{x})-\operatorname{prox}_{f}(\mathbf{y})\right\|_{2} \le\|\mathbf{x}-\mathbf{y}\|_{2}.
+          \end{align*}
+
+    \end{enumerate}
+  \item The proximal operator satisfies the following equations.
+  \begin{enumerate}
+    \item For $\lambda\not=0$ and $a\in\mathbb{R}^n$, we let $h(\mathbf{x})=f(\lambda \mathbf{x}+\mathbf{a})$, then $ \operatorname{prox}_{h}(\mathbf{x})=\frac{1}{\lambda}\left(\operatorname{prox}_{\lambda^{2} f}(\lambda \mathbf{x}+\mathbf{a})-\mathbf{a}\right)$.
+    \item For $\lambda>0$, we let $h(\mathbf{x})=\lambda f\left(\frac{\mathbf{x}}{\lambda}\right)$, then $ \operatorname{prox}_{h}(\mathbf{x})=\lambda \operatorname{prox}_{\lambda^{-1} f}\left(\frac{\mathbf{x}}{\lambda}\right)$.
+    \item For $\mathbf{a}\in\mathbb{R}^n$, we let $h(\mathbf{x})=f(\mathbf{x})+\mathbf{a}^\top \mathbf{x}$, then $ \operatorname{prox}_{h}(\mathbf{x})=\operatorname{prox}_{f}(\mathbf{x}-\mathbf{a})$.
+  %  \item For $u>0$, we let $h(\mathbf{x})=f(\mathbf{x})+\frac{u}{2}\|\mathbf{x}-\mathbf{a}\|_{2}^{2}$, then $\operatorname{prox}_{h}(\mathbf{x})=\operatorname{prox}_{\theta f}(\theta \mathbf{x}+(1-\theta) \mathbf{a})$, where $\theta=\frac{1}{1+u}$.
+  \end{enumerate}
+  \item Please find the proximal operator of the following functions. \begin{enumerate}
+          \item $f(\mathbf{x})=0$.
+          \item $f(\mathbf{x})=I_C(\mathbf{x})$, where $C$ is a convex set.
+          \item $f(\mathbf{x})=\|\mathbf{x}\|_1$.
+        \end{enumerate}
+  \item (Optional) Consider the convex optimization problem
+    \begin{align}\label{prob:indicator}
+        \min_{\textbf{x}\in\mathbb{R}^n} f(\textbf{x})+\Tilde{I}_D(\textbf{x}),
+    \end{align}
+    where $D\subseteq\mathbb{R}^n$ is a closed convex set and $\Tilde{I}_D(\textbf{x})$ is the extended-value extension of its indicator function $I_D(\textbf{x})$.
+    \begin{enumerate}
+        \item Write down the optimality condition and the proximal operator of Problem (\ref{prob:indicator}).
+        \item Find the relationship between (\ref{prob:indicator}) and the constrained optimization problem
+        \begin{align*}
+        \min_{\textbf{x}\in D} f(\textbf{x}).
+        \end{align*}
+    \end{enumerate}
+   
+    \item (Optional) Write down the proximal operator of the following convex optimization problems.
+    \begin{enumerate}
+        \item
+        \begin{align*}
+        \min_{w\in\mathbb{R}^n} \frac{1}{n}\|\textbf{y}-\textbf{X}\textbf{w}\|_2^2+\lambda_1 \|\textbf{w}\|_1+\lambda_2 I_{\mathbb{R}^n_+}(\textbf{w}),
+        \end{align*}
+
+        \item
+        \begin{align*}
+        \min_{w\in\mathbb{R}^n} \frac{1}{n}\|\textbf{y}-\textbf{X}\textbf{w}\|_2^2+\lambda \left[\left(\sum\limits_{i=1}^k x_i^2\right)^{\frac{1}{2}}+\left(\sum\limits_{i=k+1}^n x_i^2\right)^{\frac{1}{2}}\right].
+        \end{align*}
+    \end{enumerate}
+\end{enumerate}
+\end{exercise}
+\begin{solution}
+
+\end{solution}
+
+\newpage
+\begin{exercise}[Proximal Gradient]
+Consider the following convex optimization problem
+\begin{align}\label{prob:ex2}
+    \min_\textbf{x}\, &F(\textbf{x})\\
+    \nonumber\text{s.t.} &\textbf{x}\in D
+\end{align}
+where $F:\mathbb{R}^n\rightarrow\overline{\mathbb{R}}$ is a proper convex function and $D\subseteq\mathbb{R}^n$
+is a nonempty convex set with $D\subseteq\dom F$. Suppose that the problem (\ref{prob:ex2}) is solvable, and {\bf we do not require the differentiability of $F$}.
+\begin{enumerate}
+    \item If $\textbf{x}\in\intp(\dom F) \cap D$ and there exists a $\textbf{g}\in\partial F(\textbf{x})$ such that
+    \begin{align*}
+        \langle \textbf{g},\textbf{y}-\textbf{x} \rangle\ge 0,\, \forall\, \textbf{y}\in D,
+    \end{align*}
+    show that $\textbf{x}$ is optimal.
+
+    \item (Optional) If $\textbf{x}\in\intp(\dom F)$ and $\textbf{x}$ is optimal, show that $\textbf{x}\in D$ and there exists a $\textbf{g}\in\partial F(\textbf{x})$ such that
+    \begin{align*}
+        \langle \textbf{g},\textbf{y}-\textbf{x} \rangle\ge 0,\, \forall\, \textbf{y}\in D.
+    \end{align*}
+
+    \item Please give an example to show that $\partial F(\textbf{x})$ can be empty.
+
+    \item If $\textbf{x}^*$ is an interior point of $D$, show that
+    \begin{align*}
+        \mathbf{x}^*\in\argmin_{\mathbf{x}\in D}\,F(\mathbf{x})\Leftrightarrow 0\in\partial F(\mathbf{x}^*).
+    \end{align*}
+    You can use the conclusion of Problems 1 and 2.
+\end{enumerate}
+In many cases, the function $F$ can be decomposed into $F=f+g$,
+where $g:\mathbb{R}^n\to\overline{\mathbb{R}}$ is a continuous convex function, and $f:\mathbb{R}^n\to\mathbb{R}$ is a convex and continuously differentiable function, whose gradient is Lipschitz continuous with the constant $L$.
+We can use ISTA, which has been introduced in Lecture 08, to find $\min\limits_{\textbf{x}\in\mathbb{R}^n} F(\textbf{x})$.
+
+\begin{enumerate}[resume]
+    \item For a \textbf{given} point $\textbf{x}_c$, we consider the following quadratic approximation of $F$:
+    \begin{align*}
+       Q(\mathbf{x};\mathbf{x}_c)=f(\mathbf{x}_c)+\langle\nabla f(\mathbf{x}_c),\mathbf{x}-\mathbf{x}_c\rangle+\frac{L}{2}\|\mathbf{x}-\mathbf{x}_c\|^2+g(\mathbf{x}).
+    \end{align*}
+    Please show that it always admits a unique minimizer
+    \begin{align*}
+       p(\mathbf{x}_c)=&\argmin_{\textbf{x}\in\mathbb{R}^n}Q(\mathbf{x};\mathbf{x}_c).
+    \end{align*}
+
+    \item (Optional) We can think of the update step of ISTA, i.e.,  $\textbf{x}^+=p(\textbf{x})$, as two steps:
+    \begin{enumerate}
+        \item Take a step in the opposite direction of the gradient of $f$ at $\textbf{x}$, i.e.,
+        \begin{align*}
+             \textbf{z}=\textbf{x}-\frac{1}{L}\nabla f(\textbf{x}).
+        \end{align*}
+
+        \item Project $\textbf{z}$ on some set $C$, i.e.,
+        \begin{align*}
+            \textbf{x}^+=p(\textbf{x})=\Pi_C(\textbf{x}).
+        \end{align*}
+
+    \end{enumerate}
+    Find the set $C$. Is it closed, open or neither? Is it convex or not?
+
+    \item Consider the Lasso problem
+    \begin{align*}
+        \min_{\textbf{w}\in\mathbb{R}^n} \frac{1}{n} \|\textbf{y}-\textbf{X}\textbf{w}\|_2^2+\lambda\|\textbf{w}\|_1.
+    \end{align*}
+    Suppose that $\hat{\textbf{w}}$ solves the problem. Write down the optimality condition at $\hat{\textbf{w}}$.
+
+    \item If we use ISTA to solve the Lasso problem, show that
+    \begin{align*}
+        w_i^+=
+        \begin{cases}
+            z_i+\dfrac{\lambda}{L},\,&\text{if}\,z_i<-\dfrac{\lambda}{L},\\
+            0,\,&\text{if}\,|z_i|\le\dfrac{\lambda}{L},\\
+            z_i-\dfrac{\lambda}{L},\,&\text{if}\,z_i>\dfrac{\lambda}{L},
+        \end{cases}
+    \end{align*}
+    where $\textbf{z}=\textbf{w}_k-\dfrac{2}{Ln}\textbf{X}^\top(\textbf{X}\textbf{w}_k-\textbf{y})$.
+
+  
+    
+
+\end{enumerate}
+
+\end{exercise}
+\begin{solution}
+
+\end{solution}
+
+
+
+
+
+\newpage
+\begin{exercise}[Projected Gradient Descent (Optional)]
+    Consider the following problem
+    \begin{align}\label{prob:sc_min}
+        \min_{x\in D}f(x),
+    \end{align}
+    where $f:\mathbb{R}^{n} \to \overline{\mathbb{R}}$ is proper, continuously differentiable and strongly convex with convexity parameter $\mu>0$. We assume that the gradient of $f$ is Lipschitz with a constant $L>0$.
+    \par A commonly used approach to solve the constrained optimization problem (\ref{prob:sc_min}) is the so-called \emph{projected gradient descent}, in which each iteration improves the current estimation $\mathbf{x}_k$ of the optimum by
+    \begin{align*}
+        \mathbf{x}_{k+1}=\Pi_{D}(\textbf{x}_k-\alpha\nabla f(\textbf{x}_k)),
+    \end{align*}
+    where $\alpha>0$ is the step size.
+    \begin{enumerate}
+        \item Show that
+        \begin{align*}
+            f(\mathbf{y})\ge f(\mathbf{x})-\frac{1}{2\mu}\|\nabla f(\mathbf{x})\|_2^2, \,\forall\, \mathbf{x},\mathbf{y} \in D.
+        \end{align*}
+        \item Consider the problem (\ref{prob:sc_min}) and the sequence generated by the \emph{projected gradient descent} algorithm. Suppose that $\mathbf{x}^*$ is the solution to the problem (\ref{prob:sc_min}).
+        \begin{enumerate}
+            \item Find the range of $\alpha$ such that the function values $f(\mathbf{x}_k)$ converge linearly to $f(\mathbf{x}^*)$.
+            \item When does the (projected) gradient descent always achieve the optimal solution in one iteration wherever the intial point $\mathbf{x}_0$ is?
+        \end{enumerate}
+        
+        
+    \end{enumerate}
+\end{exercise}
+
+
+\begin{solution}
+
+\end{solution}
+
+\newpage
+\begin{exercise}[\cite{beck2009fast} ISTA with Backtracking]\label{exercise:ISTA-backtracking}
+Suppose that we would like to apply ISTA to solve the convex optimization problem
+\begin{align}\label{prob:f+g}
+    \min_{\textbf{x}\in\mathbb{R}^n} F(\textbf{x})=f(\textbf{x})+g(\textbf{x}),
+\end{align}
+where $g:\mathbb{R}^n\to\overline{\mathbb{R}}$ is a continuous convex function, and $f:\mathbb{R}^n\to\mathbb{R}$ is a convex and continuously differentiable function, whose gradient is Lipschitz continuous with the constant $L$. We assume that Problem (\ref{prob:f+g}) is solvable, i.e., there exists $\textbf{x}^*$ such that
+\begin{align*}
+    F(\textbf{x}^*)=F^*=\min_{\textbf{x}\in\mathbb{R}^n} F(
+    \textbf{x}).
+\end{align*}
+In practice, however, a possible drawback of ISTA is that the Lipschitz constant $L$ is not always known or computable. For instance, if $f(\textbf{x})=\|\textbf{A}\textbf{x}-\textbf{b}\|_2^2$, the Lipschitz constant for $\nabla f$ depends on $\lambda_{\rm max}(\textbf{A}^\top\textbf{A})$, which is not always easily computable for large-scale problems. To tackle this problem, we always equip ISTA with the backtracking stepsize rule as shown in Algorithm \ref{alg:ISTA-back}.
+\par Note that in Algorithm \ref{alg:ISTA-back}, $Q_L$ and $p_L$ are defined as
+\begin{align*}
+    &Q_{L}(\textbf{x};\textbf{x}_c)=f(\textbf{x}_c)+\langle\nabla f(\textbf{x}_c),\textbf{x}-\textbf{x}_c\rangle+\frac{L}{2}\|\textbf{x}-\textbf{x}_c\|_2^2+g(\textbf{x})\\
+    &p_L(\textbf{x}_c)=\argmin_{\textbf{x}\in\mathbb{R}^n} Q_L(\textbf{x};\textbf{x}_c).
+\end{align*}
+
+\begin{algorithm}[H]
+	\caption{ISTA with Backtracking}\label{alg:ISTA-back}
+	\begin{algorithmic}[1]
+		\STATE {\bf Input:} An initial point $\mathbf{x}_0$, an initial  constant $L_0>0$, a threshold $\eta>1$, and $k=1$.
+		\WHILE{the {\it termination condition} does not hold}
+		    \STATE Find the smallest non-negative integer $i_k$ such that with $\Tilde{L}=\eta^{i_k}L_{k-1}$
+		    \begin{align}\label{eqn:FQ}
+		        F(p_{\Tilde{L}}(\textbf{x}_{k-1}))\le Q_{\Tilde{L}}(p_{\Tilde{L}}(\textbf{x}_{k-1});\textbf{x}_{k-1}).
+		    \end{align}
+		    \STATE $L_k\leftarrow \eta^{i_k}L_{k-1}$, $\textbf{x}_k\leftarrow p_{L_k}(\textbf{x}_{k-1})$,
+		    \STATE $k \leftarrow k+1$,
+		\ENDWHILE
+		
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{enumerate}
+    \item Show that the sequence $\{F(\textbf{x}_k)\}$ produced by Algorithm \ref{alg:ISTA-back} is non-increasing.
+
+    \item Show that Inequality (\ref{eqn:FQ}) is satisfied for any $\Tilde{L}\ge L$, where $L$ is the Lipschitz constant of $\nabla f$, thus showing that for Algorithm \ref{alg:ISTA-back} one has $L_k\le \eta L$ for every $k\ge 1$.
+
+    \item Let $\{\textbf{x}_k\}$ be the sequence generated by Algorithm \ref{alg:ISTA-back}. Show that for any $k\ge 1$ we have
+    \begin{align*}
+        F(\textbf{x}_k)-F(\textbf{x}^*)\le \frac{\eta L \|\textbf{x}_0-\textbf{x}^*\|_2^2}{2k},\,\forall \textbf{x}^*\in \argmin_{\textbf{x}\in\mathbb{R}^n} F(\textbf{x}).
+    \end{align*}
+    The above result means that the number of iterations of Algorithm \ref{alg:ISTA-back} required to obtain an $\varepsilon$-optimal solution, i.e., an $\hat{\textbf{x}}$ such that $F(\hat{\textbf{x}})-F(\textbf{x}^*)\le \varepsilon$, is at most
+    \begin{align*}
+        \left\lceil \frac{\eta L \|\textbf{x}_0-\textbf{x}^*\|_2^2}{2\varepsilon} \right\rceil.
+    \end{align*}
+\end{enumerate}
+
+
+\end{exercise}
+\begin{solution}
+
+\end{solution}
+
+\newpage
+\begin{exercise}[Programming Exercise: Handwritten Digits Recognition]
+    MNIST is a widely used data set---which consists of grey images of handwritten digits---in machine learning and pattern recognition. The training set and the testing set have 60000 and 10000 images, respectively. We show ten images in MNIST in Figure (a).
+
+    In this exercise, we would like to predict the label of a given handwritten image. Notice that, the labels of the images in the training set come for granted. For example, given an image from the training set with a handwritten digit ``$7$" in it, we know the number (the label) in the image is $7$. Our task is to predict the number in a handwritten image outside of the training set.
+
+    To do so, we first transform the $28\times28$ gray images in the training set into a set of $784$-dimensional column vectors, and then we put them together to construct the input feature matrix $\textbf{X} \in \mathbb{R}^{n\times d}$, where $n=784$ and $d=60000$. We also provide you labels of all images in the training set. Then, we randomly choose an image in the testing set and transform it into a column vector in the same way as the corresponding response vector $\textbf{y}\in \mathbb{R}^n$. We show this image in Figure (b).
+
+    % A toy example is illustrated in Figure (a) and Figure (b).
+    To predict the label of the response vector, we use Lasso to fit this data. Please follow the instructions step by step. You can use your favorite programming language.
+\end{exercise}
+
+% \begin{figure}[htp]
+%  \centering
+%  \subfigure[Ten images in the training set.]{
+%    \label{fig:subfig:1} %% label for first subfigure
+%    \includegraphics[width=3.0in]{./Figures/0_9.png}}
+%  \hspace{1in}
+%  \subfigure[The image we choose from the testing set. ]{
+%    \label{fig:subfig:2} %% label for second subfigure
+%    \includegraphics[width=1.55in]{./Figures/4.png}}
+%  \label{fig:subfig} %% label for entire figure
+%\end{figure}
+
+
+    \begin{enumerate}
+        \item We first normalize the data matrix $\mathbf{X}$ and the response vector $\mathbf{y}$, such that each entries are within $[0,1]$. Specifically, let
+        \begin{align*}
+            \mathbf{Z}= \mathbf{X}/255,\mathbf{h}=\mathbf{y}/255.
+        \end{align*}
+        Then, Lasso takes the form of
+        \begin{align}\label{prob:lsm2}
+          \min_{\textbf{u}}F(\textbf{u}) = \frac{1}{n}\|\textbf{h}-\textbf{Z}\textbf{u}\|_2^2+\lambda\|\textbf{u}\|_1,
+        \end{align}
+        where $\textbf{u}\in\mathbb{R}^{d}$. Let $f(\textbf{u})=\frac{1}{n}\|\textbf{ h}-\textbf{Z}\textbf{u}\|_2^2$ and $g(\textbf{u})=\lambda\|\textbf{u}\|_1$.
+        \item
+        Please find the Lipschitz constants of  $\nabla f(\textbf{u})$ and write down the corresponding quadratic approximation function of $F(\textbf{u})$.
+        \item From 0.002 to 0.2, uniformly pick out 100 different $\lambda$s and then implement the ISTA algorithm in \textbf{Exercise} \ref{exercise:ISTA-backtracking} to solve Problem (\ref{prob:lsm2}), with different $\lambda$s. Terminate the iteration after 2000 steps and denote the $\textbf{u}_{2000}$ by $\textbf{u}'$. Please plot scatter diagrams of $f(\textbf{u}')$ versus $\lambda$, $g(\textbf{u}')$ versus $\lambda$ and $F(\textbf{u}')$ versus $\lambda$, respectively. Besides, please plot a scatter diagram of the ration of nonzero elements in $\textbf{u}'$ versus $\lambda$.
+
+        \item Please explain the practical meaning of the zero elements and nonzero elements in $\textbf{u}'$ and give your prediction about the digit in $\textbf{y}$ using our provided labels.
+        \item (Optional) There exists a threshold value, which satisfies  that if $\lambda$ exceeds this value, $\textbf{u}'=\textbf{0}$. Please find this threshold in theory.
+    \end{enumerate}
+
+\begin{solution}
+
+\end{solution}
+
+
+
+\newpage
+\begin{exercise}[Random Forests (Optional)]
+Of all the well-known learning methods, {\bf decision trees} come closest to meeting the requirements for serving as an off-the-shelf procedure for data mining, and have emerged as the most popular learning method for data mining due to many advantages. However, trees have one aspect that prevents them from being the ideal tool for predictive learning, namely inaccuracy. They seldom provide predictive accuracy comparable to the best that can be achieved with the data at hand. In other words, they work great with the data used to create them, but they are not flexible when encountering new samples.
+\par The good news is that \textbf{random forests} (Breiman, 2001), as shown in Algorithm \ref{alg:ran-forest}, combine the simplicity of decision trees with flexibility resulting in a vast improvement in accuracy, thus implemented in a variety of packages.
+
+\begin{algorithm}[H]
+	\caption{Random Forest for Regression or Classification}\label{alg:ran-forest}
+	\begin{algorithmic}[1]
+		\STATE {\bf Input:} The training data with $p$ attributes, the number of random-forest trees $B$, the size of one bootstrap sample $N$, the minimum node size $n_{min}$, and the number of attributes selected randomly each time $m$.
+		\STATE {\bf for} $b=1$ to $B$ {\bf do}
+		\begin{enumerate}[topsep=0.1pt, parsep=0.1pt, itemsep=0.1pt, partopsep=0.1pt]
+		    \item[(a)] Draw a sample $Z^*$ of size $N$ {\bf with replacement} (which is called a bootstrap sample) from the training data.
+		    \item[(b)] Grow a random-forest tree $T_b$ to the bootstrapped data, by recursively repeating the following steps for each terminal node of the tree, until the minimum node size $n_{min}$ is reached.
+		    \begin{enumerate}[topsep=0.1pt, parsep=0.1pt, itemsep=0.1pt, partopsep=0.1pt]
+		        \item[i.] Select $m$ attributes at random from the $p$ attributes.
+		        \item[ii.] Pick the best attribute/split-point among the $m$.
+		        \item[iii.] Split the node into two child nodes.
+		    \end{enumerate}
+		\end{enumerate}
+		{\bf End for}
+		\STATE To make a prediction at a new point $x$:\\
+		For {\it Regression:} $\hat{f}_{rf}^B(x)=\frac{1}{B}\sum_{b=1}^B T_b(x)$.\\
+		For {\it Classification:} Let $\hat{C}_b(x)$ be the class prediction of the $b$th random-forest tree $T_b$. Then $\hat{C}^B_{rf}(x)=\text{majority vote}\{\hat{C}_b(x)\}_{b=1}^B$.
+	\end{algorithmic}
+\end{algorithm}
+Random forests is a substantial modification of the so-called {\bf bagging} or {\bf bootstrap aggregation}, which builds a large collection of {\it de-correlated} trees, and then averages them.
+\begin{enumerate}
+    \item Given $B$ i.d. (identically distributed, but not necessarily independent) random variables with positive pairwise correlation $\rho$ and variance $\sigma^2$, show that the variance of their average is
+    \begin{align}\label{eqn:random-forests}
+        \rho\sigma^2+\frac{1-\rho}{B}\sigma^2.
+    \end{align}
+    This appears to fail if $\rho$ is negative; diagnose the problem in this case.
+
+    \item As $B$ increases, the second term of Eq.\,(\ref{eqn:random-forests}) disappears, but the first remains, and hence the size of the correlation of pairs of bagged trees limits the benefits of averaging. The idea in random forests is to improve the variance reduction of bagging by reducing the correlation between the trees, without increasing the variance too much. This is achieved in the tree-growing process through random selection of the input variables. \par How does the size of $m$ effect the correlation between any pair of random-forest trees? Intuitively explain your claim.
+
+    \item Not all estimators can be improved by the bootstrap aggregation. For example, bagging does not change {\it linear} estimates like the sample mean and its variance. What's more, the pairwise correlation between bootstrapped means is about $50\%$, but $\rho$ is typically small for bootstrapped trees.
+    \par Suppose $X_1,\ldots,X_N$ are i.i.d. with means $\mu$ and variances $\sigma^2$. Let $\bar{X}^*_1$ and $\bar{X}^*_2$ be two bootstrap realizations of the sample mean, i.e.,
+    \begin{align*}
+        \bar{X}_i^*=\frac{1}{n}\sum_{j=1}^n X_{j}^i,\,i=1,2,
+    \end{align*}
+    where $\{X_j^i\}_{j=1}^n,\,i=1,2$ are the bootstrap samples randomly selected with replacement from $\{X_i\}_{i=1}^N$. Show that the correlation between $\bar{X}^*_1$ and $\bar{X}^*_2$ is $\frac{n}{2n-1}\approx 50\%$.
+
+    \item The leave-one-out cross-validation (LOOCV) is a special case of the cross-validation. For each instance, LOOCV uses all other instances as a training set and the selected instance as a single-item test set. For random forests, we can also use out-of-bag (OOB) samples to estimate the prediction error. Specifically, for each observation $z_i=(x_i,y_i)$, construct its random forest predictor by averaging only those trees corresponding to {\it bootstrap samples in which $z_i$ did not appear}.
+    \par Show that as the number of bootstrap samples $B$ gets large, the OOB error estimate for a random forest approaches its leave-one-out cross-validation error estimate, and that in the limit, the identity is exact.
+\end{enumerate}
+
+\end{exercise}
+
+\begin{solution}
+
+\end{solution}
+
+
+
+\clearpage
+\begin{exercise}[Programming Exercise: Naive Bayes Classifier]
+We provide you with a data set that contains spam and non-spam emails (``hw5\_nb.zip"). Please use the Naive Bayes Classifier to detect the spam emails.
+Finish the following exercises by programming. You can use your favorite programming language.
+\begin{enumerate}
+\item Remove all the tokens that contain non-alphabetic characters.
+\item Train the Naive Bayes Classifier on the training set according to Algorithm \ref{alg:train_bayes}.
+\item Test the Naive Bayes Classifier on the test set according to Algorithm \ref{alg:test_bayes}. You may encounter a problem that the likelihood probabilities you calculate approach $0$. How do you deal with this problem?
+\item Compute the confusion matrix, accuracy, precision, recall, and F-score.
+\item Without the Laplace smoothing technique, complete the steps again.
+\end{enumerate}
+\end{exercise}
+\begin{algorithm}
+\caption{Training Naive Bayes Classifier}
+\label{alg:train_bayes}
+\textbf{Input:} The training set with the labels $\mathcal{D}=\{(\mathbf{x}_i,y_i)\}.$
+\begin{algorithmic}[1]
+\STATE $\mathcal{V}\leftarrow$ the set of distinct words and other tokens found in $\mathcal{D}$\\
+\FOR{each target value $c$ in the labels set $\mathcal{C}$}
+\STATE $\mathcal{D}_c\leftarrow$ the training samples whose labels are $c$\\
+\STATE $P(c)\leftarrow\frac{|\mathcal{D}_c|}{|\mathcal{D}|}$\\
+\STATE $T_c\leftarrow$ a single document by concatenating all training samples in $\mathcal{D}_c$\\
+\STATE $n_c\leftarrow |T_c|$
+\FOR{each word $w_k$ in the vocabulary $\mathcal{V}$}
+\STATE $n_{c,k}\leftarrow$ the number of times the word $w_k$ occurs in $T_c$\\
+\STATE $P(w_k|c)=\frac{n_{c,k}+1}{n_c+|\mathcal{V}|}$
+\ENDFOR
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+\begin{algorithm}
+\caption{Testing Naive Bayes Classifier }
+\label{alg:test_bayes}
+\textbf{Input:} An email $\mathbf{x}$. Let $x_i$ be the $i^{th}$ token in $\mathbf{x}$ . $\mathcal{I}=\emptyset.$
+\begin{algorithmic}[1]
+\FOR{$i=1,\dots,|\mathbf{x}|$}
+\IF{$\exists\, w_{k_i}\in\mathcal{V}$ such that $w_{k_i}=x_i$}
+\STATE $\mathcal{I}\leftarrow\mathcal{I}\cup i$
+\ENDIF
+\ENDFOR
+\STATE predict the label of $\mathbf{x}$ by
+\begin{align*}
+    \hat{y}=\arg\max_{c\in\mathcal{C}} P(c)\prod_{i\in\mathcal{I}}P(w_{k_i}|c)
+\end{align*}
+\end{algorithmic}
+\end{algorithm}
+\begin{solution}
+
+\end{solution}
+\clearpage
+
+
+\begin{exercise}[Logistic Regression and Newton's Method]
+Given the training data $\mathcal{D}=\{ (\textbf{x}_i,y_i) \}_{i=1}^n$, where $\textbf{x}_i \in \mathbb{R}^d$ and $y_i \in \{ 0,1 \}$. Let
+\begin{align*}
+    \mathcal{I}^+&=\{i:i\in[n],y_i=1\},\\
+    \mathcal{I}^-&=\{i:i\in[n],y_i=0\},
+\end{align*}
+where $[n]=\{1,2,\ldots,n\}$. We assume that $\mathcal{I}^+$ and $\mathcal{I}^-$ are not empty.\\
+Then, we can formulate the logistic regression of the form.
+	\begin{equation}\label{prob:logistic}
+	\min_{\textbf{w}}\,\,L(\textbf{w})=-\frac{1}{n}\sum_{i=1}^n \left( y_i \log \left( \frac{\exp(\langle \textbf{w},  \overline{\mathbf{x}}_i \rangle)}{1+\exp(\langle \textbf{w},  \overline{\mathbf{x}}_i \rangle) } \right) + (1-y_i)\log \left( \frac{1}{1+\exp(\langle \textbf{w},  \overline{\mathbf{x}}_i \rangle)} \right) \right),
+	\end{equation}
+	where $\mathbf{w} \in \mathbb{R}^{d+1}$ is the model parameter to be estimated and $ \overline{\mathbf{x}}_i^{\top} = (1,\mathbf{x}_i^{\top}) $.
+    \begin{enumerate}
+        \item
+        \begin{enumerate}
+            \item Suppose that the training data is strictly linearly separable, that is, there exists $\hat{\mathbf{w}}\in\mathbb{R}^{d+1}$ such that
+    	\begin{align*}
+    	    &\langle \hat{\mathbf{w}}, \mathbf{\bar{x}}_i\rangle>0,\,\forall\,i\in\mathcal{I}^+,\\
+    	    &\langle \hat{\mathbf{w}}, \mathbf{\bar{x}}_i\rangle<0,\,\forall\,i\in\mathcal{I}^-.
+    	\end{align*}
+    	Show that problem (\ref{prob:logistic}) has no solution.
+            \item
+            Suppose that the training data is NOT linearly separable, that is, for all $\mathbf{w} \in \mathbb{R}^{d+1}$, there exists $ i \in \left[ n \right] $ such that
+            \begin{align*}
+    	    &\langle \mathbf{w}, \mathbf{\bar{x}}_i\rangle< 0,\,\text{if\ } i\in\mathcal{I}^+,
+    	    \end{align*}
+    	    or
+    	    \begin{align*}
+    	    &\langle \mathbf{w}, \mathbf{\bar{x}}_i\rangle> 0,\,\text{if\ } i\in\mathcal{I}^-.
+    	\end{align*}
+    	Show that problem (\ref{prob:logistic}) always admits a solution.
+        \end{enumerate}
+        \item  Suppose that $\overline{\textbf{X}}=(\overline{\mathbf{x}}_1,\overline{\mathbf{x}}_2,\dots,\overline{\mathbf{x}}_n)^\top\in\mathbb{R}^{n \times (d+1)}$ and $\rank{\overline{\mathbf{X}}}=d+1$. Show that $L(\textbf{w})$ is strictly convex, i.e., for all $\textbf{w}_1\neq \textbf{w}_2$,
+    	\begin{align*}
+    	    L(t\textbf{w}_1 + (1-t)\textbf{w}_2) < t L(\textbf{w}_1)+(1-t)L(\textbf{w}_2),\forall\, t \in (0,1).
+    	\end{align*}
+    	\item In real applications, a widely-used method to learn the parameters' values of logistic regression is to solve the optimization problem in (\ref{prob:logistic}) with a regularization term, e.g.,
+    	$$
+    	\min_{\textbf{w}} F(\mathbf{w})=L(\mathbf{w})+\frac{\lambda}{2}\|\mathbf{w}\|_{2}^2, \  \lambda >0.
+    	$$
+     The Newton's method is an iterative method for optimization problems.
+    % Newton's method finds the roots of a differentiable function $F$, which are solutions to the equation $F(\mathbf{x}) = 0$. As such, Newton's method can be applied to the derivative $f'$ of a twice-differentiable function $f$ to find the roots of the derivative (solutions to $f'(x) = 0$). These solutions may be minima, maxima, or saddle points.
+    We use the Newton's method to fit the regularized logistic regression by the following algorithm.
+\begin{algorithm}[H]
+	\caption{Newton's Method for Logistic Regression }\label{alg:newton}
+	\begin{algorithmic}[1]
+		\STATE {\bf Input:} The twice-differentiable objective function $F(\mathbf{w})$, the initial point $\mathbf{w_0}$,
+		the degree of precision $\epsilon$.
+		\STATE Calculate the gradient $\mathbf{g}(\mathbf{w})=\nabla F(\mathbf{w})$ and the Hessian matrix $\mathbb{H}(\mathbf{w})$ of the input $F(\mathbf{w})$.
+		\STATE {\bf while $ \|\mathbf{g}_k(\mathbf{w}_k)\|_2 \geq \epsilon $}
+		\begin{enumerate}
+		    \item Let $\mathbb{H}(\mathbf{w}_k)=\mathbb{H}_{k}$ and $\mathbf{g}(\mathbf{w}_k)=\mathbf{g}_k$ to simplify notations.
+		    Calculate the Hessian matrix $\mathbb{H}_k$, and the let $\mathbf{w}_{k+1}=\mathbf{w}_k-\mathbb{H}^{-1}_{k}\mathbf{g}_k$.
+		    \item $k=k+1$.
+		    \item Calculate the gradient $\mathbf{g}_{k+1}$.
+		\end{enumerate}
+		\STATE {\bf Output:} $\hat{\mathbf{w}}$,the first point satisfying $ \|\hat{\mathbf{g}}\|_2 < \epsilon $.
+	\end{algorithmic}
+\end{algorithm}
+    	\begin{enumerate}
+    	    \item Please calculate the gradient $\mathbf{g}(\mathbf{w})$ and the Hessian matrix $\mathbb{H}(\mathbf{w})$ of the regularized Logistic regression.
+    	    \item Please show that the Hessian matrix $\mathbb{H}(\mathbf{w})$ is invertible.
+    	    \item (Bonus) Please show the local convergence of Newton’s method in logistic regression, i.e.,
+    	    $$
+    	   \frac{\|\mathbf{w}_{k+1}-\mathbf{w}^{*}\|}{\|\mathbf{w}_{k}-\mathbf{w}^{*}\|^2}<B,
+    	    $$
+    	    for some $B\in\mathbb{R}$, if the initial point is close enough to $\mathbf{w}^{*}=\arg \min_{\textbf{w}} F(\mathbf{w})$.
+    	\end{enumerate}
+    	
+    \end{enumerate}
+
+
+\end{exercise}
+
+
+\clearpage
+\begin{exercise}[Convergence of Stochastic Gradient Descent for Convex Function]
+Consider an optimization problem
+\begin{equation}\label{prob:SGD}
+    \min_{\mathbf{w}} F(\mathbf{w})=\frac{1}{n}\sum_{i=1}^n f_i(\mathbf{w}),
+\end{equation}
+where the objective function $F$ is  continuously differentiable and strongly convex with convexity parameter $\mu>0$. Suppose that the gradient of $F$, i.e., $\nabla F$, is Lipschitz continuous with Lipschitz constant $L$, and $F$ can attain it minimum $F^*$ at $\mathbf{w}^*$. We use the stochastic gradient descent(SGD) algorithm introduced in Lecture 12 to solve the problem (\ref{prob:SGD}). Let the solution sequence generated by SGD be $(\mathbf{w}_k)$.
+\begin{enumerate}
+    \item Please show that $\forall\mathbf{w}\in\mathbf{dom }\ F$, the following  inequality
+    \begin{align}
+        F(\mathbf{w})-F^*\leq \frac{1}{2\mu}\|\nabla F(\mathbf{w})\|^2
+    \end{align}
+    holds, and interpret the role of strong convexity based on this.
+    \item Recall that with a fixed stepsize $\alpha\in [0,\frac{1}{LM_G}]$ where $M_G$ (as well as the following $M$) is a parameter regarding the upper bound of the variance of stochastic gradient in SGD, the sequence $(\mathbb{E}[F(\mathbf{w}_k)])$ generated by SGD converges to a neighborhood of $F^*$ with a linear rate, i.e,
+		\begin{align*}
+			\mathbb{E}_{\xi_0:\xi_{k-1}}[F(\mathbf{w}_{k})-F^*]&\leq\frac{LM}{2\mu}\alpha+(1-\mu\alpha)^{k}(F(\mathbf{w}_0)-F^*-\frac{LM}{2\mu}\alpha)
+			\xrightarrow[]{\textup{linear}}\frac{LM}{2\mu}\alpha.
+		\end{align*}
+	This means that the expected optimality gap, i.e., $\mathbb{E}_{\xi_0:\xi_{k-1}}[F(\mathbf{w}_{k})-F^*]$, fails to converge to zero. In order to alleviate this problem, we consider a strategy of diminishing stepsize $\alpha_k$. Suppose that the SGD method is run with a stepsize sequence ($\alpha_k$) such that, for all $k \in \mathbb{N}$,$\alpha_k=\frac{\beta}{\gamma+k} $ for some $\beta>\frac{1}{\mu}$ and $\gamma>0$ satisfying $\alpha_0\leq\frac{1}{LM_G}$. Please show that $\forall k\in\mathbb{N}$, we have
+	\begin{align*}
+	   \mathbb{E}_{\xi_0:\xi_{k-1}}[F(\mathbf{w}_{k})-F^*]\leq\frac{\tau}{\gamma+k},
+	\end{align*}
+	where $\tau=\max\{\frac{\beta^2LM}{2(\beta\mu-1)},\gamma(F(\mathbf{w}_0)-F^*)\}$.
+	
+	\item In practice, for the same problem, SGD enjoys less time cost but more iteration steps than gradient descent methods and may suffer from non-convergence. As a trade-off between SGD and gradent descent approaches, consider using mini-batch samples to estimate the full gradient. Taking $k^{th}$ iteration as an example, instead of picking a single sample, we randomly select a subset $\mathcal{S}_k$ of the sample indices to compute the update direction
+	\begin{align*}
+	    \mathbf{g}_k(\xi_k)=\frac{1}{|\mathcal{S}_k|}\sum_{i\in\mathcal{S}_k} \nabla f_{i}(\mathbf{w}_k)
+	\end{align*}
+	 where $\xi_k$ is the selected samples. For simplicity, suppose that the mini-batches in all iterations are of constant size, i.e., $|\mathcal{S}_k|=n_m$, and the stepsize $\alpha$ is fixed. Please show that for mini-batch SGD, there holds
+	\begin{align*}
+			\mathbb{E}_{\xi_0:\xi_{k-1}}[F(\mathbf{w}_{k})-F^*]&\leq\frac{LM}{2\mu n_m}\alpha+(1-\mu\alpha)^{k}(F(\mathbf{w}_0)-F^*-\frac{LM}{2\mu n_m}\alpha)
+			\xrightarrow[]{\textup{linear}}\frac{LM}{2\mu n_m}\alpha.
+	\end{align*}
+	Moreover, point out the advantage of mini-batch SGD compared to SGD
+	in terms of the number of the iteration step.
+	
+	\item Notice that in real applications, $F$ is not always strongly convex. Let $F$ be convex and continuously  differentiable, and the second moment of stochastic gradient $ \mathbf{g} $ be bounded, i.e.,
+	\begin{align*}
+	\mathbb{E}_{\xi}[\|\mathbf{g}(\xi)\|_2^2]\leq G^2.
+	\end{align*}
+	We denote $(\mathbf{w}_k)$ as a sequence generated by SGD algorithm with a fixed stepsize $\alpha$. Besides, define
+	$ \mathbf{\tilde{w}}_K=\frac{1}{K+1}\sum_{k=0}^{K} \mathbf{w}_k $ and $ F^*=F(\mathbf{w}^*) $.
+	\begin{enumerate}
+	    \item If $X$ is a random variable and $h:\mathbb{R}\rightarrow\mathbb{R}$ is a convex function, please show that
+	    $$h(\mathbb{E}[X]) \leq \mathbb{E}[h(X)].$$
+		\item Suppose that the stochastic gradient at $ k^{th} $ iteration is $ \mathbf{g}_k $.  Please show that
+		\begin{align*}
+		\mathbb{E}_{\xi_0:\xi_{k}}[F(\mathbf{w}_{k})-F^*]\leq\mathbb{E}_{\xi_0:\xi_{k}}[\langle{\mathbf{g}_k, \mathbf{w}_{k}-\mathbf{w}^*}\rangle].
+		\end{align*}
+		\item Please show that
+		\begin{align*}
+		\mathbb{E}_{\xi_0:\xi_{k}}[F(\mathbf{w}_k)-F^*]\leq\frac{1}{2\alpha}\mathbb{E}_{\xi_0:\xi_{k}}[\|\mathbf{w}_k-\mathbf{w}^*\|_2^2 - \|\mathbf{w}_{k+1}-\mathbf{w}^*\|_2^2 + \alpha^2 \|\mathbf{g}_k\|_2^2].
+		\end{align*}
+		\item Please show that
+		\begin{align*}
+		\mathbb{E}_{\xi_0:\xi_K}[F(\tilde{\mathbf{w}}_K)-F^*] &\leq \frac{\|\mathbf{w}_0-\mathbf{w}^*\|_2^2 + \alpha^2 G^2 (K+1)}{2\alpha (K+1)}\xrightarrow[]{}\frac{\alpha G^2}{2}.
+		\end{align*}
+	\end{enumerate}
+	
+\end{enumerate}
+
+
+\end{exercise}
+
+
+
+% \begin{exercise}[Example in Stochastic Gradient Descent]
+% Consider a simple linear regression model $ f(x;w) = wx $ with samples $ \{(x_i,y_i)\}_{i=1}^2 $, where $x_i,y_i \in \mathbb{R}$ for $i=1,2$. We use SGD algorithm to minimize the average fitting error
+% \begin{align*}
+% L(w) = \frac{1}{2}\sum_{i=1}^{2}(y_i-wx_i)^2.
+% \end{align*}
+% We uniformly sample a data instance $ \xi_k=(x_{i_k}, y_{i_k}) $ from $ \{(x_i,y_i)\}_{i=1}^2 $ at $ k^{th} $ iteration. The sequence $(w_k)$ is generated by the stochastic gradient descent algorithm.
+% \begin{enumerate}
+% 	\item  Please write down the derivative $  L^\prime(w_k) $ and stochastic derivative $ g_k $.
+% 	\item  Please write down the variance of the stochastic derivative $ \mathbb{V}_{\xi_k}[g_k] $.
+% 	\item We assume the upper bound of $ \mathbb{V}_{\xi_k}[g_k] $ takes the form of
+% 	\begin{align*}
+% 	\mathbb{V}_{\xi_k}[g_k]\leq M + M_V |L^\prime(w_k)|^2.
+% 	\end{align*}
+% 	Please find the corresponding $ M $ and $ M_V $ in this problem. Specifically, when will $ M $ become zero, and when will $ M_V $ become zero?
+% 	\item Can you explain why we cannot expect $\mathbb{V}_{\xi_k}[g_k]$ is bounded or equal to 0?
+% \end{enumerate}
+% \end{exercise}
+% \begin{solution}
+
+% \end{solution}
+\clearpage
+
+% \begin{exercise}[Law of Total Variance]
+%  Let $X, Y,$ and $Z$ be random variables.
+% 	   \begin{enumerate}
+% 	        \item Show that the tower property holds, i.e.,
+%         	\begin{align*}
+%         	    \mathbb{E}[X|Y] = \mathbb{E}[\mathbb{E}[X|Y,Z] |Y].
+%         	\end{align*}
+%         	\item The law of total variance holds, i.e.,
+%         	\begin{align*}
+%         	    \mathbb{V}[X] = \mathbb{E}[\mathbb{V}[X|Y]]+\mathbb{V}[\mathbb{E}[X|Y]].
+%         	\end{align*}
+% 	   \end{enumerate}
+% 	   \emph{Hint: if you do not know measure theory well, you can assume that $X$, $Y$, and $Z$ are continuous random variables.}
+% \end{exercise}
+% \begin{solution}
+
+% \end{solution}
+
+% \clearpage
+% \begin{exercise}[Convergence of SGD for Convex Function]
+% 	Suppose that $f:\mathbb{R}^n \rightarrow \mathbb{R}$ is convex and continuously differentiable, and it attains its minimum at $\mathbf{x}^*$. Suppose the second moment of stochastic gradient $ \mathbf{g} $ is bounded, i.e.,
+% 	\begin{align*}
+% 	\mathbb{E}_{\xi}[\|\mathbf{g}(\mathbf{x},\xi)\|_2^2]\leq G^2,\,\forall\,\mathbf{x}\in \mathbb{R}^n.
+% 	\end{align*}
+% 	Suppose that $(\mathbf{x}_k)$ is a sequence generated by SGD algorithm with a fixed stepsize $\alpha$. Define
+% 	$ \mathbf{\tilde{x}}_K=\frac{1}{K}\sum_{k=1}^{K} \mathbf{x}_k $ and $ f^*=f(\mathbf{x}^*) $.
+
+% 	\begin{enumerate}
+% 	    \item If $X$ is a random variable and $h:\mathbb{R}\rightarrow\mathbb{R}$ is a convex function, please show that
+% 	    $$h(\mathbb{E}[X]) \leq \mathbb{E}[h(X)].$$
+% 		\item Suppose that the stochastic gradient at $ k^{th} $ iteration is $ \mathbf{g}_k $.  Please show that
+		
+% 		\begin{align*}
+% 		\mathbb{E}_{\xi_1:\xi_k}[f(\mathbf{x}_k)-f^*]\leq\mathbb{E}_{\xi_1:\xi_k}[\langle{\mathbf{g}_k, \mathbf{x}_k-\mathbf{x}^*}\rangle].
+% 		\end{align*}
+% 		\item Please show that
+% 		\begin{align*}
+% 		\mathbb{E}_{\xi_1:\xi_k}[f(\mathbf{x}_k)-f^*]\leq\frac{1}{2\alpha}\mathbb{E}_{\xi_1:\xi_k}[\|\mathbf{x}_k-\mathbf{x}^*\|_2^2 - \|\mathbf{x}_{k+1}-\mathbf{x}^*\|_2^2 + \alpha^2 \|\mathbf{g}_k\|_2^2].
+% 		\end{align*}
+% 		\item Please show that
+% 		\begin{align*}
+% 		\mathbb{E}_{\xi_1:\xi_K}[f(\tilde{x}_K)-f^*] &\leq \frac{\|x_1-x^*\|_2^2 + \alpha^2 G^2 K}{2\alpha K}\\
+% 		&\xrightarrow[]{O(1/K)}\frac{\alpha G^2}{2}.
+% 		\end{align*}
+% 	\end{enumerate}
+% \end{exercise}
+% \begin{solution}
+
+% \end{solution}
+\clearpage
+
+\begin{exercise}[Programming Exercise: Logistic Regression]
+
+We provide you with a dataset of handwritten digits\footnotemark\,that contains a training set of 60000 examples and a test set of 2022 examples (``hw5\_lr.mat''). Each image in this dataset  has $28\times28$ pixels and the associated label is the handwritten digit---that is, an integer from the set $\{0,1,\cdots,9\}$---in the image. In this exercise, you need to build a logistic regression classifier to \textit{predict if a given image has the handwritten digit $6$ in it or not}. You can use your favorite programming language to finish this exercise.
+\begin{enumerate}
+\item Normalize the data matrix and please find a Lipschitz constant of $\nabla L(\mathbf{w})$, where $L(\mathbf{w})$ is the objective function of the logistic regression after normalizing and  $\mathbf{w}$ is the model parameter to be estimated.
+
+\item
+\begin{enumerate}
+    \item Use the gradient descent algorithm (GD), which is a special case of ISTA introduced in Lecture 09, and SGD to train the logistic regression classifier on the training set, respectively. Evaluate the classification accuracy on the training set after each iteration. Stop the iteration when $\text{Accuracy}\geq 90\%$ or total steps are more than $5000$. Please plot the accuracy of these two classifiers (the one trained by GD and the other trained by SGD) versus the iteration step on one graph.
+    \item Compare the total iteration counts and the total time cost of the two methods (GD and SGD), respectively. Please report your result.
+    \item Compare the confusion matrix, precision, recall and F1 score of the two classifiers (the one trained by GD and the other trained by SGD). Please report your result.
+    \item Use GD and SGD to train the logistic regression classifier with a 2-norm regularization term. Note that other experimental setup details is in line with 2.(a). Please plot the accuracy of these two classifiers (the one trained by GD and the other trained by SGD) versus the iteration step on one graph and compare the confusion matrix, precision, recall and F1 score of the two classifiers.
+\end{enumerate}
+\item
+\begin{enumerate}
+    \item The training set is imbalanced as the majority class has roughly nine times more images than the minority class. Imbalanced data can hurt the performance of the classifiers badly. Thus, please undersample the majority class such that the numbers of images in the two classes are roughly the same.
+    \item Use GD and SGD to train the logistic regression classifier on the new training set after undersampling. Stop the iteration when $\text{Accuracy}\geq 90\%$ or total steps are more than $5000$.
+    \item Evaluate the two classifiers (the one trained with GD on the original training set and the other trained on the new training set after undersampling) on the test set. Compare the confusion matrix, precision, recall and F1 score of the two classifiers. Please report your result.
+\end{enumerate}
+
+\end{enumerate}
+\end{exercise}
+\footnotetext[1]{This dataset is modified from the MNITS dataset: http://yann.lecun.com/exdb/mnist/}
+\begin{solution}
+\end{solution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+    \bibliography{refs}
+    \bibliographystyle{abbrv}
+	
+
+\end{document}
+
+
+

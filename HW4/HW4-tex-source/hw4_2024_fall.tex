@@ -1,0 +1,419 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Template for homework of Introduction to Machine Learning.
+%
+%  Fill in your name, lecture number, lecture date and body
+%  of homework as indicated below.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[11pt,letter,notitlepage]{article}
+
+\usepackage[left=2cm, right=2cm, lines=45, top=0.8in, bottom=0.7in]{geometry}
+
+\usepackage{fancyhdr}
+\usepackage{fancybox}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{enumitem}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{epstopdf}
+\usepackage{subfigure}
+\usepackage{threeparttable}
+
+
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1.5pt}
+\newcommand\Loadedframemethod{TikZ}
+\usepackage[framemethod=\Loadedframemethod]{mdframed}
+
+\usepackage{amssymb,amsmath}
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\setlength{\topmargin}{0pt}
+\setlength{\textheight}{9in}
+\setlength{\headheight}{0pt}
+
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6in}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Define math operator %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator*{\argmin}{\bf argmin}
+\DeclareMathOperator*{\relint}{\bf relint\,}
+\DeclareMathOperator*{\dom}{\bf dom\,}
+\DeclareMathOperator*{\intp}{\bf int\,}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setlength{\topmargin}{0pt}
+\setlength{\textheight}{9in}
+\setlength{\headheight}{0pt}
+
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6in}
+\pagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\mdtheorem[
+topline=false,
+rightline=false,
+leftline=false,
+bottomline=false,
+leftmargin=-10,
+rightmargin=-10
+]{exercise}{\textbf{Exercise}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Problem environment %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\mdtheorem[
+topline=false,
+rightline=false,
+leftline=false,
+bottomline=false,
+leftmargin=-10,
+rightmargin=-10
+]{problem}{\textbf{Problem}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Solution Environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+\declaretheoremstyle
+[
+spaceabove=0pt,
+spacebelow=0pt,
+headfont=\normalfont\bfseries,
+notefont=\mdseries,
+notebraces={(}{)},
+headpunct={:\quad},
+headindent={},
+postheadspace={ },
+postheadspace=4pt,
+bodyfont=\normalfont,
+qed=$\blacksquare$,
+preheadhook={\begin{mdframed}[style=myframedstyle]\end{mdframed}},
+	postfoothook={},
+]{mystyle}
+
+\declaretheorem[style=mystyle,title=Solution,numbered=no]{solution}
+\mdfdefinestyle{myframedstyle}{%
+	topline=false,
+	rightline=false,
+	leftline=false,
+	bottomline=false,
+	skipabove=-6ex,
+	leftmargin=-10,
+	rightmargin=-10}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Solution environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Homework info.
+\newcommand{\posted}{\text{Nov. 6, 2024}}       			%%% FILL IN POST DATE HERE
+\newcommand{\due}{\text{Nov. 14, 2024}} 			%%% FILL IN Due DATE HERE
+\newcommand{\hwno}{\text{4}} 		           			%%% FILL IN LECTURE NUMBER HERE
+
+
+%%%%%%%%%%%%%%%%%%%%
+%% Put your information here %%
+%%%%%%%%%%%%%%%%%%%
+\newcommand{\name}{\text{San Zhang}}  	          			%%% FILL IN YOUR NAME HERE
+\newcommand{\id}{\text{PBXXXXXXXX}}		       			%%% FILL IN YOUR ID HERE
+%%%%%%%%%%%%%%%%%%%%
+%% End of the student's info %%
+%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\proj}[2]{\textbf{P}_{#2} (#1)}
+\newcommand{\lspan}[1]{\textbf{span}  (#1)  }
+\newcommand{\rank}[1]{ \textbf{rank}  (#1)  }
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\DeclareMathOperator*{\cl}{\bf cl\,}
+\DeclareMathOperator*{\bd}{\bf bd\,}
+\DeclareMathOperator*{\conv}{\bf conv\,}
+\DeclareMathOperator*{\epi}{\bf epi\,}
+\DeclareMathOperator*{\argmax}{\bf argmax\,}
+
+% \lhead{
+% 	\textbf{\name}
+% }
+% \rhead{
+% 	\textbf{\id}
+% }
+\chead{\textbf{
+		Homework \hwno
+}}
+
+
+
+
+\begin{document}
+\vspace*{-4\baselineskip}
+\thispagestyle{empty}
+
+
+\begin{center}
+{\bf\large Introduction to Machine Learning}\\
+{Fall 2024}\\
+University of Science and Technology of China
+\end{center}
+
+\noindent
+Lecturer: Jie Wang  			 %%% FILL IN LECTURER HERE
+\hfill
+Homework \hwno             			
+\\
+Posted: \posted
+\hfill
+Due: \due
+% \\
+% Name: \name             			
+% \hfill
+% ID: \id						
+% \hfill
+
+\noindent
+\rule{\textwidth}{2pt}
+
+\medskip
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BODY OF HOMEWORK GOES HERE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Notice, }to get the full credits, please present your solutions step by step.
+
+\begin{exercise}[Convex Functions]
+    \begin{enumerate}
+        % \item (Optional)
+        % For each of the following functions, determine whether it is convex. % and then show your conclusion.
+        % % \item Judgement questions.
+        % \begin{enumerate}
+        %     \item
+        %     $f(x)=x^2\log x$ on $\mathbb{R}_{++}$, where $\mathbb{R}_{++}=\{x\in\mathbb{R}:x>0\}$.
+        %     \item
+        %     $f(x_1,x_2)=x_1x_2$ on $\mathbb{R}^2$.
+        %     \item
+        %     $f(x_1,x_2)=\frac{x_1}{x_2}$ on $\mathbb{R}^2_{++}$, where $\mathbb{R}^2_{++}=\{ (x_1,x_2)\in\mathbb{R}^2:x_1,x_2>0\}$.
+        %     \item
+        %     $f(x_1,x_2)=\frac{x_1^2}{x_2}$ on $\mathbb{R}\times\mathbb{R}_{++}$.
+        %     \item
+        %     $f(x_1,x_2)=x_1^\alpha x_2^{1-\alpha}$ on $\mathbb{R}^2_{++}$, where $0\le\alpha\le 1$.
+        % \end{enumerate}
+        \item
+        Please show that the following functions are convex.
+        \begin{enumerate}
+            % \item
+            % $ f(\mathbf{x})=\log \sum_{i=1}^n e^{x_i}$
+            % on $\dom f=\mathbb{R}^n$, where $x_i$ denotes the $i^{th}$ component of $\mathbf{x}$.
+
+            \item
+            $f(\mathbf{x})=\sum_{i=1}^k x_{[i]}$ on $\dom f=\mathbb{R}^n$, where $1\le k\le n$ and $x_{[i]}$ denotes the $i^{th}$ largest component of $\mathbf{x}$.
+
+            % \item The extended-value extension of the indicator function of a convex set $C\subseteq\mathbb{R}^n$, i.e.,
+            % \begin{align*}
+            %     \Tilde{I}_c(\mathbf{x})=
+            %     \begin{cases}
+            %         0,\hspace{4mm}\mathbf{x}\in C,\\
+            %         \infty,\hspace{3mm}\mathbf{x}\notin C.
+            %     \end{cases}
+            % \end{align*}
+
+            \item
+            The negative entropy, i.e.,
+            $$
+            f(\mathbf{p})=\sum_{i=1}^n p_i\log p_i
+            $$
+            on $\dom f=\{ \mathbf{p}\in\mathbb{R}^n:0<p_i\le 1, \sum_{i=1}^n p_i=1\}$, where $p_i$ denotes the $i^{\text{th}}$ component of $\mathbf{p}$.
+
+            \item
+            The $p$-norms, i.e., $ f(\mathbf{X})=\|\mathbf{X}\|_{p}$ on $\dom f=\mathbb{R}^{m\times n}$.
+
+            % \item
+            % $f(\mathbf{X})=\operatorname{tr} (\mathbf{X}^{-1})$ on $\dom f=\mathbb{S}_{++}^n$, where $\mathbb{S}_{++}^n$ is the space of all $n\times n$ real positive definite matrices.
+
+        \end{enumerate}
+
+    \item 
+    % Please show the following two equalities:
+    % % $$
+    % % f(\mathbf{y})-f(\mathbf{x}) = \int_{0}^{1} \nabla f(\mathbf{x}+t(\mathbf{y}-\mathbf{x}))^{\top}(\mathbf{y}-\mathbf{x}) \mathrm{d} t \\
+    % % $$
+    % % $$
+    % % \nabla f(\mathbf{y})-\nabla f(\mathbf{x}) = \int_{0}^{1} \nabla^{2} f(\mathbf{x}+t(\mathbf{y}-\mathbf{x}))(\mathbf{y}-\mathbf{x}) \mathrm{d} t
+    % % $$
+    % \begin{align}
+    %     f(\mathbf{y})-f(\mathbf{x}) = \int_{0}^{1} \nabla f(\mathbf{x}+t(\mathbf{y}-\mathbf{x}))^{\top}(\mathbf{y}-\mathbf{x}) \mathrm{d} t \\
+    %     \nabla f(\mathbf{y})-\nabla f(\mathbf{x}) = \int_{0}^{1} \nabla^{2} f(\mathbf{x}+t(\mathbf{y}-\mathbf{x}))(\mathbf{y}-\mathbf{x}) \mathrm{d} t
+    % \end{align}
+    % (\textbf{Hint:} you may consider the function $g(t)=f(\mathbf{x}+t(\mathbf{y}-\mathbf{x}))$ and apply the fundamental theorem of calculus.)
+    Please show that a function $f$ is convex if and only if $\dom f$ is convex and its restriction to any line intersecting its domain is convex, i.e., for any $\mathbf{x}_{0} \in \dom f$ and $\mathbf{v} \in \mathbb{R}^{n}$, the function
+    \begin{align*}
+        g(t) = f(\mathbf{x}_{0} + t \mathbf{v})
+    \end{align*}
+    is convex over its domain $\dom g = \{t \in \mathbb{R}:\mathbf{x}_{0} + t \mathbf{v} \in \dom f \}$.
+    
+    (\textbf{Hint:} you may prove the sufficiency by contradiction.)
+
+    \item (Optional)
+    Please show that a continuously differentiable function $f$ is strongly convex with parameter $\mu>0$ if and only if
+    \begin{align*}
+        f(\mathbf{y})\ge f(\mathbf{x})+\langle\nabla f(\mathbf{x}),\mathbf{y}-\mathbf{x}\rangle+\frac{\mu}{2}\|\mathbf{y}-\mathbf{x}\|_2^2,\quad \forall\, \mathbf{x},\mathbf{y}\in\mathbb{R}^n.
+    \end{align*}
+    \item (Optional)
+    Suppose that $f$ is twice continuously differentiable and strongly convex with parameter $\mu>0$. Please show that $\mu\leq \lambda_{\min}(\nabla^2 f(\mathbf{x}))$ for any $\mathbf{x}\in\mathbb{R}^n$, where $\lambda_{\min}(\nabla^2 f(\mathbf{x}))$ is the smallest eigenvalue of $\nabla^2 f(\mathbf{x})$.
+    \item Suppose that $f:\mathbb{R}^n\rightarrow\mathbb{R}$ is twice continuously differentiable, and the gradient of $f$ is Lipschitz continuous, i.e.,
+    \begin{align*}
+        \|\nabla f(\mathbf{x})-\nabla f(\mathbf{y})\|_2\le L\|\mathbf{x}-\mathbf{y}\|_2,\quad \forall\,\mathbf{x},\mathbf{y}\in\mathbb{R}^n,
+    \end{align*}
+    where $L>0$ is the Lipschitz constant. Please show that $\lambda_{\max}(\nabla^2f(\mathbf{x}))\leq L$ for any $\mathbf{x}\in\mathbb{R}^n$, where $\lambda_{\max}(\nabla^2f(\mathbf{x}))$ is the largest eigenvalue of $\nabla^2 f(\mathbf{x})$.
+
+    \item Consider the problem
+    \begin{align}\label{prob:solution_of_conv}
+        \min_{\textbf{x}\in\mathbb{R}^n}f(\mathbf{x}),
+    \end{align}
+    where $f:\mathbb{R}^n\rightarrow\mathbb{R}$ is  continuously differentiable and convex, and $\textbf{dom } f$ is closed.
+    \begin{enumerate}
+        \item
+        Please show that the $\alpha$-sublevel set of $f$, i.e., $ C_\alpha=\{\mathbf{x}\in\textbf{dom }f:f(\mathbf{x})\leq \alpha\}
+        $
+        is closed.
+        \item
+        Please give an example to show that Problem (\ref{prob:solution_of_conv}) may be unsolvable even if $f$ is strictly convex.
+        \item
+        Suppose that $f$ can attain its minimum. Please show that the optimal set $\mathcal{C}=\{ \mathbf{y}:f(\mathbf{y})=\min_{\mathbf{x}} f(\mathbf{x})\}$ is closed and convex. Does this property still hold if $\textbf{dom }f$ is not closed?
+        \item
+        Suppose that $f$ is strongly convex with parameter $\mu>0$. Please show that Problem (\ref{prob:solution_of_conv}) admits a unique solution.
+    \end{enumerate}
+\end{enumerate}
+
+\end{exercise}
+
+
+\newpage
+\begin{exercise}[ Operations that Preserve Convexity ]
+    % \begin{enumerate}
+
+    %     \item
+        \begin{enumerate}
+            \item Let $f:\mathbb{R}^m \rightarrow \left( -\infty,+\infty \right]$ be a given convex function, $\mathbf{A}\in \mathbb{R}^{m \times n}$ and $\mathbf{b} \in \mathbb{R}^m$. Please show that
+        \begin{align*}
+            F(\mathbf{x}) = f(\mathbf{Ax+b}),\quad\mathbf{x}\in\mathbb{R}^n.
+        \end{align*}
+        is convex.
+        \item Let $f_i:\mathbb{R}^n \rightarrow \left(-\infty,+\infty \right],i=1,\dots,m$, be given convex functions. Please show that
+        \begin{align*}
+            F(\mathbf{x}) = \sum_{i=1}^m w_if_i(\mathbf{x})
+        \end{align*}
+        is convex, where $w_i \geq 0,\,i=1,\dots,m$.
+
+        \item
+            Let $f_i:\mathbb{R}^n \rightarrow \left(-\infty,+\infty \right]$ be given convex functions for $i \in I$, where $I$ is an arbitrary index set. Please show that the supremum
+            \begin{align*}
+                F(\mathbf{x}) = \sup_{i\in I}f_i(\mathbf{x})
+            \end{align*}
+            is convex.
+
+        % \end{enumerate}
+
+
+        % \item (Optional) Let A∈Rn×m,x0∈Rn\mathbf{A}\in \mathbb{R}^{n\times m},\mathbf{x}_0\in \mathbb{R}^n. The restriction of f:Rn→Rf:\mathbb{R}^n\rightarrow\mathbb{R} to the affine set {Az+x0|z∈Rm}\{\mathbf{Az}+\mathbf{x}_0|\mathbf{z}\in\mathbb{R}^m\} is defined as the function F:Rm→RF:\mathbb{R}^m\rightarrow\mathbb{R} with
+        % \begin{align*}
+        %     F(\mathbf{z})=f(\mathbf{Az}+\mathbf{x}_0)
+        % \end{align*}
+        % on dom F={z|Az+x0∈dom f}\textbf{dom }F=\{\mathbf{z}|\mathbf{Az}+\mathbf{x}_0\in\textbf{dom }f\}. Suppose ff is twice differentiable with a convex domain.
+        % \begin{enumerate}
+        %     \item Show that FF is convex if and only if for all z∈dom F\mathbf{z}\in\textbf{dom }F, we have
+        %     \begin{align*}
+        %         \mathbf{A}^\top\nabla^2f(\mathbf{Az}+\mathbf{x}_0)\mathbf{A}\succeq 0.
+        %     \end{align*}
+        %     \item Suppose B∈Rp×n\mathbf{B}\in\mathbb{R}^{p\times n} is a matrix whose nullspace is equal to the range of A\mathbf{A}, i.e., AB=0\mathbf{AB}=\mathbf{0} and rank(B)=n−rank(A)\operatorname{rank} (\mathbf{B})=n-\operatorname{rank}(\mathbf{A}). Show that FF is convex if for all z∈dom F\mathbf{z}\in\textbf{dom }F, there exists a λ∈R\lambda\in\mathbb{R} such that
+        %     \begin{align*}
+        %         \nabla^2f(\mathbf{Az}+\mathbf{x}_0)+\lambda\mathbf{B}^\top\mathbf{B}\succeq 0.
+        %     \end{align*}
+
+        %     (\textbf{Hint:} you can use the result as follows. If $\mathbf{C}\in\mathbb{S}^n$ and $\mathbf{D}\in\mathbb{R}^{p\times n}$, then $\mathbf{x}^\top\mathbf{C}\mathbf{x}\geq 0$ for all $\mathbf{x}\in\mathcal{N}(\mathbf{D})$ if there exists a $\lambda$ such that $\mathbf{C}+\lambda\mathbf{D}^\top\mathbf{D}\succeq 0.$)
+        % \end{enumerate}
+
+
+        % \item (Optional) \begin{enumerate}
+
+
+        %     \item
+        %     Consider the function $f(\mathbf{X})=\lambda_{\max}(\mathbf{X})$, with $\dom\, f =\mathbb{S}^n$, where $\lambda_{\max}(\mathbf{X})$ is the largest eigenvalue of $\mathbf{X}$ and $\mathbb{S}^n$ is the set of $n\times n$ real symmetric matrices. Show that $f$ is a convex function.
+        %     \item
+        %     Let $f:\mathbb{R}^n\to\mathbb{R}$ be a convex function, with $\textbf{dom }f=\mathbb{R}^n$. Show that it can be represented as the pointwise supremum of a family of affine functions, i.e.,
+        %     $$
+        %     f(\mathbf{x})=\sup\{ g(\mathbf{x}): g\text{ is affine},g(\mathbf{z})\le f(\mathbf{z}) \text{ for all }\mathbf{z}\in\mathbb{R}^n\}.
+        %     $$
+        % \end{enumerate}
+        % \item
+        % Suppose that the training set is {(xi,yi)}ni=1\{(\mathbf{x}_i,y_i)\}_{i=1}^n, where xi∈Rd\mathbf{x}_i\in\mathbb{R}^d is the ithi^{th} data instance and yi∈Ry_i\in\mathbb{R} is the corresponding label.
+        % Recall that Lasso is the regression problem:
+        % 	\begin{align*}
+        %     	\min_{\mathbf{w}}\,\frac{1}{2n}\|\mathbf{X}\mathbf{w}-\mathbf{y}\|_2^2+\lambda\|\mathbf{w}\|_1,
+        %     \end{align*}
+        % 	where X∈Rn×d\mathbf{X}\in\mathbb{R}^{n\times d} with its ithi^{th} row being x⊤i\mathbf{x}_i^{\top}, w∈Rd\mathbf{w} \in \mathbb{R}^d, and λ>0\lambda>0 is the regularization parameter. Show that the objective function in the above problem is convex.
+    	
+    \end{enumerate}
+\end{exercise}
+
+
+
+\newpage
+\begin{exercise}[Subdifferentials]
+    Calculation of subdifferentials (you need to finish at least four of the problems).
+        \begin{enumerate}
+            \item Let $H\subset\mathbb{R}^n$ be a hyperplane. The extended-value extension of its indicator function $I_H$ is
+            \begin{align*}
+                \Tilde{I}_H(\textbf{x})=\begin{cases}
+                    0,&\textbf{x}\in H,\\
+                    \infty,&\textbf{x}\not\in H.
+                \end{cases}
+            \end{align*}
+            Find $\partial \Tilde{I}_H(\textbf{x})$.
+
+            \item Let $f(\textbf{x})=\exp{\|\textbf{x}\|_1},\, \textbf{x}\in\mathbb{R}^n$. Find $\partial f(\textbf{x})$.
+
+
+            \item For $\textbf{x}\in\mathbb{R}^n$, let $x_{[i]}$ be the $i^{th}$ largest component of $\textbf{x}$. Find the subdifferentials of
+            \begin{align*}
+                f(\textbf{x})=\sum_{i=1}^k x_{[i]}.
+            \end{align*}
+            
+            \item Let $f(\textbf{x})=\|\mathbf{x}\|_\infty,\, \textbf{x}\in\mathbb{R}^n$. Find $\partial f(\textbf{x})$.
+            % TODO 改成 Ax + b 之类的函数，可以考虑换成其他常见的函数
+
+            \item Let $f(X)=\max\limits_{1\le i\le n}|\lambda_i|$, where $X\in \mathbb{S}^n$ and $\lambda_1,\dots,\lambda_n$ are the eigenvalues of $X$. Find $\partial f(X)$.
+            
+            (\textbf{Hint}: you can refer to Example 7 in Lec06.)
+            % TODO 课件有修改
+     
+    \end{enumerate}
+\end{exercise}
+
+\newpage
+\bibliography{refs}
+\bibliographystyle{abbrv}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
