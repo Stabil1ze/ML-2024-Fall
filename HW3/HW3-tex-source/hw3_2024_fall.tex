@@ -1,0 +1,369 @@
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Template for homework of Introduction to Machine Learning.
+%
+%  Fill in your name, lecture number, lecture date and body
+%  of homework as indicated below.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,letter,notitlepage]{article}
+%Mise en page
+\usepackage[left=2cm, right=2cm, lines=45, top=0.8in, bottom=0.7in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{fancybox}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{enumitem}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1.5pt}
+\newcommand\Loadedframemethod{TikZ}
+\usepackage[framemethod=\Loadedframemethod]{mdframed}
+\usepackage{amssymb,amsmath}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\setlength{\topmargin}{0pt}
+\setlength{\textheight}{9in}
+\setlength{\headheight}{0pt}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6in}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Define math operator %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator*{\argmin}{\bf argmin}
+\DeclareMathOperator*{\relint}{\bf relint\,}
+\DeclareMathOperator*{\dom}{\bf dom\,}
+\DeclareMathOperator*{\intp}{\bf int\,}
+\DeclareMathOperator*{\relbd}{\bf relbd\,}
+%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\topmargin}{0pt}
+\setlength{\textheight}{9in}
+\setlength{\headheight}{0pt}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6in}
+\pagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\mdtheorem[
+topline=false,
+rightline=false,
+leftline=false,
+bottomline=false,
+leftmargin=-10,
+rightmargin=-10
+]{exercise}{\textbf{Exercise}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Problem environment %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\mdtheorem[
+topline=false,
+rightline=false,
+leftline=false,
+bottomline=false,
+leftmargin=-10,
+rightmargin=-10
+]{problem}{\textbf{Problem}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Solution Environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+\declaretheoremstyle
+[
+spaceabove=0pt,
+spacebelow=0pt,
+headfont=\normalfont\bfseries,
+notefont=\mdseries,
+notebraces={(}{)},
+headpunct={:\quad},
+headindent={},
+postheadspace={ },
+postheadspace=4pt,
+bodyfont=\normalfont,
+qed=$\blacksquare$,
+preheadhook={\begin{mdframed}[style=myframedstyle]},
+	postfoothook=\end{mdframed},
+]{mystyle}
+\declaretheorem[style=mystyle,title=Solution,numbered=no]{solution}
+\mdfdefinestyle{myframedstyle}{%
+	topline=false,
+	rightline=false,
+	leftline=false,
+	bottomline=false,
+	skipabove=-6ex,
+	leftmargin=-10,
+	rightmargin=-10}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Solution environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Homework info.
+\newcommand{\posted}{\text{Oct. 24, 2024}}       			%%% FILL IN POST DATE HERE
+\newcommand{\due}{\text{Oct. 31, 2024}} 			%%% FILL IN Due DATE HERE
+\newcommand{\hwno}{\text{3}} 		           			%%% FILL IN LECTURE NUMBER HERE
+
+
+%%%%%%%%%%%%%%%%%%%%
+%% Put your information here %%
+%%%%%%%%%%%%%%%%%%%
+\newcommand{\name}{\text{San Zhang}}  	          			%%% FILL IN YOUR NAME HERE
+\newcommand{\id}{\text{PBXXXXXXXX}}		       			%%% FILL IN YOUR ID HERE
+%%%%%%%%%%%%%%%%%%%%
+%% End of the student's info %%
+%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\proj}[2]{\textbf{P}_{#2} (#1)}
+\newcommand{\lspan}[1]{\textbf{span}  (#1)  }
+\newcommand{\rank}[1]{ \textbf{rank}  (#1)  }
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\DeclareMathOperator*{\cl}{\bf cl\,}
+\DeclareMathOperator*{\bd}{\bf bd\,}
+\DeclareMathOperator*{\conv}{\bf conv\,}
+\DeclareMathOperator*{\epi}{\bf epi\,}
+
+
+% \lhead{
+% 	\textbf{\name}
+% }
+% \rhead{
+% 	\textbf{\id}
+% }
+\chead{\textbf{Homework\hwno}}
+
+
+\begin{document}
+\vspace*{-4\baselineskip}
+\thispagestyle{empty}
+
+
+\begin{center}
+{\bf\large Introduction to Machine Learning}\\
+{Fall 2024}\\
+University of Science and Technology of China
+\end{center}
+
+\noindent
+Lecturer: Jie Wang  			 %%% FILL IN LECTURER HERE
+\hfill
+Homework \hwno             			
+\\
+Posted: \posted
+\hfill
+Due: \due
+%\\
+% Name: \name             			
+% \hfill
+% ID: \id						
+% \hfill
+
+\noindent
+\rule{\textwidth}{2pt}
+
+\medskip
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BODY OF HOMEWORK GOES HERE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Notice, }to get the full credits, please present your solutions step by step.
+
+\begin{exercise}[Affine Sets]
+ Affine sets are an important concept in convex optimization theory. Please review the definition of affine sets from our lecture and answer the following questions.
+\begin{enumerate}
+    \item A subspace is a special case of an affine set, where the subspace must contain the origin, whereas an affine set does not necessarily have to. A good intuitive example is in $\mathbb{R}^3$, where all lines and planes are affine sets, but only those lines and planes that pass through the origin are subspaces. If we extend the discussion to $\mathbb{R}^n$, we find that the conclusion still holds. Based on this, please show the following statements:
+    \begin{enumerate}
+        \item If $U\subset\mathbb{R}^n$ and $\mathbf{0}\in U$, then $U$ is an affine set if and only if it is a subspace.
+        \item If $U\subset\mathbb{R}^n$ is an affine set, there is a unique subspace $V\subset\mathbb{R}^n$ such that $U=\mathbf{u}+V$ for any $\mathbf{u} \in U$.
+    \end{enumerate}
+    
+    \item In optimization problems, many linear constraints are often involved, and many optimization problems are frequently transformed into linear algebra problems. This is related to the properties of affine sets. Please show the following statements: 
+    \begin{enumerate}
+        \item Let $\mathbf{A}\in \mathbb{R}^{m\times n}$ and $\mathbf{b}\in\mathbb{R}^m$. The solution set $C=\{\mathbf{x}:\mathbf{Ax}=\mathbf{b}\}$ is an affine set.
+        \item Any affine set can be represented as the solution set of a system of linear equations. That is, for any affine set $U \subset \mathbb{R}^n$, there exists $\mathbf{A} \in \mathbb{R}^{m \times n}$ and $\mathbf{b} \in \mathbb{R}^{m}$ such that the solution set $C=\{\mathbf{x}:\mathbf{Ax}=\mathbf{b}\} = U$, where $m \leq n$.\\
+        \textbf{Hint}: just think about how to use some kind of base vectors to represent an affine set. 
+    \end{enumerate}
+    
+\end{enumerate}
+\end{exercise}
+\begin{solution}
+
+\end{solution}
+
+
+
+\newpage
+
+\begin{exercise}[Convex Sets]
+    \begin{enumerate}
+        \item  Let $C \subset \mathbb{R}^n$ be a nonempty convex set. Please show the following statements. Some operations that preserve convexity.
+          \begin{enumerate}
+            \item
+            Both $\cl C $ and $\intp C $ are convex.
+            \item
+            The set $\relint{C}$ is convex.
+            \item
+            The intersection $\bigcap_{i \in I}C_i$ of any collection $\{ C_i:i\in \mathcal{I} \}$ of convex sets is convex.
+    
+            \item
+            The set $\{ \mathbf{y}\in\mathbb{R}^m:\mathbf{y}=\mathbf{Ax}+\mathbf{a},\mathbf{x}\in C \}$ is convex, where $\mathbf{A} \in \mathbb{R}^{m \times n}$ and $\mathbf{a} \in \mathbb{R}^m$.
+            \item
+            The set $\{ \mathbf{y}\in\mathbb{R}^m:\mathbf{x}=\mathbf{By}+\mathbf{b},\mathbf{x}\in C \}$ is convex, where $\mathbf{B} \in \mathbb{R}^{n \times m}$ and $\mathbf{b} \in \mathbb{R}^n$.
+        \end{enumerate}
+        \item Please find the interior and relative interior of the following convex sets (you don't need to prove them).
+        \begin{enumerate}
+          \item $\{\mathbf{x}\in\mathbb{R}^3: x_1^2+x_2^2<1,x_3=0\}\subset\mathbb{R}^3$.
+          \item $\{\mathbf{A}\in S_{++}^n: \text{Tr}(\mathbf{A})=1\}\subset \mathbb{R}^{n\times n}$.
+          \item $\{\mathbf{A}\in S_{++}^n: \text{Tr}(\mathbf{A})=1\}\subset S^ n$.
+          \item (Optional) $\{\mathbf{A}\in S_{++}^n: \text{Tr}(\mathbf{A})\le1\}\subset \mathbb{R}^{n\times n}$.
+          % \item \conv({x,x2,x3})⊂C[0,1]\conv (\{x, x^2, x^3\})\subset C[0,1] with L∞L^\infty norm, i.e., ‖\|f\|_\infty = \max_{x\in [0,1]}|f(x)| for any f\in C[0,1]f\in C[0,1].
+        \end{enumerate}
+
+    \end{enumerate}
+
+\end{exercise}
+\begin{solution}
+
+\end{solution}
+
+\newpage
+
+\begin{exercise}[Relative Interior and Interior]
+    Let $C\subset\mathbb{R}^n$ be a nonempty convex set.
+    \begin{enumerate}
+      \item Let $\mathbf{x}_0\in C$. Please show the following statements.
+        The point $\mathbf{x}_0\in \relint C$ if and only if there exists $r>0$ such that $\mathbf{x}_0 +r\mathbf{v}\in C$ for any $\mathbf{v}\in\textbf{aff}\,C-\mathbf{x}_0 $ and $\|\mathbf{v}\|_2\le 1$.
+
+      \item
+        \begin{enumerate}
+  
+                \item Please show that $\mathbf{x} \in \relint C$ if and only if for any $\mathbf{y}\in C$, there exists $\gamma>0$ such that $\mathbf{x}+\gamma(\mathbf{x}-\mathbf{y}) \in C$.\\
+                \textbf{Hint}: the result in Question 1 may be useful.
+
+                \item Please show that if $\mathbf{x} \in \relint C$, $\mathbf{y} \in \cl C$, then  $\lambda \mathbf{x}+(1-\lambda) \mathbf{y} \in \relint C$ for $\lambda \in(0,1]$.\\
+                 \textbf{Hint}: there exists $r>0$, such that $B(\mathbf{x}, r)\cap \textbf{aff }C\subset \relint C$. Then consider the convex hull of $(B(\mathbf{x}, r)\cap \textbf{aff }C)\cup \{\mathbf{y}\}$.
+      % \end{enumerate}
+
+        \end{enumerate}
+        \item (Optional)
+      Please show the following statements.
+          \begin{enumerate}
+            \item Suppose $\intp C$ is nonempty, then $\intp C=\intp(\cl C)$. \\
+            \textbf{Hint}: notice that $\relint C=\intp C$ if $\intp C$ is nonempty, then apply \textbf{Ex} 3.2(b).
+            (in fact, the result still holds when $C=\emptyset$.)
+            \item $\cl (\relint C)=\cl C$.\\
+            \textbf{Hint}: you can use \textbf{Ex} 3.2(b).
+            \item $\relint (\cl C)=\relint C$.
+% 
+
+          % \item Using the results in Question 3(a), please prove the following statement.
+
+          %     For a convex set C⊂RnC\subset\mathbb{R}^n and x0∈\bdC\mathbf{x}_0\in\bd C, we can find a sequence {xk}⊂Rn∖\clC\{\mathbf{x}_k\}\subset\mathbb{R}^n\setminus\cl C such that xk→x0\mathbf{x}_k\to\mathbf{x}_0 as k→∞k\to\infty.
+        \end{enumerate}
+    \end{enumerate}
+
+\end{exercise}
+\begin{solution}
+
+\end{solution}
+
+% \newpage
+% \begin{exercise}[Relative Boundary]
+% The relative boundary of a set S⊂RnS\subset\mathbb{R}^n is defined as
+% \relbdS=\clS∖\relintS\relbd S = \cl S \setminus  \relint S.
+% Please show the following statements {\bf or give counter-examples}.
+%     \begin{enumerate}
+%         \item
+%         For a set S⊂RnS\subset\mathbb{R}^n, \relbdS⊂\bdS\relbd S\subset \bd S.
+%         \item
+%         For a set S⊂RnS\subset\mathbb{R}^n, \relbdS=\bdS\relbd S= \bd S.
+%         \item
+%         For a set S⊂RnS \subset \mathbb{R}^n, \relbdS=\relbd\clS\relbd S=\relbd \cl S.
+%         % \item (Optional)
+%         % For a convex set  C⊂RnC \subset \mathbb{R}^n, \relbdC=\relbd\clC\relbd C=\relbd \cl C.
+        
+%         \item
+%         For a set S⊂RnS\subset\mathbb{R}^n and x0∈\clS\mathbf{x}_0\in \cl S, we can find a sequence {xk}⊂Rn∖\clS\{\mathbf{x}_k\}\subset\mathbb{R}^n\setminus\cl S such that xk→x0\mathbf{x}_k\to\mathbf{x}_0 as k→∞k\to\infty.
+
+
+
+
+%     \end{enumerate}
+% \end{exercise}
+% \begin{solution}
+
+% \end{solution}
+
+
+
+
+
+\newpage
+\begin{exercise}[Supporting Hyperplane]
+    \begin{enumerate}
+        \item From the lecture, we know that there exsits supporting hyperplanes at the boundary point of a convex set. Please solve the following questions.
+        \begin{enumerate}
+        \item Express the closed convex set $\{\mathbf{x} \in \mathbb{R}_{+}^2 \mid x_1x_2 \geq 1\}$ as an intersection of halfspaces.
+        \item Let $C = \{\mathbf{x} \in \mathbb{R}^n \mid \|\mathbf{x}\|_\infty \leq 1\}$, the $\infty$-norm unit ball in $\mathbb{R}^n$, and let $\hat{\mathbf{x}}$ be a point in the boundary of $C$. Identify the supporting hyperplanes of $C$ at $\hat{\mathbf{x}}$ explicitly.\\
+        (The $\infty$-norm of a point $\mathbf{x}\in\mathbb{R}^n$ is defined as $\max_{1\le i\le n}|x_i|$.)
+        \end{enumerate}
+        
+        % \item On the linear space of symmetric n×nn \times n matrices SnS^n, we can define the standard inner product tr(XY)=∑ni,j=1XijYij\text{tr}(XY) = \sum_{i,j=1}^{n} X_{ij} Y_{ij}. From \textbf{Ex7} in \textbf{HW2}, we know the positive semi-definite cone Sn+S^n_+ isn't a polyhedron. However, please show that we can express Sn+S^n_+ as an intersection of halfspaces. Specifically, for X,Y∈SnX, Y \in S^n,
+        % \begin{align*}
+        %     \text{tr}(XY) \geq 0 \text{ for all } X \geq 0 \Leftrightarrow Y \geq 0.
+        % \end{align*}
+        
+        \item \textbf{The set of separating hyperplanes:} Suppose that $C$ and $D$ are disjoint subsets of $\mathbb{R}^n$ ($C$ and $D$ may \textbf{not} be the convex sets). Consider the set of $(\mathbf{a},b) \in \mathbb{R}^{n+1}$ for which $\mathbf{a}^T \mathbf{x} \leq b$ for all $\mathbf{x} \in C$, and $\mathbf{a}^T \mathbf{x} \geq b$ for all $\mathbf{x} \in D$. Show that this set is a convex cone (if there is no hyperplane that separates $C$ and $D$, the set becomes $\{(\mathbf{0},0)\}$ ).
+    \end{enumerate}
+\end{exercise}
+
+\newpage
+\begin{exercise}[Farkas' Lemma]
+    Let $\mathbf{A}=(\mathbf{a}_1,\cdots,\mathbf{a}_n)\in \mathbb{R}^{m\times n}$ and $\mathbf{b}\in\mathbb{R}^m$. Consider a set $A=\{ \mathbf{a}_1,\cdots ,\mathbf{a}_n\}$. Its conic hall $\textbf{cone}\,A$ is defined as
+        $$
+        \textbf{cone}\,A=\{ \sum_{i=1}^n\alpha_i\mathbf{a}_i:\alpha_i\ge 0,\mathbf{a}_i\in A\}.
+        $$
+    \begin{enumerate}
+        \item
+        Please show that $\textbf{cone}\,A$ is closed and convex.
+        \item
+        If $\mathbf{b}\in\textbf{cone}\,A$, please show that there exists $\mathbf{x}\in\mathbb{R}^n$ such that $\mathbf{Ax}=\mathbf{b}$ and $\mathbf{x}\ge \mathbf{0}$.
+        \item
+        If $\mathbf{b}\notin\textbf{cone}\,A$, use separation theorems to show that there exists $\mathbf{y}\in\mathbb{R}^m$, such that $\mathbf{A}^\top \mathbf{y}\ge \mathbf{0}$ and $\mathbf{b}^\top\mathbf{y}<0$.
+        \item
+        Now you can prove Farkas' Lemma: for given $\mathbf{A}\in\mathbb{R}^{m\times n}$ and $\mathbf{b}\in\mathbb{R}^m$, one and only one of the two statements hold:
+        \begin{itemize}
+            \item
+            $\exists \mathbf{x}\in\mathbb{R}^n$, $\mathbf{Ax}=\mathbf{b}$ and $\mathbf{x}\ge \mathbf{0}$.
+            \item
+            $\exists \mathbf{y}\in\mathbb{R}^m$, $\mathbf{A}^\top\mathbf{y}\ge\mathbf{0}$ and $\mathbf{b}^\top\mathbf{y}<0$.
+        \end{itemize}
+    \end{enumerate}
+\end{exercise}
+\begin{solution}
+
+\end{solution}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\newpage
+     \bibliography{refs}
+     \bibliographystyle{abbrv}
+	
+
+\end{document}

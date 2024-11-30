@@ -1,0 +1,426 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{Homework}}
+\author{PB22010344 黄境}
+\date{\today}
+\linespread{1.5}
+\newcounter{exercisename}
+\newenvironment{exercise}{\stepcounter{exercisename}\par\noindent\textsc{Exercise \arabic{exercisename}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textsc{Solution. }}{\\\par}
+\newenvironment{note}{\par\noindent\textsc{Note of Problem \arabic{exercisename}. }}{\\\par}
+
+\DeclareMathOperator*{\relint}{\bf relint\,}
+\DeclareMathOperator*{\aff}{\bf aff\,}
+\DeclareMathOperator*{\cone}{\bf cone\,}
+
+\begin{document}
+
+\maketitle
+
+\begin{exercise}
+    \bf Affine Sets
+\end{exercise}
+
+\begin{solution}
+	1.(a) ($\Rightarrow$) Since $U$ is an affine set, for all $\mathbf{x}, \mathbf{y} \in U$ and $\theta \in \mathbb{R}$, we have 
+	\[
+	\theta \mathbf{x} + (1 - \theta) \mathbf{y} \in U.
+	\]
+	Since $\mathbf{0} \in U$, let $\mathbf{y} = \mathbf{0}$. Therefore, for all $\mathbf{x} \in U$ and $\theta \in \mathbb{R}$, we have $\theta \mathbf{x} \in U$. 
+	Let $\theta = \frac{1}{2}$, then 
+	\[
+	\forall\, \mathbf{x}, \mathbf{y} \in U, \mathbf{x} + \mathbf{y} = 2(\frac{\mathbf{x} + \mathbf{y}}{2}) \in U.
+	\] 
+	Thus, $U$ is a subspace. 
+	\newline
+	($\Leftarrow$) Since $U$ is a subspace, for all $\mathbf{x}, \mathbf{y} \in U$ and $\theta \in \mathbb{R}$, we have 
+	\[
+	\theta \mathbf{x} \in U, (1 - \theta) \mathbf{y} \in U \Rightarrow \theta \mathbf{x} + (1 - \theta) \mathbf{y} \in U.
+	\]
+	Thus, $U$ is an affine set. 
+	\newline\newline
+	(b) Suppose that $V_1$ and $V_2$ are two subspaces that satisfy the condition. Let $\mathbf{u}_0 \in U$. Then we have
+	\[
+	V_1 = U - \mathbf{u}_0 = V_2,
+	\]
+	which implies that $V$ must be unique. 
+	\newline
+	Now, let $V = U - \mathbf{u}_0$, then $V$ is also an affine set. Since $\mathbf{0} = \mathbf{u}_0 - \mathbf{u}_0 \in V$, from exercise 1.1(a) we know that $V$ is a subspace. 
+	Let $\mathbf{u}_1$ be an arbitrary vector in $U$. We will prove that 
+	\[
+	V + \mathbf{u}_1 = U.
+	\]
+	In fact, for all $\mathbf{u}_2 \in U$, since $\mathbf{u}_1$ and $\mathbf{u}_0 \in U$, let $\theta = \frac{1}{2}$. We have 
+	\[
+	\frac{\mathbf{u}_1 + \mathbf{u}_0}{2}, \quad \frac{\mathbf{u}_2 + \mathbf{u}_0}{2} \in U \Rightarrow \frac{\mathbf{u}_1 - \mathbf{u}_0}{2}, \quad \frac{\mathbf{u}_2 - \mathbf{u}_0}{2} \in V.
+	\]
+	Since $V$ is a subspace, we have 
+	\[
+	\mathbf{u}_2 - \mathbf{u}_1 = 2\left(\frac{\mathbf{u}_2 - \mathbf{u}_0}{2} - \frac{\mathbf{u}_1 - \mathbf{u}_0}{2}\right) \in V \Rightarrow \mathbf{u}_2 \in V + \mathbf{u}_1.
+	\]
+	Therefore, we conclude that 
+	\[
+	U \subset V + \mathbf{u}_1.
+	\]
+	Since 
+	\[
+	|V + \mathbf{u}_1| = |U - \mathbf{u}_0 + \mathbf{u}_1| = |U|,
+	\]
+	we have 
+	\[
+	V + \mathbf{u}_1 = U, \forall\, \mathbf{u}_1 \in U.
+	\]
+	Thus, we conclude that 
+	\[
+	U = \mathbf{u} + V, \forall\, \mathbf{u} \in U.
+	\]
+	\newline
+	2.(a) Suppose that $\mathbf{x}_1$, $\mathbf{x}_2 \in C$ and $\theta \in \mathbb{R}$, then we have
+	\[
+	\mathbf{A}(\theta\mathbf{x}_1 + (1 - \theta)\mathbf{x}_2) = \theta\mathbf{Ax}_1 + (1 - \theta)\mathbf{Ax}_2
+	\]
+	\[
+	= \theta\mathbf{b} + (1 - \theta)\mathbf{b} = \mathbf{b},
+	\]
+	which implies that $\theta\mathbf{x}_1 + (1 - \theta)\mathbf{x}_2 \in C$. Thus $C$ is an affine set. 
+	\newline\newline
+	(b) From exercise 1.1(b), let $\mathbf{u}_0 \in U$. Then $V = U - \mathbf{u}_0$ is a subspace. Let $\{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_k\}$ be a basis of $V$, where $k \leq n$. 
+	\newline
+	Since $\mathbf{X} = (\mathbf{x}_1^T, \mathbf{x}_2^T, \dots, \mathbf{x}_k^T)^T \in \mathbb{R}^{k \times n}$, the equation $\mathbf{Xa} = \mathbf{0}$ has at least one nontrivial solution, denoted by $\mathbf{a}_0$. Therefore, we have 
+	\[
+	\mathbf{a}_0^T \mathbf{x}_i = 0, \quad i = 1, 2, \dots, k.
+	\]
+	Let $\mathbf{A} = (\mathbf{a}_0, \mathbf{a}_0, \dots, \mathbf{a}_0)^T \in \mathbb{R}^{m \times n}$. Since 
+	\[
+	\mathbf{u} - \mathbf{u}_0 = \sum_{i = 1}^{k} \lambda_i \mathbf{x}_i, \forall \mathbf{u} \in U,
+	\]
+	we have 
+	\[
+	\mathbf{A}(\mathbf{u} - \mathbf{u}_0) = \sum_{i = 1}^{k} \lambda_i \mathbf{A}\mathbf{x}_i = \mathbf{0} \Rightarrow \mathbf{Au} = \mathbf{Au}_0 \triangleq \mathbf{b} \in \mathbb{R}^{m \times 1}, \quad \forall \mathbf{u} \in U.
+	\]
+	Thus, we have proved that 
+	\[
+	U \subset \{\mathbf{x}: \mathbf{Ax} = \mathbf{b}\}.
+	\]
+	On the other hand, suppose that $\mathbf{x}_0 \in \{\mathbf{x}: \mathbf{Ax} = \mathbf{b}\}$. This implies 
+	\[
+	\mathbf{x}_0 - \mathbf{u}_0 \in \mathcal{N}(\mathbf{A}) = \mathcal{C}(\mathbf{X}).
+	\]
+	Since $V$ is a subspace, $\mathcal{C}(\mathbf{X}) = V$, which implies that $\mathbf{x}_0 \in \mathbf{U}$. Therefore, we conclude that 
+	\[
+	\{\mathbf{x}: \mathbf{Ax} = \mathbf{b}\} = U.
+	\]
+\end{solution}
+\newpage
+\begin{exercise}
+	\bf Convex Sets
+\end{exercise}
+
+\begin{solution}
+	1.(a) For all $\mathbf{x} \in \bar{C}$, since $\bar{C} = C \cap C'$, we consider two cases:
+	\newline
+	(i) If $\mathbf{x} \in C$, let $\mathbf{x}_n = \mathbf{x}$ for $n = 1, 2, \dots$. Then $\mathbf{x}_n \rightarrow \mathbf{x}$ as $n \rightarrow \infty$.
+	\newline
+	(ii) If $\mathbf{x} \in C'$, since $\mathbf{x}$ is a limit point of $C$, we can find a sequence $\{\mathbf{x}_n\} \subset C$ such that $\mathbf{x}_n \rightarrow \mathbf{x}$ as $n \rightarrow \infty$.
+	\newline
+	In both cases, we conclude that for all $\mathbf{x} \in \bar{C}$, there exists a sequence $\{\mathbf{x}_n\} \subset C$ such that $\mathbf{x}_n \rightarrow \mathbf{x}$ as $n \rightarrow \infty$.
+	\newline
+	Now, for all $\mathbf{x}, \mathbf{y} \in \bar{C}$ and $\theta \in \mathbb{R}$, let $\mathbf{x}_n \rightarrow \mathbf{x}$ and $\mathbf{y}_n \rightarrow \mathbf{y}$. Since $C$ is convex, we have 
+	\[
+	\theta \mathbf{x}_n + (1 - \theta) \mathbf{y}_n \in C \subset \bar{C}, \forall n.
+	\]
+	Since $\bar{C}$ is closed, we have 
+	\[
+	\theta \mathbf{x} + (1 - \theta) \mathbf{y} = \lim_{n \rightarrow \infty} \left(\theta \mathbf{x}_n + (1 - \theta) \mathbf{y}_n\right) \in \bar{C}.
+	\]
+	Therefore, we conclude that $\bar{C}$ is also convex.
+	\newline
+	For all $\mathbf{x} \in C^\circ$, there exists $r \geq 0$ such that $B_r(\mathbf{x}) \subset C$. Therefore, for all $\mathbf{x}, \mathbf{y} \in C^\circ$ and $\theta \in \mathbb{R}$, there exist $r \geq 0$ such that $B_r(\mathbf{x}) \subset C$ and $B_r(\mathbf{y}) \subset C$. 
+	\newline
+	Now, for all $\mathbf{z} \in B_r(\theta \mathbf{x} + (1 - \theta) \mathbf{y})$, we have 
+	\[
+	B_r(\theta \mathbf{x} + (1 - \theta) \mathbf{y}) = \theta \mathbf{x} + (1 - \theta) \mathbf{y} + B_r(\mathbf{0}).
+	\]
+	For any $\mathbf{r} \in B_r(\mathbf{0})$, we can express 
+	\[
+	\theta \mathbf{x} + (1 - \theta) \mathbf{y} = \theta (\mathbf{x} + \mathbf{r}) + (1 - \theta)(\mathbf{y} + \mathbf{r}).
+	\]
+	Since $\mathbf{x} + \mathbf{r} \in B_r(\mathbf{x}) \subset C$ and $\mathbf{y} + \mathbf{r} \in B_r(\mathbf{y}) \subset C$, and since $C$ is convex, we have 
+	\[
+	\theta (\mathbf{x} + \mathbf{r}) + (1 - \theta)(\mathbf{y} + \mathbf{r}) \in C
+	\]
+	for all $\mathbf{r} \in B_r(\mathbf{0})$. Therefore, we conclude that 
+	\[
+	\theta \mathbf{x} + (1 - \theta) \mathbf{y} + B_r(\mathbf{0}) \subset C,
+	\]
+	which implies that 
+	\[
+	\theta \mathbf{x} + (1 - \theta) \mathbf{y} \in C^\circ.
+	\]
+	Thus, $C^\circ$ is also convex.
+	\newline\newline
+	(b) For all $\mathbf{x} \in \relint C$, there exists $r \geq 0$ such that $B_r(\mathbf{x}) \cap \aff C \subset C$. Therefore, for all $\mathbf{x}, \mathbf{y} \in \relint C$ and $\theta \in \mathbb{R}$, there exist $r \geq 0$ such that $B_r(\mathbf{x}) \cap \aff C \subset C$ and $B_r(\mathbf{y}) \cap \aff C \subset C$. 
+	\newline
+	Without loss of generality, assume that $\theta \neq 0$ and $\theta \neq 1$. Let $\mathbf{z} = \theta \mathbf{x} + (1 - \theta) \mathbf{y}$. Consider 
+	\[
+	B_r(\mathbf{z}) \cap \aff C = \mathbf{z} + \{\mathbf{r} : \mathbf{z} + \mathbf{r} \in \aff C, \, \mathbf{r} \in B_r(\mathbf{0})\} = \mathbf{z} + R.
+	\]
+	For all $\mathbf{r} \in R$, since $\mathbf{z} + \mathbf{r}, \mathbf{x}, \mathbf{y} \in \aff C$, we have
+	\[
+	\mathbf{y} + \frac{\mathbf{r}}{1 - \theta} = \frac{-\theta}{1 - \theta} \mathbf{x} + \frac{1}{1 - \theta} (\theta \mathbf{x} + (1 - \theta) \mathbf{y} + \mathbf{r}) = \frac{-\theta}{1 - \theta} \mathbf{x} + \frac{1}{1 - \theta} (\mathbf{z} + \mathbf{r}) \in \aff C.
+	\]
+	Therefore, 
+	\[
+	\mathbf{y} + \mathbf{r} = (1 - \theta) \left(\mathbf{y} + \frac{\mathbf{r}}{1 - \theta}\right) + \theta \mathbf{y} \in \aff C.
+	\]
+	Moreover, since $\mathbf{y} + \mathbf{r} \in B_r(\mathbf{y})$, we have $\mathbf{y} + \mathbf{r} \in B_r(\mathbf{y}) \cap \aff C \subset C$. Similarly, $\mathbf{x} + \mathbf{r} \in C$. 
+	Therefore, for all $\mathbf{r} \in R$, since $\mathbf{x} + \mathbf{r}, \mathbf{y} + \mathbf{r} \in C$ and $C$ is convex, we have 
+	\[
+	\mathbf{z} + \mathbf{r} = \theta (\mathbf{x} + \mathbf{r}) + (1 - \theta)(\mathbf{y} + \mathbf{r}) \in C.
+	\]
+	Thus, $B_r(\mathbf{z}) \cap \aff C \subset C$, which implies that $\mathbf{z} \in \relint C$. 
+	Therefore, $\relint C$ is also convex.
+	\newline\newline
+	(c) For all $\mathbf{x}, \mathbf{y} \in \bigcap_{i \in I} C_i$ and $\theta \in \mathbb{R}$, since each $C_i$ is convex, we have
+	\[
+	\theta \mathbf{x} + (1 - \theta) \mathbf{y} \in C_i, \forall\, i \in I \quad \Rightarrow \quad \theta \mathbf{x} + (1 - \theta) \mathbf{y} \in \bigcap_{i \in I} C_i,
+	\]
+	which implies that $\bigcap_{i \in I} C_i$ is convex.
+	\newline\newline
+	(d) Denote the set by $P$. $\forall \mathbf{y}_1 = \mathbf{Ax}_1 + \mathbf{a}$, $\mathbf{y}_2 = \mathbf{Ax}_2 + \mathbf{a} \in \mathbf{P}$ and $\theta \in \mathbb{R}$, we have
+	\[
+	\theta \mathbf{y}_1 + (1 - \theta) \mathbf{y}_2 = \theta (\mathbf{Ax}_1 + \mathbf{a}) + (1 - \theta)(\mathbf{Ax}_2 + \mathbf{a}) = \mathbf{A} (\theta \mathbf{x}_1 + (1 - \theta) \mathbf{x}_2) + \mathbf{a}.
+	\]
+	Since $C$ is convex, we have $\theta \mathbf{x}_1 + (1 - \theta) \mathbf{x}_2 \in C$, which implies that $\theta \mathbf{y}_1 + (1 - \theta) \mathbf{y}_2 \in P$. Therefore, $P$ is convex.
+	\newline\newline
+	(e) Denote the set by $Q$. $\forall \mathbf{y}_1$, $\mathbf{y}_2 \in \mathbf{P}$ and $\theta \in \mathbb{R}$, let $\mathbf{x}_1 = \mathbf{By}_1 + \mathbf{b}$, $\mathbf{x}_2 = \mathbf{By}_2 + \mathbf{b}$, we have
+	\[
+	\mathbf{B}(\theta \mathbf{y}_1 + (1 - \theta) \mathbf{y}_2) + \mathbf{b} = \theta (\mathbf{By}_1 + \mathbf{b}) + (1 - \theta)(\mathbf{By}_2 + \mathbf{b}) = \theta \mathbf{x}_1 + (1 - \theta) \mathbf{x}_2.
+	\]
+	Since $C$ is convex, we have $\theta \mathbf{x}_1 + (1 - \theta) \mathbf{x}_2 \in C$, which implies that $\theta \mathbf{y}_1 + (1 - \theta) \mathbf{y}_2 \in Q$. Therefore, $Q$ is convex.
+	\newline\newline
+	2. Denote the set by $P$.
+	\newline
+	(a) $P^\circ = \emptyset$, $\relint P$ = $P$.
+	\newline\newline
+	(b) $P^\circ = \emptyset$, $\relint P$ = $P$.
+	\newline\newline
+	(c) $P^\circ = \relint P = P$.
+\end{solution}
+\newpage
+\begin{exercise}
+	\bf Relative Interior and Interior
+\end{exercise}
+
+\begin{solution}
+	1. From exercise 2.1(b), we know that 
+	\begin{align*}
+		\mathbf{x}_0 \in \relint C 
+		& \quad \Leftrightarrow \quad \exists r_0 > 0, \text{ s.t. } (\mathbf{x}_0 + B_{r_0}(\mathbf{0})) \cap \aff C \subset C \\
+		& \quad \Leftrightarrow \quad \exists r_0 > 0, \text{ s.t. } \mathbf{x}_0 + (B_{r_0}(\mathbf{0}) \cap (\aff C - \mathbf{x}_0)) \subset C.
+	\end{align*}
+	Noticing that 
+	\[
+	B_{r_0}(\mathbf{0}) \cap (\aff C - \mathbf{x}_0) = \{\mathbf{r} : \mathbf{r} \in \aff C - \mathbf{x}_0, \|\mathbf{r}\|_2 \leq r_0\}.
+	\]
+	Since $\aff C$ is an affine set in $\mathbb{R}^n$ and $\mathbf{x}_0 \in \aff C$, from exercise 1.1(a) we have that $\aff C - \mathbf{x}_0$ is a subspace. Let $r = r_0$. Therefore, for all $\mathbf{v} \in \aff C - \mathbf{x}_0$ and $\|\mathbf{v}\|_2 \leq 1$, we have 
+	\[
+	r \mathbf{v} \in \aff C - \mathbf{x}_0,\, \|r \mathbf{v}\|_2 \leq r = r_0 \Rightarrow r\mathbf{v} \in \{\mathbf{r} : \mathbf{r} \in \aff C - \mathbf{x}_0, \|\mathbf{r}\|_2 \leq r_0\}.
+	\]
+	Thus, 
+	\[
+	\mathbf{x}_0 + r \mathbf{v} \in \mathbf{x}_0 + B_{r_0}(\mathbf{0}) \cap (\aff C - \mathbf{x}_0) \subset C,
+	\]
+	which implies that 
+	\[
+	\exists r_0 > 0, \text{ s.t. } B_{r_0}(\mathbf{0}) \cap (\aff C - \mathbf{x}_0) \subset C 
+	\]
+	\[
+	\Leftrightarrow \exists r_0 > 0, \text{ s.t. } \mathbf{x}_0 + r \mathbf{v} \in C \text{ for any } \mathbf{v} \in \aff C - \mathbf{x}_0 \text{ and } \|\mathbf{v}\|_2 \leq 1.
+	\]
+	\newline
+	2.(a) If there $\exists\, \gamma > 0$ and $\mathbf{y}_0 \in C$, s.t.
+	\[
+	\mathbf{x} + \gamma (\mathbf{x} - \mathbf{y}) \in C,
+	\]
+	since $\frac{\gamma}{1 + \gamma}$, $\frac{1}{1 + \gamma} \in (0, 1)$ and $C$ is convex, we have 
+	\[
+	\mathbf{x} = \frac{\gamma}{1 + \gamma}\mathbf{y} + \frac{1}{1 + \gamma}(\mathbf{x} + \gamma (\mathbf{x} - \mathbf{y})) \in C.
+	\]
+	Thus without loss of generality, we assume that $\mathbf{x} \in C$.
+	\newline
+	($\Rightarrow$) If $\mathbf{x} \in \relint C$, from exercise 3.1, we have
+	\[
+	\exists\, r > 0, \text{ s.t. } \mathbf{x} + \{\mathbf{r} : \mathbf{x} + \mathbf{r} \in \aff C, \|\mathbf{r}\|_2 \leq r\} \subset C.
+	\]
+	Since $\aff C$ is affine, we have
+	\[
+	\mathbf{x} + \gamma (\mathbf{x} - \mathbf{y}) \in \aff C, \forall\, \gamma \in \mathbb{R}.
+	\]
+	Set $\gamma_0 = \frac{r}{2\|\mathbf{x} - \mathbf{y}\|_2}$, we have
+	\[
+	\|\gamma_0 (\mathbf{x} - \mathbf{y})\|_2 \leq \frac{r}{2\|\mathbf{x} - \mathbf{y}\|_2} \|\mathbf{x} - \mathbf{y}\|_2 = \frac{r}{2} < r,
+	\]
+	which implies that
+	\[
+	\gamma_0 (\mathbf{x} - \mathbf{y}) \in \{\mathbf{r} : \mathbf{x} + \mathbf{r} \in \aff C, \|\mathbf{r}\|_2 \leq r\}.
+	\]
+	Therefore, 
+	\[
+	\mathbf{x} + \gamma_0 (\mathbf{x} - \mathbf{y}) \in \mathbf{x} + \{\mathbf{r} : \mathbf{x} + \mathbf{r} \in \aff C, \|\mathbf{r}\|_2 \leq r\} \subset C.
+	\]
+	($\Leftarrow$) We will use the conclusion from the next question.
+	\newline
+	Firstly we will prove that $\relint C \neq \emptyset$ if $C$ is a non-empty convex set. Since non-empty convex set $C$ contains a non-empty simplex $S$, applying an affine transformation if necessary, we can assume that the vertices of $S$ are the vectors $(1, 0, \dots, 0)$, $(0, 1, \dots, 0)$, ..., $(0, 0, \dots, 1)$:
+	\[
+	S = \{(\xi_1, \xi_2, \dots, \xi_n): \xi_i \geq 0, \sum_{i = 1}^{n}\xi_i \leq 1\}.
+	\]
+	But the simplex does have a non-empty interior:
+	\[
+	S^\circ = \{(\xi_1, \xi_2, \dots, \xi_n): \xi_i > 0, \sum_{i = 1}^{n}\xi_i < 1\}.
+	\]
+	Therefore $S^\circ$ is a subset of $\relint C$. Thus $\relint C \neq \emptyset$.
+	\newline
+	Since 
+	\[
+	\forall\, \mathbf{y} \in C,\, \exists\, \gamma > 0, \text{ s.t. } \mathbf{x} + \gamma (\mathbf{x} - \mathbf{y}) \in C,
+	\]
+	Denote $\mathbf{x} + \gamma (\mathbf{x} + \mathbf{y})$ by $\mathbf{z}$. 
+	Since $\relint C \neq \emptyset$, set $\mathbf{z} \in \relint C$. Therefore, 
+	\[
+	\mathbf{x} = \frac{1}{1 + \gamma} \mathbf{z} + \frac{\gamma}{1 + \gamma} \mathbf{y}, \text{ where } \frac{1}{1 + \gamma}, \frac{\gamma}{1 + \gamma} \in (0, 1).
+	\]
+	Since $\mathbf{z} \in \relint C$, $\mathbf{y} \in C \subset \bar{C}$, from exercise 3.2(b), we have $\mathbf{x} \in \relint C$.
+	\newline\newline
+	(b) Denote $\lambda \mathbf{x} + (1 - \lambda) \mathbf{y}$ by $\mathbf{z}_\lambda$. Since $\mathbf{x} \in \relint C$, from exercise 3.1, we have
+	\[
+	\exists\, r > 0, \text{ s.t. } \mathbf{x} + \{\mathbf{r} : \mathbf{r} \in \aff C - \mathbf{x}, \|\mathbf{r}\|_2 \leq r\} \subset C.
+	\]
+	From exercise 1.1(b), $\aff C - \mathbf{x}$ is unrelated to $\mathbf{x}$. Therefore, we can denote $\{\mathbf{r} : \mathbf{r} \in \aff C - \mathbf{x}, \|\mathbf{r}\|_2 \leq t\}$ by $R_t$.
+	\newline
+	Since $\mathbf{y} \in \bar{C}$, $\forall\, \epsilon > 0$, we have
+	\[
+	\mathbf{y} \in C + B_\epsilon(\mathbf{0}).
+	\]
+	Therefore,
+	\begin{align*}
+		B_\delta(\mathbf{z}_\lambda) \cap \aff C 
+		& = \lambda \mathbf{x} + (1 - \lambda) \mathbf{y} + R_\delta \\
+		& \subset \lambda \mathbf{x} + (1 - \lambda) C + (2 - \lambda) R_\delta \\
+		& = \lambda (\mathbf{x} + R_{\frac{2 - \lambda}{\lambda}\delta}) + (1 - \lambda) C. 
+	\end{align*}
+	Set $\delta = \frac{\lambda}{2 - \lambda} r$, we have 
+	\[
+	\mathbf{x} + R_\delta \subset \mathbf{x} + R_r \subset{C},
+	\]
+	therefore, 
+	\[
+	B_\delta(\mathbf{z}_\lambda) \cap \aff C \subset \lambda C + (1 - \lambda) C \subset C,
+	\]
+	since $C$ is convex. Thus, we conclude that
+	\[
+	\mathbf{z}_\lambda = \lambda \mathbf{x} + (1 - \lambda) \mathbf{y} \in \relint C,\, \forall\, \lambda \in (0, 1].
+	\]
+\end{solution}
+
+\begin{exercise}
+	\bf Supporting Hyperplane
+\end{exercise}
+
+\begin{solution}
+	1.(a) Since the tangent line of $y = 1/x$ on point $(x_0, y_0)$ is
+	\[
+	y = -\frac{x}{x_0^2} + \frac{2}{x_0},
+	\]
+	we have
+	\[
+	\{\mathbf{x} \in \mathbf{R}_+^2| x_1x_2 \geq 1\} = \bigcap\limits_{x_0 \in \mathbb{R}_+}\{(x, y): y \geq -\frac{x}{x_0^2} + \frac{2}{x_0}\}.
+	\]
+	\newline
+	(b) Since the the boundary of $C$ is 
+	\[
+	\bigcup\limits_{1 \leq i \leq n} \{(x_1, x_2, \dots, x_n): \|x_i\| = 1 \text{ and } \|x_j\| < 1,\, \forall\, j \neq i\}.
+	\]
+	If the $i$th element of $\hat{x}$ is $1$, the supporting hyperplanes of $C$ at $\hat{x}$ is
+	\[
+	\{(x_1, x_2, \dots, x_n): x_i = 1\}.
+	\]
+	If the $i$th element of $\hat{x}$ is $-1$, the supporting hyperplanes of $C$ at $\hat{x}$ is
+	\[
+	\{(x_1, x_2, \dots, x_n): x_i = -1\}.
+	\]
+	2. Denote the set by $P$.
+	\newline
+	$\forall (\mathbf{a}, b) \in P$, $\lambda > 0$, we have
+	\begin{align*}
+		& \lambda \mathbf{a}^T \mathbf{x} \leq \lambda b \quad \Leftrightarrow \quad \mathbf{a}^T \mathbf{x} \leq b,\, \forall\, \mathbf{x} \in C. \\
+		& \lambda \mathbf{a}^T \mathbf{x} \geq \lambda b \quad \Leftrightarrow \quad \mathbf{a}^T \mathbf{x} \geq b,\, \forall\, \mathbf{x} \in D. 
+	\end{align*}
+	Which implies that $P$ is a cone.
+	\newline
+	$\forall (\mathbf{a}_1, b_1)$, $(\mathbf{a}_2, b_2) \in P$, $\lambda \in (0, 1)$, we have
+	\begin{align*}
+		(\lambda \mathbf{a}_1 + (1 - \lambda) \mathbf{a}_2)^T \mathbf{x} 
+		& = \lambda \mathbf{a}_1^T \mathbf{x} + (1 - \lambda) \mathbf{a}_2^T \mathbf{x} \\
+		& \leq \lambda b_1 + (1 - \lambda) b_2,\, \forall\, \mathbf{x} \in C.
+	\end{align*}
+	\begin{align*}
+		(\lambda \mathbf{a}_1 + (1 - \lambda) \mathbf{a}_2)^T \mathbf{x} 
+		& = \lambda \mathbf{a}_1^T \mathbf{x} + (1 - \lambda) \mathbf{a}_2^T \mathbf{x} \\
+		& \geq \lambda b_1 + (1 - \lambda) b_2,\, \forall\, \mathbf{x} \in D.
+	\end{align*}
+	Therefore, 
+	\[
+	(\lambda \mathbf{a}_1 + (1 - \lambda) \mathbf{a}_2, \lambda b_1 + (1 - \lambda) b_2) = \lambda (\mathbf{a}_1, b_1) + (1 - \lambda)(\mathbf{a}_2, b_2) \in P.
+	\]
+	Thus, $P$ is convex. Therefore, we can conclude that $P$ is a convex cone.
+\end{solution}
+
+\begin{exercise}
+	\bf Farkas’ Lemma
+\end{exercise}
+
+\begin{solution}
+	1.(a) $\forall\, \mathbf{a} = \sum_{i = 1}^{n} \alpha_i \mathbf{a}_i$, $\mathbf{b} = \sum_{i = 1}^{n} \beta_i \mathbf{a}_i \in \cone A$ and $\lambda \in (0, 1)$, we have
+	\[
+	\lambda \mathbf{a} + (1 - \lambda) \mathbf{b} = \sum_{i = 1}^{n} (\lambda \alpha_i + (1 - \lambda) \beta_i) \mathbf{a}_i.
+	\]
+	Since $\alpha_i \geq 0$, $\beta_i \geq 0$, we have $\lambda \alpha_i + (1 - \lambda) \beta_i \geq 0$, which implies that
+	\[
+	\lambda \mathbf{a} + (1 - \lambda) \mathbf{b} \in \cone A,\, \forall\, \mathbf{a}, \mathbf{b} \in \cone A \text{ and } \lambda \in (0, 1).
+	\]
+	Therefore $\cone A$ is convex.
+	\newline
+	Suppose that $\mathbf{a}_n \rightarrow \mathbf{a}$ as $n \rightarrow \infty$. Since $\|\mathbf{a}_n - \mathbf{a}\|_2 \geq |a_{n_i} - a_i|$, we have $a_i = \lim\limits_{n \to \infty}a_{n_i} \geq 0$. Therefore $\mathbf{a} \in \cone A$, which implies that $\cone A$ is closed.
+	\newline\newline
+	2. Since $\mathbf{b} = \sum_{i = 1}^{n} \beta_i \mathbf{a}_i$, set $\mathbf{x} = (\beta_1, \beta_2, \dots, \beta_n)$, we have $\mathbf{Ax} = \mathbf{b}$.
+	\newline\newline
+	3. Since $\cone A$ is a nonempty closed convex set, from the seperation theorem, we have
+	\[
+	\exists\, \mathbf{y}_0 \neq \mathbf{0} \text{ and } \alpha < \beta, \text{ s.t. } \mathbf{A}^T\mathbf{y}_0 \geq \boldsymbol{\beta} = (\beta, \beta, \dots, \beta),\, \mathbf{b}^T\mathbf{y}_0 \leq \alpha.
+	\]
+	Since $\mathbf{0} \in \cone A$, we have $\mathbf{b} \neq \mathbf{0}$. Without loss of generality, we can assume that $b_1 \neq 0$. 
+	\newline
+	If $\alpha = 0$ or $\beta = 0$ then the proof is trivial. Suppose that $\alpha$, $\beta \neq 0$, set $\mathbf{z} = (\frac{\beta}{b_1}, 0, 0, \dots, 0)$, we have 
+	\[
+	\mathbf{A}^T(\mathbf{y}_0 - \mathbf{z}) \geq \boldsymbol{\beta} - \boldsymbol{\beta} = \mathbf{0},\, \mathbf{b}^T(\mathbf{y}_0 - \mathbf{z}) \leq \alpha - \beta < 0.
+	\]
+	Therefore, $\mathbf{y}_0 - \mathbf{z} \in \mathbb{R}^{m \time 1}$ satisfies the condition.
+	\newline\newline
+	4. Consider two cases:
+	\newline
+	(i) $\mathbf{b} \in \cone A$. From exercise 5.2, there exists $\mathbf{x} \in \mathbb{R}^n$, s.t. $\mathbf{Ax} = \mathbf{b}$ and $\mathbf{x} \geq \mathbf{0}$.
+	\newline
+	(ii) $\mathbf{b} \notin \cone A$. From exercise 5.3, there exists $\mathbf{y} \in \mathbb{R}^m$, s.t. $\mathbf{A}^T \mathbf{y} \geq \mathbf{0}$ and $\mathbf{b}^T \mathbf{y} < 0$.
+	\newline
+	Since we have either $\mathbf{b} \in \cone A$ or $\mathbf{b} \notin \cone A$, at least one of the two statements hold. 
+	\newline
+	On the other hand, suppose that two statements hold together. Since $\mathbf{x} \geq \mathbf{0}$ and $\mathbf{A}^T \mathbf{y} \geq \mathbf{0}$, we have 
+	\[
+	\mathbf{b}^T \mathbf{y} = (\mathbf{Ax})^T \mathbf{y} = \mathbf{x}^T \mathbf{A}^T \mathbf{y} \geq 0,
+	\]
+	contradicting to $\mathbf{b}^T \mathbf{y} < 0$. Therefore, one and only one of the two statements hold.
+\end{solution}
+
+\end{document}
